@@ -20,6 +20,7 @@
 		EC9F2983262C50DD006BF21F /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9F2982262C50DD006BF21F /* FriendsTableViewController.swift */; };
 		EC9F2986262C548E006BF21F /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9F2985262C548E006BF21F /* FriendsTableViewCell.swift */; };
 		EC9F2989262C5F07006BF21F /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9F2988262C5F07006BF21F /* GroupTableViewController.swift */; };
+		ECA0D3A626C9822E009A0948 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0D3A526C9822E009A0948 /* Session.swift */; };
 		ECA123FA266127F200DF2A59 /* NewsCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA123F8266127F200DF2A59 /* NewsCustomTableViewCell.swift */; };
 		ECA123FB266127F200DF2A59 /* NewsCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA123F9266127F200DF2A59 /* NewsCustomTableViewCell.xib */; };
 		ECB12D4B262CA123004406CE /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB12D4A262CA123004406CE /* GroupTableViewCell.swift */; };
@@ -49,6 +50,7 @@
 		EC9F2982262C50DD006BF21F /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		EC9F2985262C548E006BF21F /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		EC9F2988262C5F07006BF21F /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
+		ECA0D3A526C9822E009A0948 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		ECA123F8266127F200DF2A59 /* NewsCustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCustomTableViewCell.swift; sourceTree = "<group>"; };
 		ECA123F9266127F200DF2A59 /* NewsCustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCustomTableViewCell.xib; sourceTree = "<group>"; };
 		ECB12D4A262CA123004406CE /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
@@ -92,19 +94,13 @@
 		EC1290A125EA477300661904 /* vk-api */ = {
 			isa = PBXGroup;
 			children = (
-				EC1290A825EA477300661904 /* Main.storyboard */,
-				EC98F6CA262D8B8F00E9126E /* AppDelegate.swift */,
-				EC98F6CE262D8C0400E9126E /* SceneDelegate.swift */,
-				EC1290A625EA477300661904 /* LoginViewController.swift */,
 				EC195FBA261A21CC00D9673C /* ProfileTableViewController.swift */,
-				ECE0EA5E26569C9400CF92EE /* Assets.xcassets */,
-				EC1290AD25EA477400661904 /* LaunchScreen.storyboard */,
-				EC1290B025EA477400661904 /* Info.plist */,
-				ECC50379265582D10021BBC4 /* Model */,
-				EC9F2980262C4FA0006BF21F /* User */,
-				EC9F2981262C4FB8006BF21F /* Group */,
-				EC6F83DC2661112C00A18E2F /* News */,
+				ECA0D3A126C97CED009A0948 /* App */,
 				EC8311E12664E98100C0AF15 /* ImageView */,
+				ECC50379265582D10021BBC4 /* Model */,
+				ECA0D3A326C97F2B009A0948 /* Modules */,
+				ECA0D3A226C97D8C009A0948 /* Resources */,
+				ECA0D3A426C980E9009A0948 /* Services */,
 			);
 			path = "vk-api";
 			sourceTree = "<group>";
@@ -150,6 +146,45 @@
 				ECB12D4D262CA489004406CE /* AllGroupTableViewController.swift */,
 			);
 			path = Group;
+			sourceTree = "<group>";
+		};
+		ECA0D3A126C97CED009A0948 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EC98F6CA262D8B8F00E9126E /* AppDelegate.swift */,
+				EC98F6CE262D8C0400E9126E /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ECA0D3A226C97D8C009A0948 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC1290A825EA477300661904 /* Main.storyboard */,
+				ECE0EA5E26569C9400CF92EE /* Assets.xcassets */,
+				EC1290AD25EA477400661904 /* LaunchScreen.storyboard */,
+				EC1290B025EA477400661904 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		ECA0D3A326C97F2B009A0948 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				EC1290A625EA477300661904 /* LoginViewController.swift */,
+				EC9F2980262C4FA0006BF21F /* User */,
+				EC9F2981262C4FB8006BF21F /* Group */,
+				EC6F83DC2661112C00A18E2F /* News */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		ECA0D3A426C980E9009A0948 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ECA0D3A526C9822E009A0948 /* Session.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		ECC50379265582D10021BBC4 /* Model */ = {
@@ -246,6 +281,7 @@
 				ECA123FA266127F200DF2A59 /* NewsCustomTableViewCell.swift in Sources */,
 				ECB12D4E262CA489004406CE /* AllGroupTableViewController.swift in Sources */,
 				EC195FBB261A21CC00D9673C /* ProfileTableViewController.swift in Sources */,
+				ECA0D3A626C9822E009A0948 /* Session.swift in Sources */,
 				EC9F2986262C548E006BF21F /* FriendsTableViewCell.swift in Sources */,
 				EC4A96CA2659577100AF372A /* LikeButton.swift in Sources */,
 				EC238B2126556D5400C1144D /* FriendPhotoViewController.swift in Sources */,
@@ -399,7 +435,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 559TND22VC;
-				INFOPLIST_FILE = "$(SRCROOT)/vk-api/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/vk-api/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -417,7 +453,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 559TND22VC;
-				INFOPLIST_FILE = "$(SRCROOT)/vk-api/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/vk-api/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

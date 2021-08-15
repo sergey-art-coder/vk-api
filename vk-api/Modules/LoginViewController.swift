@@ -13,9 +13,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    let login = "1"
+    let login = ""
     
-    let password = "1"
+    let password = ""
     
     // Напишем логику авторизации в метод нажатия кнопки
     @IBAction func onButtonTapped(_ sender: Any) {
