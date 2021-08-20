@@ -20,7 +20,7 @@ final class FriendsAPI {
     let clientId = Session.shared.userId
     let version = "5.21"
     
-    func getFriends (completion: @escaping([User]?)->()) {
+    func getFriends (completion: @escaping([FriendModel]?)->()) {
         
         let method = "/friends.get"
         
@@ -31,7 +31,8 @@ final class FriendsAPI {
             "count": 100,
             "fields": "photo_100",
             "access_token": Session.shared.token,
-            "v": version]
+            "v": version
+        ]
         
         // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
         let url = baseUrl + method
@@ -39,7 +40,28 @@ final class FriendsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            print (response.result)
+            //            print (response.data)
+            //            print (response.result)
+            //            print ("====================")
+            //            print (response.data?.prettyJSON)
+            
+            // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
+            guard let data = response.data else { return }
+            
+            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
+            do {
+                // получили объект вложенный состоящий еще с двух подобъектов
+                let friendsResponse = try? JSONDecoder().decode(FriendsResponse.self, from: data)
+                
+                // вытащили friends
+                let friends = friendsResponse?.response.items
+                
+                completion (friends)
+            }
+            catch {
+                
+                print(error)
+            }
         }
     }
 }
