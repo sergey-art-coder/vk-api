@@ -8,9 +8,11 @@ target '1|SergeyLyashenko' do
   # Pods for 1|SergeyLyashenko
 
   pod 'Alamofire'
-
-  #pod 'Realm'
+  pod 'SDWebImage'
+  pod 'Realm'
+  pod 'RealmSwift'
+  pod 'SwiftKeychainWrapper'
   #pod 'Firebase'
-  #pod 'SwiftKeychaingWrapper'
+  
 
 end

@@ -20,7 +20,7 @@ final class PhotosAPI {
     let clientId = Session.shared.userId
     let version = "5.21"
     
-    func getPhotos (completion: @escaping([Photos]?)->()) {
+    func getPhotos (completion: @escaping([PhotoModel]?)->()) {
         
         let method = "/photos.getAll"
         
@@ -40,9 +40,27 @@ final class PhotosAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //            print (response.result)
-            //            print ("====================")
-            //            print (response.data?.prettyJSON)
+            //                        print (response.result)
+            //                        print ("====================")
+            //                        print (response.data?.prettyJSON)
+            // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
+            guard let data = response.data else { return }
+            
+            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
+            do {
+                // получили объект вложенный состоящий еще с двух подобъектов
+                let photosResponse = try? JSONDecoder().decode(PhotosResponse.self, from: data)
+                
+                // вытащили photos
+                let photos = photosResponse?.response.items
+                
+                completion (photos)
+            }
+            catch {
+                
+                print(error)
+            }
+            
         }
     }
 }

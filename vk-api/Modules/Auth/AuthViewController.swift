@@ -83,7 +83,7 @@ class AuthViewController: UIViewController {
     
     func showMainTabBar() {
         
-        performSegue(withIdentifier: "showFriendsSegue", sender: nil)
+        performSegue(withIdentifier: "showMainSegue", sender: nil)
     }
     
 }

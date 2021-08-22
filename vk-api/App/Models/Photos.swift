@@ -8,6 +8,7 @@
 //   let photosResponse = try? newJSONDecoder().decode(PhotosResponse.self, from: jsonData)
 
 import Foundation
+import RealmSwift
 
 // MARK: - PhotosResponse
 class PhotosResponse: Codable {

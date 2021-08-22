@@ -40,6 +40,7 @@ final class FriendsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
+            //            print (response.request)
             //            print (response.data)
             //            print (response.result)
             //            print ("====================")
