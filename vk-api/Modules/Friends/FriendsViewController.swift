@@ -12,12 +12,21 @@ class FriendsViewController: UITableViewController {
     let friendsAPI = FriendsAPI()
     let photosAPI = PhotosAPI()
     let groupsAPI = GroupsAPI()
-    let searchGroupsAPI = SearchGroupsAPI()
+    
+    var friends: [FriendModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        friendsAPI.getFriends { users in
+        // регистрируем нашу кастомную ячейку
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        //Получаем список друзей, добавляем его в таблицу
+        friendsAPI.getFriends { [weak self] users in
+            
+            // сохраняем во friends
+            self?.friends = users!
+            self?.tableView.reloadData()
             
         }
         photosAPI.getPhotos { users in
@@ -26,8 +35,28 @@ class FriendsViewController: UITableViewController {
         groupsAPI.getGroups { users in
             
         }
-        searchGroupsAPI.getSearchGroups { users in
+        groupsAPI.getSearchGroups { users in
             
         }
+    }
+    
+    // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return friends.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        // берем друга из массива по indexPath
+        let friend: FriendModel = friends[indexPath.row]
+        
+        // отображаем имя и фамилию
+        cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
+        
+        return cell
     }
 }

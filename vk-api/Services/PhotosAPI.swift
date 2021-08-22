@@ -26,12 +26,13 @@ final class PhotosAPI {
         
         // параметры
         let parameters: Parameters = [
-            "owner_id": -1,
+            "owner_id": clientId,
             "access_token": Session.shared.token,
             "v": version,
             "no_service_albums": 0,
             "count": 100,
-            "extended": 1]
+            "extended": 1
+        ]
         
         // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
         let url = baseUrl + method
@@ -39,7 +40,9 @@ final class PhotosAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            print (response.result)
+            //            print (response.result)
+            //            print ("====================")
+            //            print (response.data?.prettyJSON)
         }
     }
 }
