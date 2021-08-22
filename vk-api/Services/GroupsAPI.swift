@@ -29,7 +29,8 @@ final class GroupsAPI {
             "user_id": clientId,
             "access_token": Session.shared.token,
             "v": version,
-            "extended": 1]
+            "extended": 1
+        ]
         
         // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
         let url = baseUrl + method
@@ -37,7 +38,33 @@ final class GroupsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            print (response.result)
+            //            print (response.result)
+            //            print ("====================")
+            //            print (response.data?.prettyJSON)
+        }
+    }
+    
+    func getSearchGroups (completion: @escaping([Groups]?)->()) {
+        
+        let method = "/groups.search"
+        
+        // параметры
+        let parameters: Parameters = [
+            "access_token": Session.shared.token,
+            "v": version,
+            "q": "searchText"
+        ]
+        
+        // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
+        let url = baseUrl + method
+        
+        // делаем запрос
+        AF.request(url, method: .get, parameters: parameters).responseJSON { response in
+            
+            //            print ("=========SearchGroups===========")
+            //            print (response.result)
+            //            print ("====================")
+            //            print (response.data?.prettyJSON)
         }
     }
 }
