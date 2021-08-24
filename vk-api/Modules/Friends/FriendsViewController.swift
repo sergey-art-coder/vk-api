@@ -11,13 +11,11 @@ import SDWebImage
 class FriendsViewController: UITableViewController {
     
     let friendsAPI = FriendsAPI()
-    let photosAPI = PhotosAPI()
-    let groupsAPI = GroupsAPI()
     
     var friends: [FriendModel] = []
-    let toPhotosFriend = "toPhotosFriend"
+    let toPhotosFriends = "toPhotosFriends"
     var selectedFriend: FriendModel?
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,23 +25,12 @@ class FriendsViewController: UITableViewController {
         //Получаем список друзей, добавляем его в таблицу (выполняем запрос)
         friendsAPI.getFriends { [weak self] users in
             guard let self = self else { return }
+            
             // сохраняем в массив friends
             guard let users = users else { return }
             self.friends = users
             // перезагружаем таблицу
             self.tableView.reloadData()
-        }
-        
-        //        groupsAPI.getGroups { users in
-        //
-        //        }
-        
-        groupsAPI.getSearchGroups { users in
-            
-        }
-        
-        photosAPI.getPhotos { users in
-            
         }
     }
     
@@ -61,7 +48,7 @@ class FriendsViewController: UITableViewController {
         
         // берем друга из массива по indexPath
         let friend: FriendModel = friends[indexPath.row]
-   
+        
         // отображаем имя,фамилию и аватарку
         cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
         cell.imageView?.sd_setImage(with: URL(string: friend.photo100), placeholderImage: UIImage())
@@ -73,7 +60,7 @@ class FriendsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedFriend = friends[indexPath.row]
-        performSegue(withIdentifier: toPhotosFriend, sender: self)
+        performSegue(withIdentifier: toPhotosFriends, sender: self)
     }
     
     // метод через который мы переходим на PhotosFriendCollectionViewController
@@ -82,10 +69,10 @@ class FriendsViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         // проверяем что индитификатор называется "toPhotosFriend"
-        if segue.identifier == toPhotosFriend {
+        if segue.identifier == toPhotosFriends {
             
             // проверяем что контроллер на который мы переходим является контроллером типа PhotosFriendCollectionViewController и передаем тот или иной friend по соответствующему индексу строки
-            guard let detailVC = segue.destination as? PhotosFriendCollectionViewController  else { return }
+            guard let detailVC = segue.destination as? PhotosFriendsCollectionViewController  else { return }
             detailVC.photosUsers = selectedFriend
         }
     }

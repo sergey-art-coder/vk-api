@@ -21,17 +21,17 @@ class GroupsViewController: UITableViewController {
         
         //Получаем список групп, добавляем их в таблицу
         groupsAPI.getGroups { [weak self] users in
+            guard let self = self else { return }
             
             // сохраняем в groups
             guard let users = users else { return }
-            self?.groups = users
-            self?.tableView.reloadData()
+            self.groups = users
+            self.tableView.reloadData()
             
         }
         
-        groupsAPI.getGroups { users in
-            
-        }
+        //        groupsAPI.getSearchGroups { users in
+        //
     }
     
     // MARK: - Table view data source

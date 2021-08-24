@@ -8,10 +8,9 @@
 import UIKit
 import SDWebImage
 
-class PhotosFriendCollectionViewCell: UICollectionViewCell {
+class PhotoCollectionViewCell: UICollectionViewCell {
     
-    var photosFriendImage: PhotosModel!
-    
+    @IBOutlet weak var photoImage: UIImageView!
     
     func setup() {
         

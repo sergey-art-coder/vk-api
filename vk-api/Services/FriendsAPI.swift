@@ -40,9 +40,10 @@ final class FriendsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //            print (response.request)
-            //            print (response.data)
-            //            print (response.result)
+            //            print (response.request) //запрос
+            //            print (response.response) //ответ - статус код и хедеры
+            //            print (response.data) //бинарник
+            //            print (response.result) //JSON
             //            print ("====================")
             //            print (response.data?.prettyJSON)
             
