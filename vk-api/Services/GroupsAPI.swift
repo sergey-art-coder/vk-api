@@ -20,7 +20,7 @@ final class GroupsAPI {
     let clientId = Session.shared.userId
     let version = "5.21"
     
-    func getGroups (completion: @escaping([Groups]?)->()) {
+    func getGroups (completion: @escaping([GroupModel]?)->()) {
         
         let method = "/groups.get"
         
@@ -38,13 +38,33 @@ final class GroupsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //            print (response.result)
-            //            print ("====================")
-            //            print (response.data?.prettyJSON)
+//            print (response.result)
+//            print ("====================")
+//            print (response.data?.prettyJSON)
+            
+            // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
+            guard let data = response.data else { return }
+            
+            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
+            do {
+                // получили объект вложенный состоящий еще с двух подобъектов
+                let groupsResponse = try? JSONDecoder().decode(GroupsResponse.self, from: data)
+                
+                // вытащили friends
+                let groups = groupsResponse?.response.items
+                
+                completion (groups)
+            }
+            catch {
+                
+                print(error)
+            }
         }
     }
     
-    func getSearchGroups (completion: @escaping([Groups]?)->()) {
+    // =========================================getSearchGroups================================================================================
+    
+    func getSearchGroups (completion: @escaping([SearchGroupModel]?)->()) {
         
         let method = "/groups.search"
         
@@ -61,10 +81,29 @@ final class GroupsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //            print ("=========SearchGroups===========")
-            //            print (response.result)
-            //            print ("====================")
-            //            print (response.data?.prettyJSON)
+            //                        print ("=========SearchGroups===========")
+            //                        print (response.result)
+            //                        print ("====================")
+            //                        print (response.data?.prettyJSON)
+            
+            // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
+            guard let data = response.data else { return }
+            
+            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
+            do {
+                // получили объект вложенный состоящий еще с двух подобъектов
+                let searchGroupsResponse = try? JSONDecoder().decode(SearchGroupsResponse.self, from: data)
+                
+                // вытащили friends
+                let searchGroups = searchGroupsResponse?.response.items
+                
+                completion (searchGroups)
+            }
+            catch {
+                
+                print(error)
+            }
         }
     }
 }
+
