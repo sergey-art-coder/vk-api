@@ -7,8 +7,13 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 class FriendsViewController: UITableViewController {
+    
+    let friend = FriendModel()
+    
+    let friendsDB = FriendsDB()
     
     let friendsAPI = FriendsAPI()
     
@@ -17,6 +22,7 @@ class FriendsViewController: UITableViewController {
     var selectedFriend: FriendModel?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         // регистрируем нашу кастомную ячейку
@@ -48,6 +54,11 @@ class FriendsViewController: UITableViewController {
         
         // берем друга из массива по indexPath
         let friend: FriendModel = friends[indexPath.row]
+        
+        friendsDB.add(friend)
+        print(friendsDB.read())
+        //        friendsDB.delete(friend)
+        //        print(friendsDB.read())
         
         // отображаем имя,фамилию и аватарку
         cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
