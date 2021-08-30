@@ -6,14 +6,23 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PhotoCollectionViewController: UICollectionViewController {
     
     let photoCell = "PhotoCell"
     
+    let toPhoto = "toPhoto"
+    
+    let photosDB = PhotosDB()
+    
     let photosAPI = PhotosAPI()
     
     var photos: [PhotoModel] = []
+    
+    var selectedPhotos: [PhotoModel] = []
+    
+    var selectedFriend: FriendModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +65,11 @@ class PhotoCollectionViewController: UICollectionViewController {
                 
                 DispatchQueue.main.async {
                     
+                    self.photosDB.add(photo)
+                    print(self.photosDB.read())
+                    //                    self.photosDB.delete(photo)
+                    //                    print(self.photosDB.read())
+                    
                     cell.photoImage.image = UIImage(data: data!)
                 }
             }
@@ -66,5 +80,28 @@ class PhotoCollectionViewController: UICollectionViewController {
         }
         
         return cell
+    }
+    
+    // сохраняем выбранный индекс в переменной selectedPhotos и убираем выделения
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedPhotos = [photos [indexPath.item]]
+        performSegue(withIdentifier: toPhoto, sender: self)
+    }
+    
+    // метод через который мы переходим на PhotoViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //вызываем подготовку к переходу
+        super.prepare(for: segue, sender: sender)
+        
+        // проверяем что индитификатор называется "toPhoto"
+        if segue.identifier == toPhoto {
+            
+            guard let detailVC = segue.destination as? PhotoViewController,
+                  let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
+            
+            //  selectedPhotos = [photos [indexPath.item]]
+            
+            detailVC.photos = [photos [indexPath.item]]
+        }
     }
 }
