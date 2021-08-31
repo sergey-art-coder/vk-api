@@ -15,6 +15,6 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoImageView = photos.first
+        photoImageView = photos.last
     }
 }

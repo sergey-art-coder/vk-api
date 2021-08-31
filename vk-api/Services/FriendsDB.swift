@@ -11,7 +11,7 @@ import RealmSwift
 class FriendsDB: FriendsDBProtocol {
     
     //подключаем миграцию (расширяем старые объекты новыми полями)
-    let configFriends = Realm.Configuration(schemaVersion: 6)
+    let configFriends = Realm.Configuration(schemaVersion: 7)
     //подтягиваем Realm на главном потоке
     lazy var mainRealm = try! Realm(configuration: configFriends)
     
