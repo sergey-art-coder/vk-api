@@ -7,14 +7,11 @@
 
 import Foundation
 import Alamofire
-
-struct Photos {
-    
-}
+import DynamicJSON
 
 final class PhotosAPI {
     
-    // базовый URL сервиса
+    // базовый URL сервис
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
@@ -40,24 +37,26 @@ final class PhotosAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //                        print (response.result)
-            //                        print ("====================")
-            //                        print (response.data?.prettyJSON)
-            
             // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {
+                //                print ("====================")
+                //                print (response.result as Any)
+                //                print ("====================")
+                //                print (response.data?.prettyJSON as Any)
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
+                print(data.prettyJSON as Any)
+                guard let items = JSON(data).response.items.array else { return }
                 
-                // получили объект вложенный состоящий еще с двух подобъектов
-                let photosResponse = try? JSONDecoder().decode(PhotosResponse.self, from: data)
+                //                    let photos: [PhotoModel] = items.map { json in
+                //                        PhotoModel(data: json)
+                //                    }
+                let photos: [PhotoModel] = items.map { PhotoModel(data: $0) }
                 
-                // вытащили photos
-                let photos = photosResponse?.response.items
-                
-                completion (photos)
-                
+                DispatchQueue.main.async {
+                    completion (photos)
+                }
             }
             catch DecodingError.keyNotFound(let key, let context) {
                 Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
@@ -74,8 +73,6 @@ final class PhotosAPI {
             catch let error as NSError {
                 NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
             }
-            
-            
         }
     }
 }

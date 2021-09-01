@@ -33,7 +33,7 @@ class GroupsViewController: UITableViewController {
     //для подписки на уведомления генерируем токен
     var token: NotificationToken?
     //подключаем миграцию (расширяем старые объекты новыми полями)
-    let configFriends = Realm.Configuration(schemaVersion: 7)
+    let configFriends = Realm.Configuration(schemaVersion: 9)
     //подтягиваем Realm на главном потоке
     lazy var mainRealm = try! Realm(configuration: configFriends)
     
