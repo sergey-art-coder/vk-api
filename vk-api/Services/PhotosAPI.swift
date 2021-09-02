@@ -39,14 +39,14 @@ final class PhotosAPI {
             
             // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {
-                //                print ("====================")
-                //                print (response.result as Any)
-                //                print ("====================")
-                //                print (response.data?.prettyJSON as Any)
+                
+                //response.request позволяет посмотреть как выглядит полный запрос
+                //    print (response.request as Any)
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
-                print(data.prettyJSON as Any)
+                //          print(data.prettyJSON as Any)
+                
                 guard let items = JSON(data).response.items.array else { return }
                 
                 //                    let photos: [PhotoModel] = items.map { json in

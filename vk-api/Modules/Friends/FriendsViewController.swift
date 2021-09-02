@@ -21,7 +21,7 @@ class FriendsViewController: UITableViewController {
     //для подписки на уведомления генерируем токен
     var token: NotificationToken?
     //подключаем миграцию (расширяем старые объекты новыми полями)
-    let configFriends = Realm.Configuration(schemaVersion: 9)
+    let configFriends = Realm.Configuration(schemaVersion: 13)
     //подтягиваем Realm на главном потоке
     lazy var mainRealm = try! Realm(configuration: configFriends)
     
@@ -86,9 +86,8 @@ class FriendsViewController: UITableViewController {
         cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
         cell.imageView?.sd_setImage(with: URL(string: friend.photo100), placeholderImage: UIImage())
         
-//                friendsDB.delete(friend)
-//                print(friendsDB.read())
-        
+//                        friendsDB.delete(friend)
+//                        print(friendsDB.read())
         return cell
     }
     

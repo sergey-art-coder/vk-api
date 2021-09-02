@@ -13,6 +13,8 @@ class GroupsViewController: UITableViewController {
     let groupsDB = GroupsDB()
     let groupsAPI = GroupsAPI()
     var groups: [GroupModel] = []
+    var search: [SearchGroupModel] = []
+    
     
     //пустой массив куда будем помещать отфильтрованные записи
     private var filteredGroups = [GroupModel]()
@@ -33,7 +35,7 @@ class GroupsViewController: UITableViewController {
     //для подписки на уведомления генерируем токен
     var token: NotificationToken?
     //подключаем миграцию (расширяем старые объекты новыми полями)
-    let configFriends = Realm.Configuration(schemaVersion: 9)
+    let configFriends = Realm.Configuration(schemaVersion: 13)
     //подтягиваем Realm на главном потоке
     lazy var mainRealm = try! Realm(configuration: configFriends)
     
@@ -77,6 +79,14 @@ class GroupsViewController: UITableViewController {
             self.groups = users
             self.tableView.reloadData()
         }
+        groupsAPI.getSearchGroups { [weak self] users in
+            //Получаем фото, добавляем их в таблицу
+            guard let self = self else { return }
+
+            // print(users)
+            self.search = users!
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Table view data source
@@ -107,14 +117,12 @@ class GroupsViewController: UITableViewController {
         groupsDB.add(group)
         print(groupsDB.read())
         
-        
         // отображаем группы
         cell.textLabel?.text = "\(group.name)"
         cell.imageView?.sd_setImage(with: URL(string: group.photo100), placeholderImage: UIImage())
         
-        //        groupsDB.delete(group)
-        //        print(groupsDB.read())
-        
+//                groupsDB.delete(group)
+//                print(groupsDB.read())
         return cell
     }
 }
