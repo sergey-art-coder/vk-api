@@ -9,13 +9,15 @@ import UIKit
 
 class PhotoViewController: UIViewController {
     
+    let myPhotos = "MyPhotos"
     var photos: [PhotoModel]!
+    var photo: PhotoModel!
     
     @IBOutlet weak var photoImageView: PhotoModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        photoImageView.self = photos.first
     }
+    
+    //photoImageView = photos.first
 }

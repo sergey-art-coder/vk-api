@@ -139,7 +139,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OcP-if-HuE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4150.7246376811599" y="-269.19642857142856"/>
+            <point key="canvasLocation" x="4961" y="-269"/>
         </scene>
         <!--Photo Collection View Controller-->
         <scene sceneID="eFv-bu-Phe">
@@ -197,7 +197,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ldp-hE-Nw9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4050.7246376811599" y="1178.5714285714284"/>
+            <point key="canvasLocation" x="4961" y="1132"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="htN-yY-lqQ">
@@ -228,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1R-pu-Kig" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4960.8695652173919" y="1178.5714285714284"/>
+            <point key="canvasLocation" x="5958" y="1132"/>
         </scene>
         <!--Сообщества-->
         <scene sceneID="jWr-vf-11Q">
@@ -344,18 +344,18 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MyB-7n-rwA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5074" y="-269"/>
+            <point key="canvasLocation" x="5958" y="-269"/>
         </scene>
         <!--Все сообщества-->
         <scene sceneID="Jiz-Ig-Lll">
             <objects>
-                <tableViewController id="w3X-mw-pcA" customClass="AllGroupTableViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="w3X-mw-pcA" customClass="SearhGroupsTableViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="905-IS-XS9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" rowHeight="44" id="gcG-hL-kDG" customClass="GroupTableViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="44" id="gcG-hL-kDG" customClass="GroupTableViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gcG-hL-kDG" id="rdy-iD-XJW">
@@ -396,9 +396,7 @@
                             <outlet property="delegate" destination="w3X-mw-pcA" id="Mmm-lg-Odi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Все сообщества" id="Qma-mg-4Cg">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Z67-ep-TDE"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Все сообщества" id="Qma-mg-4Cg"/>
                     <connections>
                         <segue destination="EOB-EH-Jhb" kind="unwind" identifier="addGroup" unwindAction="addGroupWithSegue:" id="CoV-AL-jU6"/>
                     </connections>
@@ -446,7 +444,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ldd-3w-iji" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3240.579710144928" y="-269.19642857142856"/>
+            <point key="canvasLocation" x="4051" y="-269"/>
         </scene>
         <!--Фото-->
         <scene sceneID="aiP-RE-M5k">
@@ -465,13 +463,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5UK-Ao-8CN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3140.579710144928" y="1178.5714285714284"/>
+            <point key="canvasLocation" x="4051" y="1132"/>
         </scene>
-        <!--Группы-->
+        <!--Сообщества-->
         <scene sceneID="UeD-hK-0NA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Of-QF-zDo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Группы" id="3bZ-rd-eM8"/>
+                    <tabBarItem key="tabBarItem" title="Сообщества" id="3bZ-rd-eM8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGl-bg-Dvd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

@@ -15,6 +15,5 @@ final class Session {
     
     var token = "" // хранение токена в VK
     var userId = "" // хранение идентификатора пользователя VK
-    
 }
 
