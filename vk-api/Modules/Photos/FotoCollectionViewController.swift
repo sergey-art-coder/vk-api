@@ -38,8 +38,8 @@ class FotoCollectionViewController: UICollectionViewController {
         //        cell.photoImageView.image = UIImage(data: data!)
         
         
-        //          guard let urlString = photos?.first else { return cell}
-        //          cell.photoImageView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage())
+//                  guard let urlString = photos?.first else { return cell}
+//                  cell.photoImageView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage())
         
         return cell
     }
