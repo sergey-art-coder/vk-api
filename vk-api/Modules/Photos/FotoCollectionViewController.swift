@@ -17,12 +17,18 @@ class FotoCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         // регестрируем ячейку
-        collectionView!.register(UINib(nibName: "CustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: customCollectionViewCellIdentifier)
+        collectionView.register(UINib(nibName: "CustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: customCollectionViewCellIdentifier)
     }
     
     // MARK: UICollectionViewDataSource
     
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//
+//        return 1
+//    }
+//
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customCollectionViewCellIdentifier, for: indexPath) as? CustomCollectionViewCell else { return UICollectionViewCell() }
         
         //        let urlPhoto = URL(string:(photos?.first), placeholderImage: UIImage())
@@ -32,8 +38,8 @@ class FotoCollectionViewController: UICollectionViewController {
         //        cell.photoImageView.image = UIImage(data: data!)
         
         
-        //  guard let urlString = photos?.first else { return cell}
-        //  cell.photoImageView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage())
+        //          guard let urlString = photos?.first else { return cell}
+        //          cell.photoImageView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage())
         
         return cell
     }

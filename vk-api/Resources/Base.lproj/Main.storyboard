@@ -125,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="5871.0144927536239" y="1822.7678571428571"/>
         </scene>
-        <!--Photo View Controller-->
+        <!--Foto Collection View Controller-->
         <scene sceneID="htN-yY-lqQ">
             <objects>
-                <viewController id="yZf-ND-EYX" customClass="PhotoViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yZf-ND-EYX" customClass="FotoCollectionViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N6N-ZD-rPb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
