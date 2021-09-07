@@ -3,7 +3,6 @@
 //  1|SergeyLyashenko
 //
 //  Created by Сергей Ляшенко on 03.09.2021.
-//
 
 import UIKit
 import RealmSwift
@@ -12,7 +11,7 @@ class SearhGroupsTableViewController: UITableViewController {
     
     let searchAPI = SearchAPI()
     var searchForGroups: [SearchGroupModel] = []
-    
+    private let customTableViewCellIdentifier = "CustomTableViewCellIdentifier"
     
     //пустой массив куда будем помещать отфильтрованные записи
     private var filteredSearchGroups = [SearchGroupModel]()
@@ -34,6 +33,9 @@ class SearhGroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // регестрируем ячейку
+        tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: customTableViewCellIdentifier)
+        
         // настройка параметров Search Controller
         searchGroupsController.searchResultsUpdater = self
         searchGroupsController.obscuresBackgroundDuringPresentation = false
@@ -41,12 +43,9 @@ class SearhGroupsTableViewController: UITableViewController {
         navigationItem.searchController = searchGroupsController
         definesPresentationContext = true
         
-        // регистрируем нашу кастомную ячейку
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SearchCell")
-        
         //Получаем фото, добавляем их в таблицу
         searchAPI.getSearchGroups { [weak self] users in
-            // print(users)
+            
             guard let self = self else { return }
             
             // сохраняем в searchForGroups
@@ -65,10 +64,9 @@ class SearhGroupsTableViewController: UITableViewController {
         return searchForGroups.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: customTableViewCellIdentifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
         
         var search: SearchGroupModel
         
@@ -79,8 +77,9 @@ class SearhGroupsTableViewController: UITableViewController {
         }
         
         //отображаем группы
-        cell.textLabel?.text = search.searchName
-        cell.imageView?.sd_setImage(with: URL(string: search.photo50!), placeholderImage: UIImage())
+        
+        cell.nameLabel.text = search.searchName
+        cell.avatarImage?.sd_setImage(with: URL(string: search.photo100!), placeholderImage: UIImage())
         
         return cell
     }
@@ -89,7 +88,6 @@ class SearhGroupsTableViewController: UITableViewController {
 extension SearhGroupsTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(_searchText: searchController.searchBar.text!)
-        
     }
     //заполняем массив filteredSearchGroups отфильтрованными данными из основного массива searchForGroups
     private func filterContentForSearchText (_searchText: String) {

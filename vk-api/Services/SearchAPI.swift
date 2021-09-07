@@ -36,15 +36,15 @@ final class SearchAPI {
         
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-            //
-            //            print ("=========SearchGroups===========")
-            //            response.request позволяет посмотреть как выглядит полный запрос
-            //            print (response.request as Any)
-            //
-            //             распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
+            
+//                        print ("=========SearchGroups===========")
+//                       // response.request позволяет посмотреть как выглядит полный запрос
+//                        print (response.request as Any)
+//
+                        // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
             guard let data = response.data else { return }
-            //            print ("=======test=============")
-            //            print (data.prettyJSON as Any)
+//                        print ("=======test=============")
+//                        print (data.prettyJSON as Any)
             
             guard let items = JSON(data).response.items.array else { return }
             let searchs: [SearchGroupModel] = items.map { SearchGroupModel(data: $0) }

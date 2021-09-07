@@ -1,18 +1,18 @@
 //
-//  GroupsViewController.swift
+//  GroupsTableViewController.swift
 //  1|SergeyLyashenko
 //
-//  Created by Сергей Ляшенко on 21.08.2021.
-//
+//  Created by Сергей Ляшенко on 06.09.2021.
 
 import UIKit
 import RealmSwift
 
-class GroupsViewController: UITableViewController {
+class GroupsTableViewController: UITableViewController {
     
     let groupsDB = GroupsDB()
     let groupsAPI = GroupsAPI()
     var groups: [GroupModel] = []
+    private let customTableViewCellIdentifier = "CustomTableViewCellIdentifier"
     
     //пустой массив куда будем помещать отфильтрованные записи
     private var filteredGroups = [GroupModel]()
@@ -39,6 +39,10 @@ class GroupsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // регестрируем ячейку
+        tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: customTableViewCellIdentifier)
+        
         //        //получаем коллекцию из базы
         //        let groupsFromRealm = mainRealm.objects(GroupModel.self)
         //
@@ -65,9 +69,6 @@ class GroupsViewController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        // регистрируем нашу кастомную ячейку
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "GroupCell")
-        
         //Получаем список групп, добавляем их в таблицу
         groupsAPI.getGroups { [weak self] users in
             guard let self = self else { return }
@@ -82,6 +83,7 @@ class GroupsViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if isFiltering {
             return filteredGroups.count
         }
@@ -90,7 +92,7 @@ class GroupsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: customTableViewCellIdentifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
         
         var group: GroupModel
         
@@ -104,8 +106,8 @@ class GroupsViewController: UITableViewController {
         //        print(groupsDB.read())
         
         // отображаем группы
-        cell.textLabel?.text = "\(group.name)"
-        cell.imageView?.sd_setImage(with: URL(string: group.photo100), placeholderImage: UIImage())
+        cell.nameLabel.text = group.name
+        cell.avatarImage?.sd_setImage(with: URL(string: group.photo100), placeholderImage: UIImage())
         
         //                groupsDB.delete(group)
         //                print(groupsDB.read())
@@ -113,7 +115,7 @@ class GroupsViewController: UITableViewController {
     }
 }
 
-extension GroupsViewController: UISearchResultsUpdating {
+extension GroupsTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(_searchText: searchController.searchBar.text!)
         
@@ -125,8 +127,7 @@ extension GroupsViewController: UISearchResultsUpdating {
             //возвращаем отфильтрованные элементы
             return group.name.lowercased().contains(_searchText.lowercased())
         })
-        
         tableView.reloadData()
     }
+    
 }
-

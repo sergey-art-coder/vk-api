@@ -1,8 +1,8 @@
 //
-//  FriendsViewController.swift
+//  FriendsTableViewController.swift
 //  1|SergeyLyashenko
 //
-//  Created by Сергей Ляшенко on 17.08.2021.
+//  Created by Сергей Ляшенко on 06.09.2021.
 //
 
 import UIKit
@@ -10,14 +10,15 @@ import SDWebImage
 import RealmSwift
 import Firebase
 
-class FriendsViewController: UITableViewController {
+class FriendsTableViewController: UITableViewController {
     
-    let friend = FriendModel()
+    var friend = FriendModel()
     let friendsDB = FriendsDB()
     let friendsAPI = FriendsAPI()
     var friends: [FriendModel] = []
-    let toPhotosFriends = "toPhotosFriends"
     var selectedFriend: FriendModel?
+    private let customTableViewCellIdentifier = "CustomTableViewCellIdentifier"
+    private let toPhotosFriends = "toPhotosFriends"
     
     // для подписки на уведомления генерируем токен
     var token: NotificationToken?
@@ -30,29 +31,29 @@ class FriendsViewController: UITableViewController {
         
         super.viewDidLoad()
         
+        // регестрируем ячейку
+        tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: customTableViewCellIdentifier)
+        
         writingIdToFirebase()
         
         //получаем коллекцию из базы
-        let friendsFromRealm = mainRealm.objects(FriendModel.self)
-        
-        //подписываемся на получение уведомлений с описанием изменения
-        self.token = friendsFromRealm.observe { (changes: RealmCollectionChange) in
-            
-            switch changes {
-            case .initial(let results):
-                print("initial", results)
-                
-            case let .update(results, deletions, insertions, modifications):
-                print(results,"deletions", deletions,"insertions", insertions,"modifications", modifications)
-                
-            case .error(let error):
-                print("error", error.localizedDescription)
-            }
-            print("данные изменились")
-        }
-        
-        // регистрируем нашу кастомную ячейку
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "FriendsCell")
+        //        let friendsFromRealm = mainRealm.objects(FriendModel.self)
+        //
+        //        //подписываемся на получение уведомлений с описанием изменения
+        //        self.token = friendsFromRealm.observe { (changes: RealmCollectionChange) in
+        //
+        //            switch changes {
+        //            case .initial(let results):
+        //                print("initial", results)
+        //
+        //            case let .update(results, deletions, insertions, modifications):
+        //                print(results,"deletions", deletions,"insertions", insertions,"modifications", modifications)
+        //
+        //            case .error(let error):
+        //                print("error", error.localizedDescription)
+        //            }
+        //            print("данные изменились")
+        //        }
         
         // получаем список друзей, добавляем его в таблицу (выполняем запрос)
         friendsAPI.getFriends { [weak self] users in
@@ -76,21 +77,19 @@ class FriendsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // создается ячейка
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: customTableViewCellIdentifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
         
         // берем друга из массива по indexPath
-        let friend: FriendModel = friends[indexPath.row]
+        let friend = self.friends[indexPath.row]
         
-        friendsDB.add(friend)
-        print(friendsDB.read())
+        //        friendsDB.add(friend)
+        //        print(friendsDB.read())
         
         // отображаем имя,фамилию и аватарку
-        cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
-        cell.imageView?.sd_setImage(with: URL(string: friend.photo100), placeholderImage: UIImage())
+        cell.nameLabel.text = "\(friend.firstName) \(friend.lastName)"
         
-        //                        friendsDB.delete(friend)
-        //                        print(friendsDB.read())
+        cell.avatarImage?.sd_setImage(with: URL(string: friend.photo100), placeholderImage: UIImage())
+        
         return cell
     }
     
@@ -117,7 +116,7 @@ class FriendsViewController: UITableViewController {
     
     // MARK:  - Firebase
     
-    func writingIdToFirebase() {
+    private func writingIdToFirebase() {
         
         // работаем с Firebase
         let database = Database.database()
@@ -137,17 +136,15 @@ class FriendsViewController: UITableViewController {
             // записываем Id в Firebase
             ref.child(String(Session.shared.userId)).setValue(self.friend.id)
             
-            print("Пользователь с Id: \(String(Session.shared.userId)) в Firebase записан:\n\(FriendModel._getProperties())")
+            //  print("Пользователь с Id: \(String(Session.shared.userId)) в Firebase записан:\n\(FriendModel._getProperties())")
             
             let users = snapshot.children.compactMap { $0 as? DataSnapshot }
                 .compactMap { $0.value }
             
-            print("\nРанее добавленные в Firebase пользователи с Id \(String(Session.shared.userId)):\n\(users)")
+            // print("\nРанее добавленные в Firebase пользователи с Id \(String(Session.shared.userId)):\n\(users)")
             
             // отписываемся от уведомлений, чтобы не происходило изменений при записи в базу (наблюдатель)
             ref.removeAllObservers()
         }
     }
 }
-
-
