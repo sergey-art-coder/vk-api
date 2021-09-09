@@ -118,7 +118,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="MHG-uW-3wt"/>
                     <connections>
-                        <segue destination="jbL-rT-uvF" kind="presentation" identifier="toPhoto" id="kTG-0t-pTh"/>
+                        <segue destination="jbL-rT-uvF" kind="show" identifier="toPhoto" id="kTG-0t-pTh"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ldp-hE-Nw9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -130,7 +130,7 @@
             <objects>
                 <collectionViewController id="jbL-rT-uvF" customClass="FotoCollectionViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vnY-Jh-jBb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eHZ-mI-0xZ">
@@ -145,6 +145,7 @@
                             <outlet property="delegate" destination="jbL-rT-uvF" id="nCU-Cw-7mt"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="DqU-ux-XVO"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJ0-xA-kOX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

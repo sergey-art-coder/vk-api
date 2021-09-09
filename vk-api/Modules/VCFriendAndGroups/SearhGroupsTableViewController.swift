@@ -36,7 +36,7 @@ class SearhGroupsTableViewController: UITableViewController {
         // регестрируем ячейку
         tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: customTableViewCellIdentifier)
         
-        // настройка параметров Search Controller
+        //настройка параметров Search Controller
         searchGroupsController.searchResultsUpdater = self
         searchGroupsController.obscuresBackgroundDuringPresentation = false
         searchGroupsController.searchBar.placeholder = "Search"
@@ -55,9 +55,9 @@ class SearhGroupsTableViewController: UITableViewController {
         }
     }
     // MARK: - Table view data source
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         if isFiltering {
             return filteredSearchGroups.count
         }
@@ -77,9 +77,8 @@ class SearhGroupsTableViewController: UITableViewController {
         }
         
         //отображаем группы
-        
-        cell.nameLabel.text = search.searchName
-        cell.avatarImage?.sd_setImage(with: URL(string: search.photo100!), placeholderImage: UIImage())
+        cell.nameLabel.text = search.name
+        cell.avatarImage?.sd_setImage(with: URL(string: search.photo100), placeholderImage: UIImage())
         
         return cell
     }
@@ -94,9 +93,8 @@ extension SearhGroupsTableViewController: UISearchResultsUpdating {
         filteredSearchGroups = searchForGroups.filter ({ (search: SearchGroupModel) -> Bool in
             
             //возвращаем отфильтрованные элементы
-            return (search.searchName?.lowercased().contains(_searchText.lowercased()))!
+            return (search.name.lowercased().contains(_searchText.lowercased()))
         })
-        
         tableView.reloadData()
     }
 }

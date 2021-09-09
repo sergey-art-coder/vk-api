@@ -30,7 +30,7 @@ class FriendsDB: FriendsDBProtocol {
         
         //прочитать объекты которые сохранили
         let frend = mainRealm.objects(FriendModel.self)
-        print(mainRealm.configuration.fileURL)
+        print(mainRealm.configuration.fileURL as Any)
         //переделываем в массив Swift и возврвщаем назад
         return Array(frend)
     }

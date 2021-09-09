@@ -47,7 +47,7 @@ class NewsTableViewController: UITableViewController {
         
         let new = self.news[indexPath.item]
         
-        cell.newsTextLabel.text = "\(String(describing: new.newsDate))"
+        cell.newsTextLabel.text = "\(String(describing: new.newsText))"
         
         return cell
     }
