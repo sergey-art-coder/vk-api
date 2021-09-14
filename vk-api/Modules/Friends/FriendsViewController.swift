@@ -7,17 +7,46 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 class FriendsViewController: UITableViewController {
     
+    let friend = FriendModel()
+    let friendsDB = FriendsDB()
     let friendsAPI = FriendsAPI()
-    
     var friends: [FriendModel] = []
     let toPhotosFriends = "toPhotosFriends"
     var selectedFriend: FriendModel?
     
+    //для подписки на уведомления генерируем токен
+    var token: NotificationToken?
+    //подключаем миграцию (расширяем старые объекты новыми полями)
+    let configFriends = Realm.Configuration(schemaVersion: 13)
+    //подтягиваем Realm на главном потоке
+    lazy var mainRealm = try! Realm(configuration: configFriends)
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        //получаем коллекцию из базы
+        let friendsFromRealm = mainRealm.objects(FriendModel.self)
+        
+        //подписываемся на получение уведомлений с описанием изменения
+        self.token = friendsFromRealm.observe { (changes: RealmCollectionChange) in
+            
+            switch changes {
+            case .initial(let results):
+                print("initial", results)
+                
+            case let .update(results, deletions, insertions, modifications):
+                print(results,"deletions", deletions,"insertions", insertions,"modifications", modifications)
+                
+            case .error(let error):
+                print("error", error.localizedDescription)
+            }
+            print("данные изменились")
+        }
         
         // регистрируем нашу кастомную ячейку
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "FriendsCell")
@@ -29,6 +58,7 @@ class FriendsViewController: UITableViewController {
             // сохраняем в массив friends
             guard let users = users else { return }
             self.friends = users
+            
             // перезагружаем таблицу
             self.tableView.reloadData()
         }
@@ -49,10 +79,15 @@ class FriendsViewController: UITableViewController {
         // берем друга из массива по indexPath
         let friend: FriendModel = friends[indexPath.row]
         
+        friendsDB.add(friend)
+        print(friendsDB.read())
+        
         // отображаем имя,фамилию и аватарку
         cell.textLabel?.text = "\(friend.firstName) \(friend.lastName)"
         cell.imageView?.sd_setImage(with: URL(string: friend.photo100), placeholderImage: UIImage())
         
+//                        friendsDB.delete(friend)
+//                        print(friendsDB.read())
         return cell
     }
     

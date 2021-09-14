@@ -12,6 +12,7 @@ target '1|SergeyLyashenko' do
   pod 'Realm'
   pod 'RealmSwift'
   pod 'SwiftKeychainWrapper'
+  pod 'DynamicJSON'
   #pod 'Firebase'
   
 
