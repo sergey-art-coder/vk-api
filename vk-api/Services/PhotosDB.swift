@@ -11,7 +11,7 @@ import RealmSwift
 class PhotosDB: PhotosDBProtocol {
     
     //подключаем миграцию (расширяем старые объекты новыми полями)
-    let configPhotos = Realm.Configuration(schemaVersion: 6)
+    let configPhotos = Realm.Configuration(schemaVersion: 7)
     //подтягиваем Realm на главном потоке
     lazy var mainRealm = try! Realm(configuration: configPhotos)
     
