@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.3)
+  - DynamicJSON (2.0.2)
   - Realm (10.12.0):
     - Realm/Headers (= 10.12.0)
   - Realm/Headers (10.12.0)
@@ -12,6 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - DynamicJSON
   - Realm
   - RealmSwift
   - SDWebImage
@@ -20,6 +22,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - DynamicJSON
     - Realm
     - RealmSwift
     - SDWebImage
@@ -27,11 +30,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  DynamicJSON: fc0c5a82980ff8aa956156f04d84fcdb2822e875
   Realm: 32488213acb44660539c619d620cec1bac046166
   RealmSwift: 0abdca6231d5ff8a4f84cef9c1121ef95a483faf
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 633e70c742b5d00e433f9aed53f121cd6f7dd232
+PODFILE CHECKSUM: a268fe562ad741b0c88362ccf24c7e15a89af148
 
 COCOAPODS: 1.10.2
