@@ -5,66 +5,36 @@
 //  Created by Сергей Ляшенко on 20.08.2021.
 //
 
-//   let photosResponse = try? newJSONDecoder().decode(PhotosResponse.self, from: jsonData)
-
 import Foundation
+import RealmSwift
+import DynamicJSON
 
-// MARK: - PhotosResponse
-class PhotosResponse: Codable {
-    let response: PhotosModel
-}
-
-// MARK: - Response
-class PhotosModel: Codable {
-    let count: Int
-    let items: [PhotoModel]
-}
-
-// MARK: - Item
-class PhotoModel: Codable {
-    let id: Int
-    let photo2560, photo807, photo1280: String
-    let width: Int
-    let likes: Likes
-    let photo604: String
-    let reposts: Reposts
-    let photo130: String
-    let date, ownerID, postID, height: Int
-    let text: String
-    let hasTags: Bool
-    let albumID: Int
-    let photo75: String
+class PhotoModel: Object {
+    @objc dynamic var albumid: String?
+    @objc dynamic var hastags: String?
+    @objc dynamic var fotosId: String?
+    @objc dynamic var ownerid: String?
+    @objc dynamic var photo1280: String?
+    @objc dynamic var photo130: String?
+    @objc dynamic var photo2560: String?
+    @objc dynamic var photo604: String?
+    @objc dynamic var photo75: String?
+    @objc dynamic var hoto807: String?
+    @objc dynamic var postid: String?
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case photo2560 = "photo_2560"
-        case photo807 = "photo_807"
-        case photo1280 = "photo_1280"
-        case width, likes
-        case photo604 = "photo_604"
-        case reposts
-        case photo130 = "photo_130"
-        case date
-        case ownerID = "owner_id"
-        case postID = "post_id"
-        case height, text
-        case hasTags = "has_tags"
-        case albumID = "album_id"
-        case photo75 = "photo_75"
+    convenience required init(data: JSON) {
+        self.init()
+        
+        self.albumid = data.album_id.string
+        self.hastags = data.has_tags.string
+        self.fotosId = data.id.string
+        self.ownerid = data.owner_id.string
+        self.photo1280 = data.photo_1280.string
+        self.photo130 = data.photo_130.string
+        self.photo2560 = data.photo_2560.string
+        self.photo604 = data.photo_604.string
+        self.photo75 = data.photo_75.string
+        self.hoto807 = data.hoto_807.string
+        self.postid = data.post_id.string
     }
-}
-
-// MARK: - Likes
-class Likes: Codable {
-    let userLikes, count: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case userLikes = "user_likes"
-        case count
-    }
-}
-
-// MARK: - Reposts
-class Reposts: Codable {
-    let count: Int
 }
