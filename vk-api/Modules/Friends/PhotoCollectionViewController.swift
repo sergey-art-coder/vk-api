@@ -11,29 +11,22 @@ import RealmSwift
 class PhotoCollectionViewController: UICollectionViewController {
     
     let photoCell = "PhotoCell"
-    
     let toPhoto = "toPhoto"
-    
     let photosDB = PhotosDB()
-    
     let photosAPI = PhotosAPI()
-    
     var photos: [PhotoModel] = []
-    
     var selectedPhotos: [PhotoModel] = []
-    
-    var selectedFriend: FriendModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Получаем фото, добавляем их в таблицу
         photosAPI.getPhotos { [weak self] users in
-            guard let self = self else { return }
             
-            // сохраняем в photos
-            guard let users = users else { return }
-            self.photos = users
+            //Получаем фото, добавляем их в таблицу
+            guard let self = self else { return }
+            //   print(users)
+            
+            self.photos = users!
             self.collectionView.reloadData()
         }
     }
@@ -59,10 +52,6 @@ class PhotoCollectionViewController: UICollectionViewController {
                 //берем фото из массива по indexPath
                 let photo = self.photos [indexPath.item]
                 
-                let urlPhoto = URL(string:photo.photo1280)
-                
-                let data = try? Data(contentsOf: urlPhoto!)
-                
                 DispatchQueue.main.async {
                     
                     self.photosDB.add(photo)
@@ -70,7 +59,8 @@ class PhotoCollectionViewController: UICollectionViewController {
                     //                    self.photosDB.delete(photo)
                     //                    print(self.photosDB.read())
                     
-                    cell.photoImage.image = UIImage(data: data!)
+                    guard let urlString = photo.photo1280 else { return }
+                    cell.photoImage?.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage())
                 }
             }
             catch {
@@ -85,6 +75,7 @@ class PhotoCollectionViewController: UICollectionViewController {
     // сохраняем выбранный индекс в переменной selectedPhotos и убираем выделения
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedPhotos = [photos [indexPath.item]]
+        
         performSegue(withIdentifier: toPhoto, sender: self)
     }
     
@@ -96,12 +87,9 @@ class PhotoCollectionViewController: UICollectionViewController {
         // проверяем что индитификатор называется "toPhoto"
         if segue.identifier == toPhoto {
             
-            guard let detailVC = segue.destination as? PhotoViewController,
-                  let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
-            
-            //  selectedPhotos = [photos [indexPath.item]]
-            
-            detailVC.photos = [photos [indexPath.item]]
+            // проверяем что контроллер на который мы переходим является контроллером типа PhotoViewController и передаем photos
+            guard let detailVC = segue.destination as? PhotoViewController else { return }
+            detailVC.photos = selectedPhotos
         }
     }
 }

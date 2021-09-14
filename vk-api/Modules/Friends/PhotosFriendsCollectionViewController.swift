@@ -12,7 +12,6 @@ private let reuseIdentifier = "Cell"
 class PhotosFriendsCollectionViewController: UICollectionViewController {
     
     var photosUsers: FriendModel!
-   
     var friend: FriendModel!
     
     override func viewDidLoad() {

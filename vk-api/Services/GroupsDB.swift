@@ -11,7 +11,7 @@ import RealmSwift
 class GroupsDB: GroupsDBProtocol {
     
     //подключаем миграцию (расширяем старые объекты новыми полями)
-    let configGroups = Realm.Configuration(schemaVersion: 6)
+    let configGroups = Realm.Configuration(schemaVersion: 13)
     //подтягиваем Realm на главном потоке
     lazy var mainRealm = try! Realm(configuration: configGroups)
     
