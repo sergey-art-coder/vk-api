@@ -12,14 +12,19 @@
 		EC1290AF25EA477400661904 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC1290AD25EA477400661904 /* LaunchScreen.storyboard */; };
 		EC130DE326DAACFE002A8B40 /* GroupsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC130DE226DAACFE002A8B40 /* GroupsDB.swift */; };
 		EC130DE526DABEC4002A8B40 /* PhotosDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC130DE426DABEC4002A8B40 /* PhotosDB.swift */; };
+		EC19201D26E397DE002851DE /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC19201C26E397DE002851DE /* SearchAPI.swift */; };
+		EC19202126E39D3A002851DE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC19202026E39D3A002851DE /* Search.swift */; };
 		EC195FBB261A21CC00D9673C /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC195FBA261A21CC00D9673C /* ProfileTableViewController.swift */; };
 		EC417F4626CC57F50002303B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC417F4526CC57F50002303B /* AuthViewController.swift */; };
 		EC417F4826CC58390002303B /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC417F4726CC58390002303B /* FriendsViewController.swift */; };
 		EC417F4A26CC74270002303B /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC417F4926CC74270002303B /* FriendsAPI.swift */; };
+		EC594D3E26E28E500050D8DC /* FB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC594D3D26E28E500050D8DC /* FB.swift */; };
+		EC594D4026E2A6870050D8DC /* SearhGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC594D3F26E2A6870050D8DC /* SearhGroupsTableViewController.swift */; };
 		EC5B168E26DA4D06007C6092 /* FriendsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5B168D26DA4D06007C6092 /* FriendsDB.swift */; };
 		EC5D97D226CD9AFF009DD8E1 /* PhotosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5D97D126CD9AFF009DD8E1 /* PhotosAPI.swift */; };
 		EC5D97D426CDA528009DD8E1 /* GroupsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5D97D326CDA528009DD8E1 /* GroupsAPI.swift */; };
 		EC81A61826DB5A9C006960EA /* DBProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81A61726DB5A9C006960EA /* DBProtocol.swift */; };
+		EC89233326E23341000558CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC89233226E23341000558CE /* GoogleService-Info.plist */; };
 		EC98F6CB262D8B8F00E9126E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98F6CA262D8B8F00E9126E /* AppDelegate.swift */; };
 		EC98F6CF262D8C0400E9126E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98F6CE262D8C0400E9126E /* SceneDelegate.swift */; };
 		EC9A86BD26CC81EE0029DA99 /* Data+PrettyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9A86BC26CC81EE0029DA99 /* Data+PrettyJSON.swift */; };
@@ -45,14 +50,19 @@
 		EC1290B025EA477400661904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC130DE226DAACFE002A8B40 /* GroupsDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDB.swift; sourceTree = "<group>"; };
 		EC130DE426DABEC4002A8B40 /* PhotosDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDB.swift; sourceTree = "<group>"; };
+		EC19201C26E397DE002851DE /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
+		EC19202026E39D3A002851DE /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		EC195FBA261A21CC00D9673C /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		EC417F4526CC57F50002303B /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		EC417F4726CC58390002303B /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		EC417F4926CC74270002303B /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
+		EC594D3D26E28E500050D8DC /* FB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FB.swift; sourceTree = "<group>"; };
+		EC594D3F26E2A6870050D8DC /* SearhGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearhGroupsTableViewController.swift; sourceTree = "<group>"; };
 		EC5B168D26DA4D06007C6092 /* FriendsDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDB.swift; sourceTree = "<group>"; };
 		EC5D97D126CD9AFF009DD8E1 /* PhotosAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAPI.swift; sourceTree = "<group>"; };
 		EC5D97D326CDA528009DD8E1 /* GroupsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsAPI.swift; sourceTree = "<group>"; };
 		EC81A61726DB5A9C006960EA /* DBProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBProtocol.swift; sourceTree = "<group>"; };
+		EC89233226E23341000558CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC98F6CA262D8B8F00E9126E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC98F6CE262D8C0400E9126E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EC9A86BC26CC81EE0029DA99 /* Data+PrettyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+PrettyJSON.swift"; sourceTree = "<group>"; };
@@ -129,15 +139,30 @@
 			path = "vk-api";
 			sourceTree = "<group>";
 		};
+		EC19201E26E39A30002851DE /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				ECDC633A26D1860600E97A61 /* GroupsViewController.swift */,
+				EC594D3F26E2A6870050D8DC /* SearhGroupsTableViewController.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
+		EC19201F26E39A5D002851DE /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				ECF34A2026D19C5F00013002 /* PhotoCollectionViewController.swift */,
+				ECF34A2226D1B5BB00013002 /* PhotoCollectionViewCell.swift */,
+				ECFA071526D514D100F72B65 /* PhotoViewController.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
 		EC3C089426CC559A006F20B2 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
 				EC417F4726CC58390002303B /* FriendsViewController.swift */,
 				ECAE0F9426D463E2002E0E7E /* PhotosFriendsCollectionViewController.swift */,
-				ECDC633A26D1860600E97A61 /* GroupsViewController.swift */,
-				ECF34A2026D19C5F00013002 /* PhotoCollectionViewController.swift */,
-				ECF34A2226D1B5BB00013002 /* PhotoCollectionViewCell.swift */,
-				ECFA071526D514D100F72B65 /* PhotoViewController.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -174,6 +199,7 @@
 				ECE0EA5E26569C9400CF92EE /* Assets.xcassets */,
 				EC1290AD25EA477400661904 /* LaunchScreen.storyboard */,
 				EC1290B025EA477400661904 /* Info.plist */,
+				EC89233226E23341000558CE /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -182,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				EC3C089426CC559A006F20B2 /* Friends */,
+				EC19201E26E39A30002851DE /* Groups */,
+				EC19201F26E39A5D002851DE /* Photos */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -191,6 +219,7 @@
 			children = (
 				EC417F4926CC74270002303B /* FriendsAPI.swift */,
 				EC5D97D326CDA528009DD8E1 /* GroupsAPI.swift */,
+				EC19201C26E397DE002851DE /* SearchAPI.swift */,
 				EC5D97D126CD9AFF009DD8E1 /* PhotosAPI.swift */,
 				EC5B168D26DA4D06007C6092 /* FriendsDB.swift */,
 				EC130DE226DAACFE002A8B40 /* GroupsDB.swift */,
@@ -206,8 +235,10 @@
 				EC417F4426CC57100002303B /* Auth */,
 				ECAF391D26CFE84B000138B9 /* Friends.swift */,
 				ECAF392126D04D45000138B9 /* Groups.swift */,
+				EC19202026E39D3A002851DE /* Search.swift */,
 				ECAF391F26D047A3000138B9 /* Photos.swift */,
 				EC81A61726DB5A9C006960EA /* DBProtocol.swift */,
+				EC594D3D26E28E500050D8DC /* FB.swift */,
 			);
 			name = Models;
 			path = App/Models;
@@ -273,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC1290AF25EA477400661904 /* LaunchScreen.storyboard in Resources */,
+				EC89233326E23341000558CE /* GoogleService-Info.plist in Resources */,
 				ECE0EA5F26569C9400CF92EE /* Assets.xcassets in Resources */,
 				EC1290AA25EA477300661904 /* Main.storyboard in Resources */,
 			);
@@ -332,11 +364,15 @@
 				EC98F6CF262D8C0400E9126E /* SceneDelegate.swift in Sources */,
 				EC130DE326DAACFE002A8B40 /* GroupsDB.swift in Sources */,
 				EC5D97D226CD9AFF009DD8E1 /* PhotosAPI.swift in Sources */,
+				EC594D3E26E28E500050D8DC /* FB.swift in Sources */,
 				ECAF392226D04D45000138B9 /* Groups.swift in Sources */,
 				ECFA071626D514D100F72B65 /* PhotoViewController.swift in Sources */,
 				ECF34A2126D19C5F00013002 /* PhotoCollectionViewController.swift in Sources */,
 				ECF34A2326D1B5BB00013002 /* PhotoCollectionViewCell.swift in Sources */,
+				EC19201D26E397DE002851DE /* SearchAPI.swift in Sources */,
 				EC81A61826DB5A9C006960EA /* DBProtocol.swift in Sources */,
+				EC594D4026E2A6870050D8DC /* SearhGroupsTableViewController.swift in Sources */,
+				EC19202126E39D3A002851DE /* Search.swift in Sources */,
 				ECAF391E26CFE84B000138B9 /* Friends.swift in Sources */,
 				EC130DE526DABEC4002A8B40 /* PhotosDB.swift in Sources */,
 				ECAE0F9526D463E2002E0E7E /* PhotosFriendsCollectionViewController.swift in Sources */,

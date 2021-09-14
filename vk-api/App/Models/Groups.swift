@@ -52,30 +52,3 @@ enum TypeEnum: String, Codable {
     case page = "page"
 }
 
-// =========================================getSearchGroups================================================================================
-
-
-class SearchGroupModel: Object {
-    @objc dynamic var searchId: String?
-    @objc dynamic var isClosed: String?
-    @objc dynamic var isAdvertiser: String?
-    @objc dynamic var searchType: String?
-    @objc dynamic var isMember: String?
-    @objc dynamic var photo50: String?
-    @objc dynamic var photo200: String?
-    @objc dynamic var searchName: String?
-    @objc dynamic var screenName: String?
-    
-    convenience required init(data: JSON) {
-        self.init()
-        self.searchId = data.id.string
-        self.isClosed = data.is_closed.string
-        self.isAdvertiser = data.is_advertiser.string
-        self.searchType = data.type.string
-        self.isMember = data.is_member.string
-        self.photo50 = data.photo_50.string
-        self.photo200 = data.photo_200.string
-        self.searchName = data.name.string
-        self.screenName = data.screen_name.string
-    }
-}

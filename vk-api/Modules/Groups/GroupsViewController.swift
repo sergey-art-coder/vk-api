@@ -13,8 +13,6 @@ class GroupsViewController: UITableViewController {
     let groupsDB = GroupsDB()
     let groupsAPI = GroupsAPI()
     var groups: [GroupModel] = []
-    var search: [SearchGroupModel] = []
-    
     
     //пустой массив куда будем помещать отфильтрованные записи
     private var filteredGroups = [GroupModel]()
@@ -41,24 +39,24 @@ class GroupsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //получаем коллекцию из базы
-        let groupsFromRealm = mainRealm.objects(GroupModel.self)
-        
-        //подписываемся на получение уведомлений с описанием изменения
-        self.token = groupsFromRealm.observe { (changes: RealmCollectionChange) in
-            
-            switch changes {
-            case .initial(let results):
-                print("initial", results)
-                
-            case let .update(results, deletions, insertions, modifications):
-                print(results,"deletions", deletions,"insertions", insertions,"modifications", modifications)
-                
-            case .error(let error):
-                print("error", error.localizedDescription)
-            }
-            print("данные изменились")
-        }
+        //        //получаем коллекцию из базы
+        //        let groupsFromRealm = mainRealm.objects(GroupModel.self)
+        //
+        //        //подписываемся на получение уведомлений с описанием изменения
+        //        self.token = groupsFromRealm.observe { (changes: RealmCollectionChange) in
+        //
+        //            switch changes {
+        //            case .initial(let results):
+        //                print("initial", results)
+        //
+        //            case let .update(results, deletions, insertions, modifications):
+        //                print(results,"deletions", deletions,"insertions", insertions,"modifications", modifications)
+        //
+        //            case .error(let error):
+        //                print("error", error.localizedDescription)
+        //            }
+        //            print("данные изменились")
+        //        }
         
         // настройка параметров Search Controller
         searchController.searchResultsUpdater = self
@@ -79,14 +77,6 @@ class GroupsViewController: UITableViewController {
             self.groups = users
             self.tableView.reloadData()
         }
-        groupsAPI.getSearchGroups { [weak self] users in
-            //Получаем фото, добавляем их в таблицу
-            guard let self = self else { return }
-
-            // print(users)
-            self.search = users!
-            self.tableView.reloadData()
-        }
     }
     
     // MARK: - Table view data source
@@ -95,7 +85,6 @@ class GroupsViewController: UITableViewController {
         if isFiltering {
             return filteredGroups.count
         }
-        
         return groups.count
     }
     
@@ -111,18 +100,15 @@ class GroupsViewController: UITableViewController {
             group = groups[indexPath.row]
         }
         
-        // берем группу из массива по indexPath
-        //let group: GroupModel = groups[indexPath.row]
-        
-        groupsDB.add(group)
-        print(groupsDB.read())
+        //        groupsDB.add(group)
+        //        print(groupsDB.read())
         
         // отображаем группы
         cell.textLabel?.text = "\(group.name)"
         cell.imageView?.sd_setImage(with: URL(string: group.photo100), placeholderImage: UIImage())
         
-//                groupsDB.delete(group)
-//                print(groupsDB.read())
+        //                groupsDB.delete(group)
+        //                print(groupsDB.read())
         return cell
     }
 }

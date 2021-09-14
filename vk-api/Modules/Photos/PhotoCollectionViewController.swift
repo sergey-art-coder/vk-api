@@ -16,6 +16,7 @@ class PhotoCollectionViewController: UICollectionViewController {
     let photosAPI = PhotosAPI()
     var photos: [PhotoModel] = []
     var selectedPhotos: [PhotoModel] = []
+    var photo: PhotoModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +55,8 @@ class PhotoCollectionViewController: UICollectionViewController {
                 
                 DispatchQueue.main.async {
                     
-                    self.photosDB.add(photo)
-                    print(self.photosDB.read())
+                    //                    self.photosDB.add(photo)
+                    //                    print(self.photosDB.read())
                     //                    self.photosDB.delete(photo)
                     //                    print(self.photosDB.read())
                     
@@ -93,3 +94,4 @@ class PhotoCollectionViewController: UICollectionViewController {
         }
     }
 }
+
