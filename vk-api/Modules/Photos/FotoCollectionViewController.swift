@@ -11,36 +11,56 @@ import SDWebImage
 class FotoCollectionViewController: UICollectionViewController {
     
     private let customCollectionViewCellIdentifier = "CustomCollectionViewCellIdentifier"
-    var photos: [PhotoModel]?
+    //  var photo: PhotoModel?
+    var photo = PhotoModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // регестрируем ячейку
         collectionView.register(UINib(nibName: "CustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: customCollectionViewCellIdentifier)
+        
+        self.collectionView.reloadData()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(self.photo)
     }
     
     // MARK: UICollectionViewDataSource
     
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//
-//        return 1
-//    }
-//
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 1
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customCollectionViewCellIdentifier, for: indexPath) as? CustomCollectionViewCell else { return UICollectionViewCell() }
-        
-        //        let urlPhoto = URL(string:(photos?.first), placeholderImage: UIImage())
-        //
-        //        let data = try? Data(contentsOf: urlPhoto!)
-        //
-        //        cell.photoImageView.image = UIImage(data: data!)
-        
-        
-//                  guard let urlString = photos?.first else { return cell}
-//                  cell.photoImageView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage())
+        DispatchQueue.global().async {
+            
+            do {
+
+                guard let photoPath = self.photo.photo1280 != nil ? self.photo.photo1280 : self.photo.photo604 else { return }
+                let urlPhoto = URL(string:photoPath)
+                guard let urlPhoto = urlPhoto else { return }
+                let data = try? Data(contentsOf: urlPhoto)
+                
+                DispatchQueue.main.async {
+                    
+                    guard let data = data else { return }
+                    cell.photoImageView.image = UIImage(data: data)
+                }
+            }
+            catch {
+                
+                print(error)
+            }
+        }
         
         return cell
     }
 }
+

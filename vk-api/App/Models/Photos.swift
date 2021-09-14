@@ -19,8 +19,8 @@ class PhotoModel: Object {
     @objc dynamic var photo2560: String?
     @objc dynamic var photo604: String?
     @objc dynamic var photo75: String?
-    @objc dynamic var hoto807: String?
-    @objc dynamic var postid: String?
+//    @objc dynamic var hoto807: String?
+//    @objc dynamic var postid: String?
     
     convenience required init(data: JSON) {
         self.init()
@@ -34,7 +34,7 @@ class PhotoModel: Object {
         self.photo2560 = data.photo_2560.string
         self.photo604 = data.photo_604.string
         self.photo75 = data.photo_75.string
-        self.hoto807 = data.hoto_807.string
-        self.postid = data.post_id.string
+//        self.hoto807 = data.hoto_807.string
+//        self.postid = data.post_id.string
     }
 }

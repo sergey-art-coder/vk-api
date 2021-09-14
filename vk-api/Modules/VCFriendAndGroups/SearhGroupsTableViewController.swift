@@ -44,13 +44,13 @@ class SearhGroupsTableViewController: UITableViewController {
         definesPresentationContext = true
         
         //Получаем фото, добавляем их в таблицу
-        searchAPI.getSearchGroups { [weak self] users in
+        searchAPI.getSearchGroups { [weak self] searh in
             
             guard let self = self else { return }
             
             // сохраняем в searchForGroups
-            guard let users = users else { return }
-            self.searchForGroups = users
+            guard let searh = searh else { return }
+            self.searchForGroups = searh
             self.tableView.reloadData()
         }
     }

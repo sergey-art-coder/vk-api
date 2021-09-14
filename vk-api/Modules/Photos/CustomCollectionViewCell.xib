@@ -9,30 +9,37 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CustomCollectionViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="317" height="231"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="CustomCollectionViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="454" height="511"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="317" height="231"/>
+                <rect key="frame" x="0.0" y="0.0" width="454" height="511"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SeY-fR-Ibn">
-                        <rect key="frame" x="0.0" y="0.0" width="317" height="231"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="group5" translatesAutoresizingMaskIntoConstraints="NO" id="caK-bA-Bo2">
+                        <rect key="frame" x="0.0" y="0.0" width="454" height="511"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="454" id="9xC-ge-mCK"/>
+                            <constraint firstAttribute="height" constant="511" id="GVE-hX-GTr"/>
+                        </constraints>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="SeY-fR-Ibn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="AF8-3X-UTa"/>
-                <constraint firstAttribute="trailing" secondItem="SeY-fR-Ibn" secondAttribute="trailing" id="CeF-ip-9E9"/>
-                <constraint firstItem="SeY-fR-Ibn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="h0q-ec-vAm"/>
-                <constraint firstAttribute="bottom" secondItem="SeY-fR-Ibn" secondAttribute="bottom" id="uJc-T0-g4D"/>
+                <constraint firstAttribute="bottom" secondItem="caK-bA-Bo2" secondAttribute="bottom" id="62V-0P-3Ar"/>
+                <constraint firstItem="caK-bA-Bo2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="AQq-mH-DCF"/>
+                <constraint firstAttribute="trailing" secondItem="caK-bA-Bo2" secondAttribute="trailing" id="DKM-1b-02N"/>
+                <constraint firstItem="caK-bA-Bo2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KLZ-CR-907"/>
             </constraints>
-            <size key="customSize" width="317" height="231"/>
+            <size key="customSize" width="454" height="511"/>
             <connections>
-                <outlet property="photoImageView" destination="SeY-fR-Ibn" id="ORa-in-Mrq"/>
+                <outlet property="photoImageView" destination="caK-bA-Bo2" id="507-Vy-LaZ"/>
             </connections>
-            <point key="canvasLocation" x="331.15942028985512" y="130.91517857142856"/>
+            <point key="canvasLocation" x="450.72463768115944" y="-30.46875"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="group5" width="150" height="84"/>
+    </resources>
 </document>
