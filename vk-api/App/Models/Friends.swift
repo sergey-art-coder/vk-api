@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - FriendsResponse
 // получаем объект FriendsResponse и наследуемся от Codable
@@ -21,10 +22,10 @@ class FriendsModel: Codable {
 }
 
 // MARK: - Item
-class FriendModel: Codable {
-    let id: Int
-    let lastName, trackCode, firstName: String
-    let photo100: String
+class FriendModel: Object, Codable {
+    @objc dynamic var id: Int
+    @objc dynamic var lastName, trackCode, firstName: String
+    @objc dynamic var photo100: String
     
     enum CodingKeys: String, CodingKey {
         case id
