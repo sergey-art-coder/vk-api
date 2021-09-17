@@ -14,6 +14,7 @@ class PhotoCollectionViewController: UICollectionViewController {
     let toPhoto = "toPhoto"
     let photosDB = PhotosDB()
     let photosAPI = PhotosAPI()
+    var photo = PhotoModel()
     var photos: [PhotoModel] = []
     var selectedPhotos: [PhotoModel] = []
     var selectedFriend: FriendModel?
@@ -34,6 +35,7 @@ class PhotoCollectionViewController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
+
     
     // MARK: UICollectionViewDataSource
     
@@ -57,19 +59,20 @@ class PhotoCollectionViewController: UICollectionViewController {
                 //берем фото из массива по indexPath
                 let photo = self.photos [indexPath.item]
 
-                guard let photoPath = photo.photo1280 != nil ? photo.photo1280 : photo.photo604 else { return }
+                guard let photoPath = photo.fotosSizes != nil ? photo.fotosSizes : photo.fotosSizes else { return }
                 let urlPhoto = URL(string:photoPath)
                 guard let urlPhoto = urlPhoto else { return }
                 let data = try? Data(contentsOf: urlPhoto)
-                
+
                 DispatchQueue.main.async {
-                    
+
                     //                    self.photosDB.add(photo)
                     //                    print(self.photosDB.read())
                     //                    self.photosDB.delete(photo)
                     //                    print(self.photosDB.read())
                     guard let data = data else { return }
                     cell.photoImage.image = UIImage(data: data)
+
                 }
             }
             catch {
@@ -94,17 +97,18 @@ class PhotoCollectionViewController: UICollectionViewController {
         
         // проверяем что индитификатор называется "toPhoto"
         if segue.identifier == toPhoto {
-            
-            guard let detailVC = segue.destination as? FotoCollectionViewController,
+
+            guard let detailVC = segue.destination as? PhotosCollectionViewController,
                   let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
-            
+
             let photo: PhotoModel? = photos [indexPath.item]
-            
-            guard (photo?.photo1280 != nil ? photo?.photo1280 : photo?.photo604) != nil else { return }
-            
+
+            guard (photo?.fotosSizes != nil ? photo?.fotosSizes : photo?.fotosSizes) != nil else { return }
+
             guard let photo = photo else { return }
             detailVC.photo = photo
         }
     }
 }
+
 

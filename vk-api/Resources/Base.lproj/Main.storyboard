@@ -67,7 +67,7 @@
             </objects>
             <point key="canvasLocation" x="4960.8695652173919" y="-269.19642857142856"/>
         </scene>
-        <!--Photo Collection View Controller-->
+        <!--Фото-->
         <scene sceneID="eFv-bu-Phe">
             <objects>
                 <collectionViewController id="XpI-s2-AkK" customClass="PhotoCollectionViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
@@ -107,7 +107,7 @@
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <connections>
-                                    <outlet property="photoImage" destination="W7d-in-g7M" id="hCp-pA-ZFW"/>
+                                    <outlet property="photoImage" destination="W7d-in-g7M" id="3Nj-Jp-GDO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -116,7 +116,7 @@
                             <outlet property="delegate" destination="XpI-s2-AkK" id="S3h-UT-jDR"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="MHG-uW-3wt"/>
+                    <navigationItem key="navigationItem" title="Фото" id="MHG-uW-3wt"/>
                     <connections>
                         <segue destination="jbL-rT-uvF" kind="show" identifier="toPhoto" id="kTG-0t-pTh"/>
                     </connections>
@@ -125,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="5871.0144927536239" y="1822.7678571428571"/>
         </scene>
-        <!--Foto Collection View Controller-->
+        <!--Фото-->
         <scene sceneID="Pbw-eu-acU">
             <objects>
-                <collectionViewController id="jbL-rT-uvF" customClass="FotoCollectionViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="jbL-rT-uvF" customClass="PhotosCollectionViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vnY-Jh-jBb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,7 +145,7 @@
                             <outlet property="delegate" destination="jbL-rT-uvF" id="nCU-Cw-7mt"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="DqU-ux-XVO"/>
+                    <navigationItem key="navigationItem" title="Фото" id="DqU-ux-XVO"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJ0-xA-kOX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -238,43 +238,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="44" id="gcG-hL-kDG" customClass="GroupTableViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gcG-hL-kDG" id="rdy-iD-XJW">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Группы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqO-qS-5vj">
-                                            <rect key="frame" x="48" y="4" width="350" height="36"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Re-3h-qhe">
-                                            <rect key="frame" x="8" y="4" width="36" height="36"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="8Re-3h-qhe" secondAttribute="height" multiplier="1:1" id="0CB-Wr-6Lz"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="aqO-qS-5vj" secondAttribute="trailing" constant="16" id="BMT-L8-nVq"/>
-                                        <constraint firstItem="aqO-qS-5vj" firstAttribute="leading" secondItem="8Re-3h-qhe" secondAttribute="trailing" constant="4" id="BcX-ET-fNl"/>
-                                        <constraint firstItem="8Re-3h-qhe" firstAttribute="leading" secondItem="rdy-iD-XJW" secondAttribute="leading" constant="8" id="Siu-AI-Ddo"/>
-                                        <constraint firstItem="8Re-3h-qhe" firstAttribute="top" secondItem="rdy-iD-XJW" secondAttribute="top" constant="4" id="b7C-OI-hMr"/>
-                                        <constraint firstItem="aqO-qS-5vj" firstAttribute="top" secondItem="rdy-iD-XJW" secondAttribute="top" constant="4" id="dsC-O2-GCA"/>
-                                        <constraint firstAttribute="bottom" secondItem="aqO-qS-5vj" secondAttribute="bottom" constant="4" id="mzN-Oq-plW"/>
-                                        <constraint firstAttribute="bottom" secondItem="8Re-3h-qhe" secondAttribute="bottom" constant="4" id="rEI-fz-cci"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="nameGroupLabel" destination="aqO-qS-5vj" id="01s-zr-PjL"/>
-                                    <outlet property="photoImageView" destination="8Re-3h-qhe" id="Mmy-gt-zXz"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="w3X-mw-pcA" id="3No-BQ-cER"/>
                             <outlet property="delegate" destination="w3X-mw-pcA" id="Mmm-lg-Odi"/>
@@ -312,7 +275,7 @@
             </objects>
             <point key="canvasLocation" x="2797.1014492753625" y="424.55357142857139"/>
         </scene>
-        <!--News Table View Controller-->
+        <!--Новости-->
         <scene sceneID="apw-tJ-YWB">
             <objects>
                 <tableViewController id="avp-P2-1V5" customClass="NewsTableViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
@@ -320,12 +283,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="avp-P2-1V5" id="tHh-HY-sY0"/>
                             <outlet property="delegate" destination="avp-P2-1V5" id="dbk-0C-0tw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="3X5-Sa-7ev"/>
+                    <navigationItem key="navigationItem" title="Новости" id="3X5-Sa-7ev"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GPz-FH-xxy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

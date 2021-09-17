@@ -16,30 +16,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="454" height="511"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="group5" translatesAutoresizingMaskIntoConstraints="NO" id="caK-bA-Bo2">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cge-ZI-jLn">
                         <rect key="frame" x="0.0" y="0.0" width="454" height="511"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="454" id="9xC-ge-mCK"/>
-                            <constraint firstAttribute="height" constant="511" id="GVE-hX-GTr"/>
-                        </constraints>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="caK-bA-Bo2" secondAttribute="bottom" id="62V-0P-3Ar"/>
-                <constraint firstItem="caK-bA-Bo2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="AQq-mH-DCF"/>
-                <constraint firstAttribute="trailing" secondItem="caK-bA-Bo2" secondAttribute="trailing" id="DKM-1b-02N"/>
-                <constraint firstItem="caK-bA-Bo2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KLZ-CR-907"/>
+                <constraint firstAttribute="trailing" secondItem="Cge-ZI-jLn" secondAttribute="trailing" id="7MW-Mz-1Zq"/>
+                <constraint firstAttribute="bottom" secondItem="Cge-ZI-jLn" secondAttribute="bottom" id="Ihb-W6-Ry7"/>
+                <constraint firstItem="Cge-ZI-jLn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="X79-Uv-5zq"/>
+                <constraint firstItem="Cge-ZI-jLn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="o6J-Tf-tdJ"/>
             </constraints>
             <size key="customSize" width="454" height="511"/>
             <connections>
-                <outlet property="photoImageView" destination="caK-bA-Bo2" id="507-Vy-LaZ"/>
+                <outlet property="photoImageView" destination="Cge-ZI-jLn" id="kil-h4-96N"/>
             </connections>
             <point key="canvasLocation" x="450.72463768115944" y="-30.46875"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="group5" width="150" height="84"/>
-    </resources>
 </document>

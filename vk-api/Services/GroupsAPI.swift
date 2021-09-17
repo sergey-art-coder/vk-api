@@ -19,7 +19,7 @@ final class GroupsAPI {
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
-    let version = "5.21"
+    let version = "5.131"
     
     func getGroups (completion: @escaping([GroupModel]?)->()) {
         

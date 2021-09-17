@@ -13,25 +13,25 @@ class NewsCustomTableViewCell: UITableViewCell {
     @IBOutlet weak var photoImage: UIImageView!
     
     func setup() {
-        
+
     }
-    
-    
+
+
     func clearCell() {
-        
+
     }
-    
-    
+
+
     override func prepareForReuse() {
         clearCell()
     }
-    
-    
+
+
     func configure() {
-        
+
     }
-    
-    
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()

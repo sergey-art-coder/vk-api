@@ -11,30 +11,32 @@ import DynamicJSON
 
 class PhotoModel: Object {
     @objc dynamic var albumid: String?
-    @objc dynamic var hastags: String?
     @objc dynamic var fotosId: String?
-    @objc dynamic var ownerid: String?
-    @objc dynamic var photo1280: String?
-    @objc dynamic var photo130: String?
-    @objc dynamic var photo2560: String?
-    @objc dynamic var photo604: String?
-    @objc dynamic var photo75: String?
-//    @objc dynamic var hoto807: String?
-//    @objc dynamic var postid: String?
+    @objc dynamic var fotosDate: String?
+    @objc dynamic var fotosText: String?
+    @objc dynamic var fotosSizes: String?
+    @objc dynamic var fotosWidth: String?
+    @objc dynamic var fotosHeight: String?
+    @objc dynamic var fotosUrl: String?
+    @objc dynamic var fotosType: String?
     
     convenience required init(data: JSON) {
         self.init()
         
         self.albumid = data.album_id.string
-        self.hastags = data.has_tags.string
         self.fotosId = data.id.string
-        self.ownerid = data.owner_id.string
-        self.photo1280 = data.photo_1280.string
-        self.photo130 = data.photo_130.string
-        self.photo2560 = data.photo_2560.string
-        self.photo604 = data.photo_604.string
-        self.photo75 = data.photo_75.string
-//        self.hoto807 = data.hoto_807.string
-//        self.postid = data.post_id.string
+        self.fotosDate = data.date.string
+        self.fotosText = data.text.string
+        let photoUrl = data["sizes"].last.last
+        self.fotosSizes = photoUrl.string
+        self.fotosWidth = data.width.string
+        self.fotosHeight = data.height.string
+        self.fotosUrl = data.url.string
+        self.fotosType = data.type.string
+        
+//        print("==============")
+//        print(photoUrl as Any)
+//        print("==============")
+//        print(fotosSizes as Any)
     }
 }
