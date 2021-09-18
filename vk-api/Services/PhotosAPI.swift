@@ -45,24 +45,23 @@ final class PhotosAPI {
             do {
                 
                 //response.request позволяет посмотреть как выглядит полный запрос
-            //    print (response.request as Any)
+                //    print (response.request as Any)
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
-                print(data.prettyJSON as Any)
+                //   print(data.prettyJSON as Any)
                 
                 guard let items = JSON(data).response.items.array else { return }
                 
                 // возьмем items и пройдемся по map
                 let photos: [PhotoModel] = items.map { PhotoModel(data: $0) }
                 
-//                let photos: [PhotoModel] = items.map { json in
-//                    PhotoModel(data: json)
-//                }
+                //                let photos: [PhotoModel] = items.map { json in
+                //                    PhotoModel(data: json)
+                //                }
                 
-                DispatchQueue.main.async {
-                    completion (photos)
-                }
+                completion (photos)
+                
             }
             catch DecodingError.keyNotFound(let key, let context) {
                 Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")

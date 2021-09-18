@@ -10,28 +10,30 @@ import UIKit
 class NewsCustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var newsTextLabel: UILabel!
+    @IBOutlet weak var newsDateLabel: UILabel!
+    @IBOutlet weak var newsCommentsLabel: UILabel!
     @IBOutlet weak var photoImage: UIImageView!
     
     func setup() {
-
+        
     }
-
-
+    
+    
     func clearCell() {
-
+        
     }
-
-
+    
+    
     override func prepareForReuse() {
         clearCell()
     }
-
-
+    
+    
     func configure() {
-
+        
     }
-
-
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()

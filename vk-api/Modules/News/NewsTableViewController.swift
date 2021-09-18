@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import SDWebImage
+import RealmSwift
+import Firebase
 
 class NewsTableViewController: UITableViewController {
     
     private let cellReuseIdentifier = "CellReuseIdentifier"
-
+    
+    //    var newsItem = NewModel()
     let newsAPI = NewsAPI()
-    var news: [NewModel] = []
+    var news: [NewsModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,22 +24,26 @@ class NewsTableViewController: UITableViewController {
         // регестрируем ячейку
         tableView.register(UINib(nibName: "NewsCustomTableViewCell", bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         
+        //        newsAPI.getNews { newsFeed in
+        //            print(newsFeed as Any)
+        //        }
+        //
         //Получаем News, добавляем их в таблицу
-        newsAPI.getNews { [weak self] new in
-           //  print(items)
+        newsAPI.getNews { [weak self] newsFeed in
+            //  print(items)
             guard let self = self else { return }
             
             // сохраняем в news
-            guard let new = new else { return }
-            self.news = new
-            print(self.news)
+            guard let newsFeed = newsFeed else { return }
+            self.news = newsFeed
+            
             // перезагружаем таблицу
             self.tableView.reloadData()
         }
     }
     
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return news.count
@@ -45,11 +53,12 @@ class NewsTableViewController: UITableViewController {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? NewsCustomTableViewCell else { return UITableViewCell() }
         
-        let newsItem = self.news[indexPath.item]
+        let newFeed = self.news[indexPath.item]
+        print(self.news)
         
-        cell.newsTextLabel.text = newsItem.text
-        
-       // cell.newsTextLabel.text = "\(String(describing: newsItem.text))"
+        cell.newsTextLabel.text = newFeed.newsText
+        cell.newsCommentsLabel.text = newFeed.postSource
+        cell.newsDateLabel.text = "\(String(describing: newFeed.newsDate))"
         
         return cell
     }

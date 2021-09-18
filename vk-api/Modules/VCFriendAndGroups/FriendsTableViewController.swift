@@ -34,7 +34,7 @@ class FriendsTableViewController: UITableViewController {
         // регестрируем ячейку
         tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: customTableViewCellIdentifier)
         
-        writingIdToFirebase()
+        //        writingIdToFirebase()
         
         //получаем коллекцию из базы
         //        let friendsFromRealm = mainRealm.objects(FriendModel.self)
@@ -116,35 +116,35 @@ class FriendsTableViewController: UITableViewController {
     
     // MARK:  - Firebase
     
-    private func writingIdToFirebase() {
-        
-        // работаем с Firebase
-        let database = Database.database()
-        
-        // путь к Firebase
-        let ref: DatabaseReference = database.reference(withPath: "users Id").child(String(Session.shared.userId))
-        
-        // чтение из Firebase
-        ref.observe(.value) { snapshot in
-            
-            let friendsID = snapshot.children.compactMap { $0 as? DataSnapshot }
-                .compactMap { $0.key }
-            
-            // проверка есть ли Id в Firebase
-            guard friendsID.contains(String(Session.shared.userId)) == false else { return }
-            
-            // записываем Id в Firebase
-            ref.child(String(Session.shared.userId)).setValue(self.friend.id)
-            
-            //  print("Пользователь с Id: \(String(Session.shared.userId)) в Firebase записан:\n\(FriendModel._getProperties())")
-            
-            let users = snapshot.children.compactMap { $0 as? DataSnapshot }
-                .compactMap { $0.value }
-            
-            // print("\nРанее добавленные в Firebase пользователи с Id \(String(Session.shared.userId)):\n\(users)")
-            
-            // отписываемся от уведомлений, чтобы не происходило изменений при записи в базу (наблюдатель)
-            ref.removeAllObservers()
-        }
-    }
+    //    private func writingIdToFirebase() {
+    //
+    //        // работаем с Firebase
+    //        let database = Database.database()
+    //
+    //        // путь к Firebase
+    //        let ref: DatabaseReference = database.reference(withPath: "users Id").child(String(Session.shared.userId))
+    //
+    //        // чтение из Firebase
+    //        ref.observe(.value) { snapshot in
+    //
+    //            let friendsID = snapshot.children.compactMap { $0 as? DataSnapshot }
+    //                .compactMap { $0.key }
+    //
+    //            // проверка есть ли Id в Firebase
+    //            guard friendsID.contains(String(Session.shared.userId)) == false else { return }
+    //
+    //            // записываем Id в Firebase
+    //            ref.child(String(Session.shared.userId)).setValue(self.friend.id)
+    //
+    //            //  print("Пользователь с Id: \(String(Session.shared.userId)) в Firebase записан:\n\(FriendModel._getProperties())")
+    //
+    //            let users = snapshot.children.compactMap { $0 as? DataSnapshot }
+    //                .compactMap { $0.value }
+    //
+    //            // print("\nРанее добавленные в Firebase пользователи с Id \(String(Session.shared.userId)):\n\(users)")
+    //
+    //            // отписываемся от уведомлений, чтобы не происходило изменений при записи в базу (наблюдатель)
+    //            ref.removeAllObservers()
+    //        }
+    //    }
 }

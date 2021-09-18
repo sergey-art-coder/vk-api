@@ -129,5 +129,4 @@ extension GroupsTableViewController: UISearchResultsUpdating {
         })
         tableView.reloadData()
     }
-    
 }

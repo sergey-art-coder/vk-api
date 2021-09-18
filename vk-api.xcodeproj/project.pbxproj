@@ -195,8 +195,7 @@
 				EC9109E226E4C8E4002FA630 /* NewsCustomTableViewCell.swift */,
 				EC9109E326E4C8E4002FA630 /* NewsCustomTableViewCell.xib */,
 			);
-			name = News;
-			path = ../News;
+			path = News;
 			sourceTree = "<group>";
 		};
 		EC9A86BB26CC81750029DA99 /* Extension */ = {
