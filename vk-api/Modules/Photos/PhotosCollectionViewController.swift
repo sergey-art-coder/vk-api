@@ -12,7 +12,8 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     private let customCollectionViewCellIdentifier = "CustomCollectionViewCellIdentifier"
     //  var photo: PhotoModel?
-    var photo = PhotoModel()
+   // var photo = PhotoModel()
+    var photo: [PhotoModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,8 @@ class PhotosCollectionViewController: UICollectionViewController {
             
             do {
                 
-                guard let photoPath = self.photo.fotosSizes != nil ? self.photo.fotosSizes : self.photo.fotosSizes else { return }
+                //guard let photoPath = self.photo.fotosSizes != nil ? self.photo.fotosSizes : self.photo.fotosSizes else { return }
+                let photoPath = self.photo
                 let urlPhoto = URL(string:photoPath)
                 guard let urlPhoto = urlPhoto else { return }
                 let data = try? Data(contentsOf: urlPhoto)

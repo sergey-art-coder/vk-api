@@ -7,7 +7,8 @@
 
 import Foundation
 import Alamofire
-import DynamicJSON
+//import DynamicJSON
+import SwiftyJSON
 
 //class PhotoModel {
 //
@@ -43,22 +44,14 @@ final class PhotosAPI {
             
             // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {
-                
-                //response.request позволяет посмотреть как выглядит полный запрос
-                //    print (response.request as Any)
+
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
-                //   print(data.prettyJSON as Any)
                 
-                guard let items = JSON(data).response.items.array else { return }
+                let photosResponse = try? JSONDecoder().decode(PhotosResponse.self, from: data)
                 
-                // возьмем items и пройдемся по map
-                let photos: [PhotoModel] = items.map { PhotoModel(data: $0) }
-                
-                //                let photos: [PhotoModel] = items.map { json in
-                //                    PhotoModel(data: json)
-                //                }
+                let photos = photosResponse?.response.items
                 
                 completion (photos)
                 

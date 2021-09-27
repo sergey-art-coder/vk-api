@@ -52,7 +52,7 @@ final class NewsAPI {
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
                 
-                print(data.prettyJSON as Any)
+               // print(data.prettyJSON as Any)
                 
                 guard let items = JSON(data).response.items.array else { return }
                 

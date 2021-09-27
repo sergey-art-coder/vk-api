@@ -12,9 +12,10 @@ class PhotoCollectionViewController: UICollectionViewController {
     
     let photoCell = "PhotoCell"
     let toPhoto = "toPhoto"
-    let photosDB = PhotosDB()
+    //  let photosDB = PhotosDB()
     let photosAPI = PhotosAPI()
-    var photo = PhotoModel()
+    //var photo = PhotoModel()
+    var photo: [PhotoModel] = []
     var photos: [PhotoModel] = []
     var selectedPhotos: [PhotoModel] = []
     //var selectedFriend: FriendModel?
@@ -47,38 +48,10 @@ class PhotoCollectionViewController: UICollectionViewController {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCell, for: indexPath) as? PhotoCollectionViewCell else { return UICollectionViewCell() }
         
-        DispatchQueue.global().async {
-            
-            do {
-                
-                //                let filterFoto = self.photos.compactMap { ($0) }
-                //
-                //                print(filterFoto)
-                
-                //берем фото из массива по indexPath
-                let photo = self.photos [indexPath.item]
-                
-                guard let photoPath = photo.fotosSizes != nil ? photo.fotosSizes : photo.fotosSizes else { return }
-                let urlPhoto = URL(string:photoPath)
-                guard let urlPhoto = urlPhoto else { return }
-                let data = try? Data(contentsOf: urlPhoto)
-                
-                DispatchQueue.main.async {
-                    
-                    //                    self.photosDB.add(photo)
-                    //                    print(self.photosDB.read())
-                    //                    self.photosDB.delete(photo)
-                    //                    print(self.photosDB.read())
-                    guard let data = data else { return }
-                    cell.photoImage.image = UIImage(data: data)
-                    
-                }
-            }
-            catch {
-                
-                print(error)
-            }
-        }
+        let photo = self.photos [indexPath.item]
+        
+        cell.photoImage.image = UIImage[photo.sizes.last]
+        
         
         return cell
     }
@@ -102,10 +75,10 @@ class PhotoCollectionViewController: UICollectionViewController {
             
             let photo: PhotoModel? = photos [indexPath.item]
             
-            guard (photo?.fotosSizes != nil ? photo?.fotosSizes : photo?.fotosSizes) != nil else { return }
+            guard (photo?.sizes.first != nil ? photo?.sizes.first : photo?.sizes.first) != nil else { return }
             
             guard let photo = photo else { return }
-            detailVC.photo = photo
+            detailVC.photo = [photo]
         }
     }
 }
