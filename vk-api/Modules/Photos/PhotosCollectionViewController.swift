@@ -11,9 +11,8 @@ import SDWebImage
 class PhotosCollectionViewController: UICollectionViewController {
     
     private let customCollectionViewCellIdentifier = "CustomCollectionViewCellIdentifier"
-    //  var photo: PhotoModel?
-   // var photo = PhotoModel()
-    var photo: [PhotoModel] = []
+    var photos: [PhotoModel] = []
+    var selectedIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,29 +39,23 @@ class PhotosCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customCollectionViewCellIdentifier, for: indexPath) as? CustomCollectionViewCell else { return UICollectionViewCell() }
-        DispatchQueue.global().async {
+        
+        do {
             
-            do {
+            let photoPath = self.photos[self.selectedIndex]
+            let urlPath = photoPath.sizes.last
+            guard let url = urlPath?.url else { return cell }
+            
+            if let urlPhoto = URL(string: url), let data = try? Data(contentsOf: urlPhoto), let imagePhoto = UIImage(data: data) {
                 
-                //guard let photoPath = self.photo.fotosSizes != nil ? self.photo.fotosSizes : self.photo.fotosSizes else { return }
-                let photoPath = self.photo
-                let urlPhoto = URL(string:photoPath)
-                guard let urlPhoto = urlPhoto else { return }
-                let data = try? Data(contentsOf: urlPhoto)
-                
-                DispatchQueue.main.async {
-                    
-                    guard let data = data else { return }
-                    cell.photoImageView.image = UIImage(data: data)
-                }
+                cell.photoImageView.image = imagePhoto
             }
-            catch {
-                
-                print(error)
-            }
+        }
+        catch {
+            
+            print(error)
         }
         
         return cell
     }
 }
-

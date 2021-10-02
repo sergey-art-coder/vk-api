@@ -16,7 +16,7 @@ class NewsTableViewController: UITableViewController {
     
     //    var newsItem = NewModel()
     let newsAPI = NewsAPI()
-    var news: [NewsModel] = []
+    var news: [NewsFeedModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +56,9 @@ class NewsTableViewController: UITableViewController {
         let newFeed = self.news[indexPath.item]
         print(self.news)
         
-        cell.newsTextLabel.text = newFeed.newsText
-        cell.newsCommentsLabel.text = newFeed.postSource
-        cell.newsDateLabel.text = "\(String(describing: newFeed.newsDate))"
+        cell.newsTextLabel.text = newFeed.text 
+//        cell.newsCommentsLabel.text = newFeed.postSource
+//        cell.newsDateLabel.text = "\(String(describing: newFeed.newsDate))"
         
         return cell
     }

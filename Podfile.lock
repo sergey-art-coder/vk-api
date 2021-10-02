@@ -72,6 +72,7 @@ DEPENDENCIES:
   - Realm
   - RealmSwift
   - SDWebImage
+  - SDWebImage (~> 5.0)
   - SwiftKeychainWrapper
   - SwiftyJSON
 
@@ -116,6 +117,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 76e36ad1f802e6a74d54face1668b84ea0b9fb13
+PODFILE CHECKSUM: 24191086dfd3fd53c2ddf20f5914cb81439c2d31
 
 COCOAPODS: 1.10.2

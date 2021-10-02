@@ -18,6 +18,7 @@ target '1|SergeyLyashenko' do
   #pod 'Firebase'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'SDWebImage', '~> 5.0'
   
 
 end

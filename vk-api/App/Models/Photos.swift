@@ -7,7 +7,7 @@
 
 import Foundation
 import RealmSwift
-import DynamicJSON
+//import DynamicJSON
 
 
 //   let photosResponse = try? newJSONDecoder().decode(PhotosResponse.self, from: jsonData)

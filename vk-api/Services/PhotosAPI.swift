@@ -45,7 +45,6 @@ final class PhotosAPI {
             // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {
 
-                
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
                 
