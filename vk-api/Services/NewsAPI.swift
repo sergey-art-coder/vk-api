@@ -1,18 +1,19 @@
 //
-//  FriendsAPI.swift
+//  NewsAPI.swift
 //  1|SergeyLyashenko
 //
-//  Created by Сергей Ляшенко on 18.08.2021.
+//  Created by Сергей Ляшенко on 05.09.2021.
 //
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
-struct User {
-    
-}
+//class NewsModel {
+//
+//}
 
-final class FriendsAPI {
+final class NewsAPI {
     
     // базовый URL сервиса
     let baseUrl = "https://api.vk.com/method"
@@ -20,16 +21,18 @@ final class FriendsAPI {
     let clientId = Session.shared.userId
     let version = "5.131"
     
-    func getFriends (completion: @escaping([FriendModel]?)->()) {
+    func getNews (completion: @escaping([NewModel]?)->()) {
         
-        let method = "/friends.get"
+        let method = "/newsfeed.get"
         
         // параметры
         let parameters: Parameters = [
-            "user_id": clientId,
-            "order": "name",
-            "count": 100,
-            "fields": "photo_100",
+            // "filters": "post",
+            "filters": "post, photo",
+            "return_banned": 1,
+            "max_photos": 10,
+            "source_ids": "friends",
+            "count": 70,
             "access_token": Session.shared.token,
             "v": version
         ]
@@ -39,27 +42,20 @@ final class FriendsAPI {
         
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-            
-            //            print (response.request) //запрос
-            //            print (response.response) //ответ - статус код и хедеры
-            //            print (response.data) //бинарник
-            //            print (response.result) //JSON
-            //            print ("====================")
-            //            print (response.data?.prettyJSON)
-            
-            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
+
             do {
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
                 
-                // получили объект вложенный состоящий еще с двух подобъектов
-                let friendsResponse = try? JSONDecoder().decode(FriendsResponse.self, from: data)
+            //    print(data.prettyJSON as Any)
                 
-                // вытащили friends
-                let friends = friendsResponse?.response.items
-                
-                completion (friends)
+                let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
+
+                // вытащили news
+                let newsItems = newsResponse?.response.items
+
+                completion(newsItems)
             }
             catch DecodingError.keyNotFound(let key, let context) {
                 Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")

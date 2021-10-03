@@ -30,7 +30,7 @@ class GroupsDB: GroupsDBProtocol {
         
         //прочитать объекты которые сохранили
         let grup = mainRealm.objects(GroupModel.self)
-        print(mainRealm.configuration.fileURL)
+        print(mainRealm.configuration.fileURL as Any)
         //переделываем в массив Swift и возврвщаем назад
         return Array(grup)
     }

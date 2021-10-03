@@ -30,7 +30,7 @@ class PhotosDB: PhotosDBProtocol {
         
         //прочитать объекты которые сохранили
         let foto = mainRealm.objects(PhotoModel.self)
-        print(mainRealm.configuration.fileURL)
+        print(mainRealm.configuration.fileURL as Any)
         //переделываем в массив Swift и возврвщаем назад
         return Array(foto)
     }

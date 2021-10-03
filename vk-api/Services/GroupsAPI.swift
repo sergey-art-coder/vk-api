@@ -19,7 +19,7 @@ final class GroupsAPI {
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
-    let version = "5.21"
+    let version = "5.131"
     
     func getGroups (completion: @escaping([GroupModel]?)->()) {
         
@@ -39,9 +39,10 @@ final class GroupsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //            print (response.result)
-            //            print ("====================")
-            //            print (response.data?.prettyJSON)
+            //                        print (response.data) //бинарник
+            //                        print (response.result) //получаем данные в формате JSON
+            //                        print ("=============Group=======================")
+            //                        print (response.data?.prettyJSON)
             
             // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {

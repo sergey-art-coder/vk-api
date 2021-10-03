@@ -9,13 +9,17 @@ import Foundation
 import Alamofire
 import DynamicJSON
 
+//class PhotoModel {
+//
+//}
+
 final class PhotosAPI {
     
     // базовый URL сервис
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
-    let version = "5.21"
+    let version = "5.131"
     
     func getPhotos (completion: @escaping([PhotoModel]?)->()) {
         
@@ -41,18 +45,20 @@ final class PhotosAPI {
             do {
                 
                 //response.request позволяет посмотреть как выглядит полный запрос
-                //    print (response.request as Any)
+            //    print (response.request as Any)
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
-                //          print(data.prettyJSON as Any)
+                print(data.prettyJSON as Any)
                 
                 guard let items = JSON(data).response.items.array else { return }
                 
-                //                    let photos: [PhotoModel] = items.map { json in
-                //                        PhotoModel(data: json)
-                //                    }
+                // возьмем items и пройдемся по map
                 let photos: [PhotoModel] = items.map { PhotoModel(data: $0) }
+                
+//                let photos: [PhotoModel] = items.map { json in
+//                    PhotoModel(data: json)
+//                }
                 
                 DispatchQueue.main.async {
                     completion (photos)
