@@ -51,6 +51,9 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
             
             guard let url = sizeMomel?.url else { return cell}
             
+            cell.photoImage.layer.borderWidth = 3
+            cell.photoImage.layer.borderColor = UIColor.lightGray.cgColor
+            
             cell.photoImage?.sd_setImage(with: URL(string: url), placeholderImage: UIImage())
             
         }
@@ -77,7 +80,6 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
         selectedIndex = indexPath.item
         performSegue(withIdentifier: toPhoto, sender: selectedIndex)
     }
-    
     
     // метод через который мы переходим на PhotosCollectionViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -56,7 +56,7 @@ class NewsTableViewController: UITableViewController {
         let newFeed = self.news[indexPath.item]
         print(self.news)
         
-        cell.newsTextLabel.text = newFeed.text 
+   //     cell.newsTextLabel.text = newFeed.text 
 //        cell.newsCommentsLabel.text = newFeed.postSource
 //        cell.newsDateLabel.text = "\(String(describing: newFeed.newsDate))"
         

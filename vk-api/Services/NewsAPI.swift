@@ -9,9 +9,9 @@ import Foundation
 import Alamofire
 import DynamicJSON
 
-//class NewsModel {
-//
-//}
+class NewsFeedModel {
+
+}
 
 final class NewsAPI {
     
@@ -19,7 +19,7 @@ final class NewsAPI {
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
-    let version = "5.163"
+    let version = "5.131"
     
     func getNews (completion: @escaping([NewsFeedModel]?)->()) {
         
@@ -27,14 +27,14 @@ final class NewsAPI {
         
         // параметры
         let parameters: Parameters = [
-            "filters": "photo",
-            "return_banned": 1,
-            "start_time": 10,
+            "filters": "photo, wall_photo, friend, note",
+//            "return_banned": 1,
+//            "start_time": 10,
             "max_photos": 10,
-            "source_ids": "friends",
-            "start_from": 1,
+//            "source_ids": "friends",
+//            "start_from": 1,
             "count": 5,
-            "section": 1,
+       //     "section": 1,
             "access_token": Session.shared.token,
             "v": version
         ]
@@ -51,7 +51,7 @@ final class NewsAPI {
                 guard let data = response.data else { return }
                 
                 print(data.prettyJSON as Any)
-//
+
 //                let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
 //                let new = newsResponse?.response.items
                 
