@@ -54,11 +54,22 @@ class NewsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? NewsCustomTableViewCell else { return UITableViewCell() }
         
         let newFeed = self.news[indexPath.item]
-        print(self.news)
+        let photo = newFeed.photos.items
+        let photoNews = photo.last
+        let qqq = photoNews?.sizes.last
+  //      let www = qqq?.last
+        guard let aaa = qqq?.url else { return cell}
         
-   //     cell.newsTextLabel.text = newFeed.text 
+        
+
+ 
+        cell.photoImage?.sd_setImage(with: URL(string: aaa), placeholderImage: UIImage())
+
+  //      print(self.news)
+        
+ //       cell.newsTextLabel.text = www?.url
 //        cell.newsCommentsLabel.text = newFeed.postSource
-//        cell.newsDateLabel.text = "\(String(describing: newFeed.newsDate))"
+//        cell.photoImage.image = www?.url
         
         return cell
     }

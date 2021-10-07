@@ -55,7 +55,6 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
             cell.photoImage.layer.borderColor = UIColor.lightGray.cgColor
             
             cell.photoImage?.sd_setImage(with: URL(string: url), placeholderImage: UIImage())
-            
         }
         catch {
             

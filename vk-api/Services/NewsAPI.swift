@@ -9,9 +9,9 @@ import Foundation
 import Alamofire
 import DynamicJSON
 
-class NewsFeedModel {
-
-}
+//class NewsFeedModel {
+//
+//}
 
 final class NewsAPI {
     
@@ -33,7 +33,7 @@ final class NewsAPI {
             "max_photos": 10,
 //            "source_ids": "friends",
 //            "start_from": 1,
-            "count": 5,
+            "count": 10,
        //     "section": 1,
             "access_token": Session.shared.token,
             "v": version
@@ -50,12 +50,12 @@ final class NewsAPI {
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
                 
-                print(data.prettyJSON as Any)
+//                print(data.prettyJSON as Any)
 
-//                let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
-//                let new = newsResponse?.response.items
+                let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
+                let new = newsResponse?.response.items
                 
-                completion ([])
+                completion (new)
             }
             catch DecodingError.keyNotFound(let key, let context) {
                 Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")

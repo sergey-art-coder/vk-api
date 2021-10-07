@@ -9,9 +9,9 @@ import Foundation
 import Alamofire
 import DynamicJSON
 
-struct SearchGroup {
-    
-}
+//struct SearchGroup {
+//    
+//}
 
 final class SearchAPI {
     
