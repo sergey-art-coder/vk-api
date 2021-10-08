@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import SDWebImage
-import RealmSwift
-import Firebase
 
 class NewsTableViewController: UITableViewController {
     
@@ -23,11 +20,7 @@ class NewsTableViewController: UITableViewController {
         
         // регестрируем ячейку
         tableView.register(UINib(nibName: "NewsCustomTableViewCell", bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        
-        //        newsAPI.getNews { newsFeed in
-        //            print(newsFeed as Any)
-        //        }
-        //
+
         //Получаем News, добавляем их в таблицу
         newsAPI.getNews { [weak self] newsFeed in
             //  print(items)
@@ -53,23 +46,20 @@ class NewsTableViewController: UITableViewController {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? NewsCustomTableViewCell else { return UITableViewCell() }
         
-        let newFeed = self.news[indexPath.item]
-        let photo = newFeed.photos.items
+        let newsFeed = self.news[indexPath.item]
+        let photo = newsFeed.photos.items
         let photoNews = photo.last
-        let qqq = photoNews?.sizes.last
-  //      let www = qqq?.last
-        guard let aaa = qqq?.url else { return cell}
-        
-        
+        let photoNewsLast = photoNews?.sizes.last
+        guard let newsLast = photoNewsLast?.url else { return cell }
+        let newsText = photoNews?.text
 
- 
-        cell.photoImage?.sd_setImage(with: URL(string: aaa), placeholderImage: UIImage())
-
-  //      print(self.news)
+        guard let newsDate = photoNews?.date else { return cell }
+        let newsDateString = String(newsDate)
         
- //       cell.newsTextLabel.text = www?.url
-//        cell.newsCommentsLabel.text = newFeed.postSource
-//        cell.photoImage.image = www?.url
+        cell.photoImage?.sd_setImage(with: URL(string: newsLast), placeholderImage: UIImage())
+        cell.newsTextLabel.text = newsText
+        cell.newsDateLabel.text = newsDateString
+        //        cell.photoImage.image = www?.url
         
         return cell
     }

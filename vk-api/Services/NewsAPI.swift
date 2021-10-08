@@ -28,13 +28,9 @@ final class NewsAPI {
         // параметры
         let parameters: Parameters = [
             "filters": "photo, wall_photo, friend, note",
-//            "return_banned": 1,
-//            "start_time": 10,
             "max_photos": 10,
-//            "source_ids": "friends",
-//            "start_from": 1,
             "count": 10,
-       //     "section": 1,
+            "section": 1,
             "access_token": Session.shared.token,
             "v": version
         ]

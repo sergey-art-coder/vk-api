@@ -70,7 +70,6 @@ class PhotosCollectionViewController: UICollectionViewController {
                 let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeftAction))
                 swipeLeft.direction = .left
                 view.addGestureRecognizer(swipeLeft)
-                
             }
         }
         
@@ -82,7 +81,6 @@ class PhotosCollectionViewController: UICollectionViewController {
         return cell
     }
 }
-
 
 // MARK: - swipe
 extension PhotosCollectionViewController {
