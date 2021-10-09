@@ -7,11 +7,6 @@
 
 import Foundation
 import Alamofire
-import DynamicJSON
-
-//struct SearchGroup {
-//    
-//}
 
 final class SearchAPI {
     

@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SDWebImage
 
 class PhotoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     

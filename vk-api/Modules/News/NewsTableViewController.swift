@@ -9,26 +9,29 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
-    private let cellReuseIdentifier = "CellReuseIdentifier"
-    
-    //    var newsItem = NewModel()
     let newsAPI = NewsAPI()
     var news: [NewsFeedModel] = []
+    var newsGroup: [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // регестрируем ячейку
-        tableView.register(UINib(nibName: "NewsCustomTableViewCell", bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-
+        tableView.register(UINib(nibName: "NewsCustomTableViewCell", bundle: nil), forCellReuseIdentifier: "CellReuseIdentifier")
+        
         //Получаем News, добавляем их в таблицу
-        newsAPI.getNews { [weak self] newsFeed in
-            //  print(items)
+        newsAPI.getNews { [weak self] newsFeed,newsFeedGroup  in
+            
             guard let self = self else { return }
             
             // сохраняем в news
-            guard let newsFeed = newsFeed else { return }
-            self.news = newsFeed
+            guard let newFeed = newsFeed else { return }
+            self.news = newFeed
+            print(self.news)
+            
+            // сохраняем в newsGroup
+            guard let newsFeedGroup = newsFeedGroup else { return }
+            self.newsGroup = newsFeedGroup
             
             // перезагружаем таблицу
             self.tableView.reloadData()
@@ -39,27 +42,40 @@ class NewsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return news.count
+        //   return news.count;
+        return newsGroup.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? NewsCustomTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellReuseIdentifier", for: indexPath) as? NewsCustomTableViewCell else { return UITableViewCell() }
         
-        let newsFeed = self.news[indexPath.item]
+   // MARK: - NewsFeedModel
+        let newsFeed = news[indexPath.item]
         let photo = newsFeed.photos.items
+        
         let photoNews = photo.last
         let photoNewsLast = photoNews?.sizes.last
         guard let newsLast = photoNewsLast?.url else { return cell }
+        
+        if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews) {
+            cell.photoImage.image = imageNews
+        }
+        
         let newsText = photoNews?.text
-
+        cell.newsTextLabel.text = newsText
+        
         guard let newsDate = photoNews?.date else { return cell }
         let newsDateString = String(newsDate)
-        
-        cell.photoImage?.sd_setImage(with: URL(string: newsLast), placeholderImage: UIImage())
-        cell.newsTextLabel.text = newsText
         cell.newsDateLabel.text = newsDateString
-        //        cell.photoImage.image = www?.url
+        
+        // MARK: - Group
+        let newsFeedGroup = newsGroup[indexPath.item]
+        let photoGroup = newsFeedGroup.photo100
+        cell.photoGroupImage?.sd_setImage(with: URL(string: photoGroup), placeholderImage: UIImage())
+        
+        let newsTextName = newsFeedGroup.name
+        cell.newsNameLabel.text = newsTextName
         
         return cell
     }

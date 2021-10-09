@@ -148,10 +148,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="newsCommentsLabel" destination="xLh-Ne-4yc" id="rj4-dY-Pi9"/>
-                <outlet property="newsDateLabel" destination="NPu-0G-FVT" id="bc7-ci-kWs"/>
-                <outlet property="newsTextLabel" destination="NQa-To-lGO" id="lg1-7j-eUm"/>
-                <outlet property="photoImage" destination="uXN-sT-bRP" id="iMt-B6-vWB"/>
+                <outlet property="newsDateLabel" destination="NPu-0G-FVT" id="OnO-Cz-ibs"/>
+                <outlet property="newsNameLabel" destination="xLh-Ne-4yc" id="1aG-2y-v12"/>
+                <outlet property="newsTextLabel" destination="NQa-To-lGO" id="Ycw-d1-A9l"/>
+                <outlet property="photoGroupImage" destination="5hP-Xy-t8o" id="trA-7u-hn4"/>
+                <outlet property="photoImage" destination="uXN-sT-bRP" id="NRN-ac-LD8"/>
             </connections>
             <point key="canvasLocation" x="186.95652173913044" y="132.92410714285714"/>
         </tableViewCell>

@@ -7,12 +7,6 @@
 
 import Foundation
 import Alamofire
-//import DynamicJSON
-import SwiftyJSON
-
-//class PhotoModel {
-//
-//}
 
 final class PhotosAPI {
     

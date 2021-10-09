@@ -5,7 +5,6 @@
 //  Created by Сергей Ляшенко on 04.09.2021.
 //
 
-
 //   let newsResponse = try? newJSONDecoder().decode(NewsResponse.self, from: jsonData)
 
 import Foundation
@@ -21,7 +20,7 @@ struct NewsModel: Codable {
     let groups: [Group]
     let profiles: [Profile]
     let nextFrom: String
-
+    
     enum CodingKeys: String, CodingKey {
         case items, groups, profiles
         case nextFrom = "next_from"
@@ -36,7 +35,7 @@ struct Group: Codable {
     let photo50, photo200: String
     let type, screenName, name: String
     let isClosed: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case isMember = "is_member"
         case id
@@ -58,7 +57,7 @@ struct NewsFeedModel: Codable {
     let postID, sourceID: Int
     let type: String
     let date: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case photos
         case postID = "post_id"
@@ -88,7 +87,7 @@ struct PhotosNewsItem: Codable {
     let sizes: [SizeNews]
     let hasTags: Bool
     let albumID, canComment: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case id, comments, likes
         case accessKey = "access_key"
@@ -113,7 +112,7 @@ struct Comments: Codable {
 // MARK: - Likes
 struct Likes: Codable {
     let userLikes, count: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case userLikes = "user_likes"
         case count
@@ -123,7 +122,7 @@ struct Likes: Codable {
 // MARK: - Reposts
 struct Reposts: Codable {
     let count, userReposted: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case count
         case userReposted = "user_reposted"
@@ -134,21 +133,21 @@ struct Reposts: Codable {
 struct SizeNews: Codable {
     let width, height: Int
     let url: String
-//    let type: TypeEnum
+    let type: TypeEnumNews
 }
 
-//enum TypeEnum: String, Codable {
-//    case m = "m"
-//    case o = "o"
-//    case p = "p"
-//    case q = "q"
-//    case r = "r"
-//    case s = "s"
-//    case w = "w"
-//    case x = "x"
-//    case y = "y"
-//    case z = "z"
-//}
+enum TypeEnumNews: String, Codable {
+    case m = "m"
+    case o = "o"
+    case p = "p"
+    case q = "q"
+    case r = "r"
+    case s = "s"
+    case w = "w"
+    case x = "x"
+    case y = "y"
+    case z = "z"
+}
 
 // MARK: - Profile
 struct Profile: Codable {
@@ -162,7 +161,7 @@ struct Profile: Codable {
     let sex: Int
     let isClosed: Bool
     let firstName: String
-
+    
     enum CodingKeys: String, CodingKey {
         case canAccessClosed = "can_access_closed"
         case screenName = "screen_name"
@@ -180,7 +179,7 @@ struct Profile: Codable {
 // MARK: - OnlineInfo
 struct OnlineInfo: Codable {
     let visible, isMobile, isOnline: Bool
-
+    
     enum CodingKeys: String, CodingKey {
         case visible
         case isMobile = "is_mobile"

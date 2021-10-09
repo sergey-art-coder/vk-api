@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -276,7 +275,7 @@
             </objects>
             <point key="canvasLocation" x="2797.1014492753625" y="424.55357142857139"/>
         </scene>
-        <!--Новости-->
+        <!--Лента новостей-->
         <scene sceneID="apw-tJ-YWB">
             <objects>
                 <tableViewController id="avp-P2-1V5" customClass="NewsTableViewController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
@@ -290,7 +289,7 @@
                             <outlet property="delegate" destination="avp-P2-1V5" id="dbk-0C-0tw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Новости" id="3X5-Sa-7ev"/>
+                    <navigationItem key="navigationItem" title="Лента новостей" id="3X5-Sa-7ev"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GPz-FH-xxy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -353,11 +352,11 @@
             </objects>
             <point key="canvasLocation" x="4050.7246376811599" y="424.55357142857139"/>
         </scene>
-        <!--Новости-->
+        <!--Лента новостей-->
         <scene sceneID="Ovc-n2-ZHe">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y48-6W-D9x" customClass="CustomNavigationController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Новости" id="67C-wV-iaE"/>
+                    <tabBarItem key="tabBarItem" title="Лента новостей" id="67C-wV-iaE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pQv-K6-efa">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
