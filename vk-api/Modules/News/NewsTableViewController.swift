@@ -25,8 +25,8 @@ class NewsTableViewController: UITableViewController {
             guard let self = self else { return }
             
             // сохраняем в news
-            guard let newFeed = newsFeed else { return }
-            self.news = newFeed
+            guard let newsFeed = newsFeed else { return }
+            self.news = newsFeed
             print(self.news)
             
             // сохраняем в newsGroup

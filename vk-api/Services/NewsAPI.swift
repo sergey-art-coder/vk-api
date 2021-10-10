@@ -35,6 +35,7 @@ final class NewsAPI {
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
+            
             do {
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
