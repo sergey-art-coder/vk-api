@@ -27,8 +27,7 @@ class NewsTableViewController: UITableViewController {
             // сохраняем в news
             guard let newsFeed = newsFeed else { return }
             self.news = newsFeed
-            print(self.news)
-            
+
             // сохраняем в newsGroup
             guard let newsFeedGroup = newsFeedGroup else { return }
             self.newsGroup = newsFeedGroup
@@ -50,7 +49,7 @@ class NewsTableViewController: UITableViewController {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellReuseIdentifier", for: indexPath) as? NewsCustomTableViewCell else { return UITableViewCell() }
         
-   // MARK: - NewsFeedModel
+        // MARK: - NewsFeedModel
         let newsFeed = news[indexPath.item]
         let photo = newsFeed.photos.items
         
