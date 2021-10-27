@@ -16,7 +16,7 @@ final class NewsAPI {
     let clientId = Session.shared.userId
     let version = "5.131"
     
-    func getNews (completion: @escaping([NewsFeedModel]?, [Group]?)->()) {
+    func getNews (completion: @escaping(NewsResponse?)->()) {
         
         let method = "/newsfeed.get"
         
@@ -24,7 +24,7 @@ final class NewsAPI {
         let parameters: Parameters = [
             "filters": "photo, wall_photo, friend, note",
             "max_photos": 50,
-            "count": 5,
+            "count": 1,
             "access_token": Session.shared.token,
             "v": version
         ]
@@ -37,34 +37,66 @@ final class NewsAPI {
             
             // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
             guard let data = response.data else { return }
-            //                            print(data.prettyJSON as Any)
+                        print(data.prettyJSON as Any)
             
-            // группа тасков
-            let dispatchGroup = DispatchGroup()
+            let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
+            let news = newsResponse?.response.items
+            let newsGroup = newsResponse?.response.groups
+            let newsProfile = newsResponse?.response.profiles
             
-            DispatchQueue.global().async(group: dispatchGroup) {
+            var vkItemsArray: [NewsFeedModel] = []
+            var vkGroupsArray: [Group] = []
+            var vkProfilesArray: [Profile] = []
+            
+            guard let news = news else { return }
+            
+            for (index, items) in news.enumerated() {
                 
                 do {
                     
-                    let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
+                    vkItemsArray.append(items)
                     
-                    let news = newsResponse?.response.items
-                    print(Thread.current)
+                } catch(let errorDecode) {
                     
-                    let newsGroup = newsResponse?.response.groups
-                    print(Thread.current)
-                    
-                    dispatchGroup.notify(queue: DispatchQueue.main) {
-                        
-                        completion(news, newsGroup)
-                        print(Thread.current)
-                    }
-                    
-                } catch (let error as NSError) {
-                    
-                    NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
+                    print("Item decoding error at index \(index), err: \(errorDecode)")
                 }
             }
+            
+            guard let newsGroup = newsGroup else { return }
+            
+            for (index, groups) in newsGroup.enumerated() {
+                
+                do {
+                    
+                    vkGroupsArray.append(groups)
+                    
+                } catch(let errorDecode) {
+                    
+                    print("Item decoding error at index \(index), err: \(errorDecode)")
+                }
+            }
+            
+            guard let newsProfile = newsProfile else { return }
+            
+            for (index, profiles) in newsProfile.enumerated() {
+                
+                do {
+                    
+                    vkProfilesArray.append(profiles)
+                    
+                } catch(let errorDecode) {
+                    
+                    print("Item decoding error at index \(index), err: \(errorDecode)")
+                }
+            }
+            
+            let response = NewsModel(items: vkItemsArray,
+                                     groups: vkGroupsArray,
+                                     profiles: vkProfilesArray)
+            
+            let feed = NewsResponse(response: response)
+            
+            completion(feed)
         }
     }
 }

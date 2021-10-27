@@ -9,7 +9,6 @@
 
 import Foundation
 import RealmSwift
-import DynamicJSON
 
 // MARK: - GroupsResponse
 class GroupsResponse: Codable {

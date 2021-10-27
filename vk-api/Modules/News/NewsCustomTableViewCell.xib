@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="390" height="619"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CdN-gp-Zxb">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CdN-gp-Zxb" customClass="NewsCustomGroupTableViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
                         <rect key="frame" x="8" y="8" width="94.5" height="94.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="group4" translatesAutoresizingMaskIntoConstraints="NO" id="5hP-Xy-t8o" customClass="RoundedImageViev">
@@ -149,9 +149,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="newsDateLabel" destination="NPu-0G-FVT" id="OnO-Cz-ibs"/>
-                <outlet property="newsNameLabel" destination="xLh-Ne-4yc" id="1aG-2y-v12"/>
+                <outlet property="newsNameLabel" destination="xLh-Ne-4yc" id="RuO-X0-u3U"/>
                 <outlet property="newsTextLabel" destination="NQa-To-lGO" id="Ycw-d1-A9l"/>
-                <outlet property="photoGroupImage" destination="5hP-Xy-t8o" id="trA-7u-hn4"/>
+                <outlet property="photoGroupImage" destination="5hP-Xy-t8o" id="bvd-Sc-wGv"/>
                 <outlet property="photoImage" destination="uXN-sT-bRP" id="NRN-ac-LD8"/>
             </connections>
             <point key="canvasLocation" x="186.95652173913044" y="132.92410714285714"/>

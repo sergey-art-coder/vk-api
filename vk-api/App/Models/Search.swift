@@ -7,7 +7,6 @@
 
 import Foundation
 import RealmSwift
-import DynamicJSON
 
 //   let searchGroupResponse = try? newJSONDecoder().decode(SearchGroupResponse.self, from: jsonData)
 
