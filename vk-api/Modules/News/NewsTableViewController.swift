@@ -12,6 +12,7 @@ class NewsTableViewController: UITableViewController {
     let newsAPI = NewsAPI()
     var news: [NewsFeedModel] = []
     var newsGroup: [Group] = []
+    var feedProfiles: [Profile] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,18 +21,14 @@ class NewsTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "NewsCustomTableViewCell", bundle: nil), forCellReuseIdentifier: "CellReuseIdentifier")
         
         //Получаем News, добавляем их в таблицу
-        newsAPI.getNews { [weak self] newsFeed,newsFeedGroup  in
+        newsAPI.getNews { [weak self] feed  in
             
             guard let self = self else { return }
+            guard let feed = feed else { return }
             
-            // сохраняем в news
-            guard let newsFeed = newsFeed else { return }
-            self.news = newsFeed
-            print(self.news)
-            
-            // сохраняем в newsGroup
-            guard let newsFeedGroup = newsFeedGroup else { return }
-            self.newsGroup = newsFeedGroup
+            self.news = feed.response.items
+            self.newsGroup = feed.response.groups
+            self.feedProfiles = feed.response.profiles
             
             // перезагружаем таблицу
             self.tableView.reloadData()
@@ -40,44 +37,68 @@ class NewsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //   return news.count;
-        return newsGroup.count
+        return news.count
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellReuseIdentifier", for: indexPath) as? NewsCustomTableViewCell else { return UITableViewCell() }
         
-   // MARK: - NewsFeedModel
+        // MARK: - NewsFeedModel
         let newsFeed = news[indexPath.item]
+        
         let photo = newsFeed.photos.items
         
         let photoNews = photo.last
         let photoNewsLast = photoNews?.sizes.last
-        guard let newsLast = photoNewsLast?.url else { return cell }
+        guard let newsLast = photoNewsLast?.url else { return UITableViewCell() }
         
-        if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews) {
-            cell.photoImage.image = imageNews
+        let newsDate = photoNews?.date
+        
+        if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews),
+           let newsText = photoNews?.text,
+           let postDate = newsDate
+        {
+            cell.configureNewsFeedModel(imageNews: imageNews, newsText: newsText, postDate: postDate)
         }
         
-        let newsText = photoNews?.text
-        cell.newsTextLabel.text = newsText
-        
-        guard let newsDate = photoNews?.date else { return cell }
-        let newsDateString = String(newsDate)
-        cell.newsDateLabel.text = newsDateString
-        
-        // MARK: - Group
+        // MARK: - newsGroup
         let newsFeedGroup = newsGroup[indexPath.item]
-        let photoGroup = newsFeedGroup.photo100
-        cell.photoGroupImage?.sd_setImage(with: URL(string: photoGroup), placeholderImage: UIImage())
+        let newsProfiles = feedProfiles[indexPath.section]
+        print(newsProfiles)
         
         let newsTextName = newsFeedGroup.name
-        cell.newsNameLabel.text = newsTextName
+        let photoGroup = newsFeedGroup.photo100
         
+        let newsNameProfiles = newsProfiles.firstName
+        let photoProfiles = newsProfiles.photo100
+        
+        if let urlGroup = URL(string: photoGroup), let dataGroup = try? Data(contentsOf: urlGroup), let photoGroup = UIImage(data: dataGroup),
+           let urlProfiles = URL(string: photoProfiles), let dataProfiles = try? Data(contentsOf: urlProfiles), let photoProfiles = UIImage(data: dataProfiles)
+            
+        {
+            cell.configureGroup(newsName: newsTextName, photoGroup: photoGroup, newsNameProfiles: newsNameProfiles, photoProfiles: photoProfiles)
+        }
         return cell
     }
 }
 
+extension Double {
+    func getDateStringFromUTC() -> String {
+        let date = Date(timeIntervalSince1970: self)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        
+        return dateFormatter.string(from: date)
+    }
+}

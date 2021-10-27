@@ -12,6 +12,7 @@ import Foundation
 // MARK: - NewsResponse
 struct NewsResponse: Codable {
     let response: NewsModel
+    
 }
 
 // MARK: - Response
@@ -19,11 +20,11 @@ struct NewsModel: Codable {
     let items: [NewsFeedModel]
     let groups: [Group]
     let profiles: [Profile]
-    let nextFrom: String
+//    let nextFrom: String
     
     enum CodingKeys: String, CodingKey {
         case items, groups, profiles
-        case nextFrom = "next_from"
+   //     case nextFrom = "next_from"
     }
 }
 
@@ -80,7 +81,7 @@ struct PhotosNewsItem: Codable {
     let accessKey: String
     let userID: Int
     let reposts: Reposts
-    let date, ownerID: Int
+    let date, ownerID: Double
     let postID: Int?
     let text: String
     let canRepost: Int
@@ -161,7 +162,7 @@ struct Profile: Codable {
     let sex: Int
     let isClosed: Bool
     let firstName: String
-    
+
     enum CodingKeys: String, CodingKey {
         case canAccessClosed = "can_access_closed"
         case screenName = "screen_name"
