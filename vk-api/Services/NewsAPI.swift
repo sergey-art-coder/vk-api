@@ -24,7 +24,7 @@ final class NewsAPI {
         let parameters: Parameters = [
             "filters": "photo, wall_photo, friend, note",
             "max_photos": 50,
-            "count": 1,
+            "count": 5,
             "access_token": Session.shared.token,
             "v": version
         ]
