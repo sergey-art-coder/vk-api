@@ -24,7 +24,7 @@ final class NewsAPI {
         let parameters: Parameters = [
             "filters": "photo, wall_photo, friend, note",
             "max_photos": 50,
-            "count": 2,
+            "count": 5,
             "access_token": Session.shared.token,
             "v": version
         ]
@@ -37,66 +37,81 @@ final class NewsAPI {
             
             // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
             guard let data = response.data else { return }
-                     //   print(data.prettyJSON as Any)
+            //   print(data.prettyJSON as Any)
             
             let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
             let news = newsResponse?.response.items
             let newsGroup = newsResponse?.response.groups
             let newsProfile = newsResponse?.response.profiles
             
+            // группа тасков
+            let dispatchGroup = DispatchGroup()
+            
             var vkItemsArray: [NewsFeedModel] = []
             var vkGroupsArray: [Group] = []
             var vkProfilesArray: [Profile] = []
             
-            guard let news = news else { return }
-            
-            for (index, items) in news.enumerated() {
+            DispatchQueue.global().async(group: dispatchGroup) {
+                guard let news = news else { return }
                 
-                do {
+                for (index, items) in news.enumerated() {
                     
-                    vkItemsArray.append(items)
-                    
-                } catch(let errorDecode) {
-                    
-                    print("Item decoding error at index \(index), err: \(errorDecode)")
+                    do {
+                        
+                        vkItemsArray.append(items)
+                        print(Thread.current)
+                        
+                    } catch(let errorDecode) {
+                        
+                        print("Item decoding error at index \(index), err: \(errorDecode)")
+                    }
                 }
             }
             
-            guard let newsGroup = newsGroup else { return }
-            
-            for (index, groups) in newsGroup.enumerated() {
+            DispatchQueue.global().async(group: dispatchGroup) {
+                guard let newsGroup = newsGroup else { return }
                 
-                do {
+                for (index, groups) in newsGroup.enumerated() {
                     
-                    vkGroupsArray.append(groups)
-                    
-                } catch(let errorDecode) {
-                    
-                    print("Item decoding error at index \(index), err: \(errorDecode)")
+                    do {
+                        
+                        vkGroupsArray.append(groups)
+                        print(Thread.current)
+                        
+                    } catch(let errorDecode) {
+                        
+                        print("Item decoding error at index \(index), err: \(errorDecode)")
+                    }
                 }
             }
             
-            guard let newsProfile = newsProfile else { return }
-            
-            for (index, profiles) in newsProfile.enumerated() {
+            DispatchQueue.global().async(group: dispatchGroup) {
+                guard let newsProfile = newsProfile else { return }
                 
-                do {
+                for (index, profiles) in newsProfile.enumerated() {
                     
-                    vkProfilesArray.append(profiles)
-                    
-                } catch(let errorDecode) {
-                    
-                    print("Item decoding error at index \(index), err: \(errorDecode)")
+                    do {
+                        
+                        vkProfilesArray.append(profiles)
+                        print(Thread.current)
+                        
+                    } catch(let errorDecode) {
+                        
+                        print("Item decoding error at index \(index), err: \(errorDecode)")
+                    }
                 }
             }
             
-            let response = NewsModel(items: vkItemsArray,
-                                     groups: vkGroupsArray,
-                                     profiles: vkProfilesArray)
-            
-            let feed = NewsResponse(response: response)
-            
-            completion(feed)
+            dispatchGroup.notify(queue: DispatchQueue.main) {
+                let response = NewsModel(items: vkItemsArray,
+                                         groups: vkGroupsArray,
+                                         profiles: vkProfilesArray)
+                
+                let feed = NewsResponse(response: response)
+                
+                completion(feed)
+                print(Thread.current)
+            }
         }
     }
 }

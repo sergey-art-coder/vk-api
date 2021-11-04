@@ -48,25 +48,25 @@ class FeedTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return newsGroup.count
     }
-
+    
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
+        
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as? FeedFooter else { return UITableViewCell() }
         let currentFeedItem = news[section]
-
-        view.likes.text = "♥ \(currentFeedItem.date)   |   ⚑ \(currentFeedItem.date)"
-
+        
+        view.likes.text = "♥ \(currentFeedItem.date)                  |   ⚑ \(currentFeedItem.date)"
+        
         return view
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         return PostCellType.allCases.count
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
- 
+        
         let newsFeed = news[indexPath.section]
         let newsFeedGroup = newsGroup[indexPath.section]
         
@@ -84,7 +84,7 @@ class FeedTableViewController: UITableViewController {
             let photoNews = photo.last
             let newsDate = photoNews?.date
             guard let newsDate = newsDate else { return cell }
-
+            
             if let urlGroup = URL(string: photoGroup), let dataGroup = try? Data(contentsOf: urlGroup), let photoGroup = UIImage(data: dataGroup)
                 
             {
@@ -112,7 +112,7 @@ class FeedTableViewController: UITableViewController {
             let photoNewsLast = photoNews?.sizes.last
             guard let newsLast = photoNewsLast?.url else { return UITableViewCell() }
             if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews)
-            
+                
             {
                 cell.configureFeedPhoto(feedPhotoImage: imageNews)
             }

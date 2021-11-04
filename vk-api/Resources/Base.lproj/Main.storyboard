@@ -123,7 +123,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ldp-hE-Nw9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5871.0144927536239" y="1822.7678571428571"/>
+            <point key="canvasLocation" x="4961" y="1825"/>
         </scene>
         <!--Фото-->
         <scene sceneID="Pbw-eu-acU">
@@ -149,7 +149,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJ0-xA-kOX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6650" y="1826"/>
+            <point key="canvasLocation" x="5870" y="1825"/>
         </scene>
         <!--Сообщества-->
         <scene sceneID="jWr-vf-11Q">
@@ -279,7 +279,7 @@
         <scene sceneID="Q3R-dc-lAN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gu0-3f-66J" customClass="CustomNavigationController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Друзья" id="MQB-pr-2gC"/>
+                    <tabBarItem key="tabBarItem" title="Друзья" image="person.2" catalog="system" selectedImage="person.2" id="MQB-pr-2gC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EWe-P9-293">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -298,7 +298,7 @@
         <scene sceneID="aiP-RE-M5k">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ouk-IA-5pr" customClass="CustomNavigationController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Фото" id="MIt-F1-6X6"/>
+                    <tabBarItem key="tabBarItem" title="Фото" image="photo" catalog="system" selectedImage="photo.fill" id="MIt-F1-6X6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LqU-nF-GDe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -311,13 +311,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5UK-Ao-8CN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4960.8695652173919" y="1822.7678571428571"/>
+            <point key="canvasLocation" x="4051" y="1823"/>
         </scene>
         <!--Сообщества-->
         <scene sceneID="UeD-hK-0NA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Of-QF-zDo" customClass="CustomNavigationController" customModule="__SergeyLyashenko" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Сообщества" id="3bZ-rd-eM8"/>
+                    <tabBarItem key="tabBarItem" title="Сообщества" image="person.3" catalog="system" selectedImage="person.3" id="3bZ-rd-eM8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGl-bg-Dvd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -518,6 +518,10 @@
         <image name="group4" width="119" height="106"/>
         <image name="newspaper" catalog="system" width="128" height="111"/>
         <image name="newspaper.fill" catalog="system" width="128" height="111"/>
+        <image name="person.2" catalog="system" width="128" height="81"/>
+        <image name="person.3" catalog="system" width="128" height="62"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="photo.fill" catalog="system" width="128" height="93"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
