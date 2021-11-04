@@ -24,7 +24,7 @@ final class NewsAPI {
         let parameters: Parameters = [
             "filters": "photo, wall_photo, friend, note",
             "max_photos": 50,
-            "count": 5,
+            "count": 2,
             "access_token": Session.shared.token,
             "v": version
         ]
@@ -37,7 +37,7 @@ final class NewsAPI {
             
             // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
             guard let data = response.data else { return }
-                        print(data.prettyJSON as Any)
+                     //   print(data.prettyJSON as Any)
             
             let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
             let news = newsResponse?.response.items
