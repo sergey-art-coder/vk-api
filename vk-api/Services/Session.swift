@@ -15,5 +15,9 @@ final class Session {
     
     var token = "" // хранение токена в VK
     var userId = "" // хранение идентификатора пользователя VK
+    
+    let cliendId = "7902471"
+    let version = "5.131"
+
 }
 
