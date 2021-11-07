@@ -26,7 +26,6 @@ class NewsFeedAPI {
     init(_ session: Session) {
         
         self.parameters = [
-            "client_id": Session.shared.cliendId,
             "user_id": Session.shared.userId,
             "access_token": Session.shared.token,
             "v": Session.shared.version,
@@ -76,6 +75,9 @@ class NewsFeedAPI {
                         let decodedItem = try decoder.decode(Items.self, from: items.rawData())
                         vkItemsArray.append(decodedItem)
                         
+                        print("==========global itemsAPI==========")
+                        print(Thread.current)
+                        
                     } catch(let errorDecode) {
                         print("Item decoding error at index \(index), err: \(errorDecode)")
                     }
@@ -89,6 +91,9 @@ class NewsFeedAPI {
                         let decodedItem = try decoder.decode(Group.self, from: groups.rawData())
                         vkGroupsArray.append(decodedItem)
                         
+                        print("==========global groupsAPI==========")
+                        print(Thread.current)
+                        
                     } catch(let errorDecode) {
                         print("Group decoding error at index \(index), err: \(errorDecode)")
                     }
@@ -101,6 +106,9 @@ class NewsFeedAPI {
                     do {
                         let decodedItem = try decoder.decode(Profile.self, from: profiles.rawData())
                         vkProfilesArray.append(decodedItem)
+                        
+                        print("==========global profilesAPI==========")
+                        print(Thread.current)
                         
                     } catch(let errorDecode) {
                         print("Profile decoding error at index \(index), err: \(errorDecode)")
@@ -118,6 +126,9 @@ class NewsFeedAPI {
                     let feedNews = NewsResponse(response: response)
                     
                     completion (.success(feedNews))
+                    
+                    print("==========main NewsFeedAPI==========")
+                    print(Thread.current)
                 }
             }
             

@@ -48,7 +48,7 @@ class FeedTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return newsProfiles.count
+        return newsGroup.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,7 +111,8 @@ class FeedTableViewController: UITableViewController {
         case .photo:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedPhotoCell", for: indexPath) as? FeedPhotoTableViewCell else { return UITableViewCell() }
             
-            let newsLast = newsFeedProfiles.photo100
+            let newsLast = newsFeedProfiles.photo100            
+//            guard let newsLast = newsLast else { return UITableViewCell() }
             
             if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews)
                 
