@@ -30,7 +30,7 @@ class NewsFeedAPI {
             "access_token": Session.shared.token,
             "v": Session.shared.version,
             "filters": "post",
-//          "count": "1",
+//          "count": "5",
         ]
     }
     
@@ -75,8 +75,8 @@ class NewsFeedAPI {
                         let decodedItem = try decoder.decode(Items.self, from: items.rawData())
                         vkItemsArray.append(decodedItem)
                         
-                        print("==========global itemsAPI==========")
-                        print(Thread.current)
+//                        print("==========global itemsAPI==========")
+//                        print(Thread.current)
                         
                     } catch(let errorDecode) {
                         print("Item decoding error at index \(index), err: \(errorDecode)")
@@ -91,8 +91,8 @@ class NewsFeedAPI {
                         let decodedItem = try decoder.decode(Group.self, from: groups.rawData())
                         vkGroupsArray.append(decodedItem)
                         
-                        print("==========global groupsAPI==========")
-                        print(Thread.current)
+//                        print("==========global groupsAPI==========")
+//                        print(Thread.current)
                         
                     } catch(let errorDecode) {
                         print("Group decoding error at index \(index), err: \(errorDecode)")
@@ -107,8 +107,8 @@ class NewsFeedAPI {
                         let decodedItem = try decoder.decode(Profile.self, from: profiles.rawData())
                         vkProfilesArray.append(decodedItem)
                         
-                        print("==========global profilesAPI==========")
-                        print(Thread.current)
+//                        print("==========global profilesAPI==========")
+//                        print(Thread.current)
                         
                     } catch(let errorDecode) {
                         print("Profile decoding error at index \(index), err: \(errorDecode)")
@@ -127,8 +127,8 @@ class NewsFeedAPI {
                     
                     completion (.success(feedNews))
                     
-                    print("==========main NewsFeedAPI==========")
-                    print(Thread.current)
+//                    print("==========main NewsFeedAPI==========")
+//                    print(Thread.current)
                 }
             }
             
