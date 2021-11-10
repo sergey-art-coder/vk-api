@@ -10,7 +10,7 @@ import UIKit
 class FeedTextTableViewCell: UITableViewCell {
     
     @IBOutlet weak var feedTextLabel: UILabel!
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -39,5 +39,5 @@ class FeedTextTableViewCell: UITableViewCell {
         super.awakeFromNib()
         clearCell()
     }
-
+    
 }

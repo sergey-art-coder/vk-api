@@ -50,11 +50,13 @@ final class PhotosAPI {
                     let photosResponse = try? JSONDecoder().decode(PhotosResponse.self, from: data)
                     
                     let photos = photosResponse?.response.items
+                    print("==========global PhotosAPI==========")
                     print(Thread.current)
                     
                     dispatchGroup.notify(queue: DispatchQueue.main) {
                         
                         completion(photos)
+                        print("==========main PhotosAPI==========")
                         print(Thread.current)
                     }
                     

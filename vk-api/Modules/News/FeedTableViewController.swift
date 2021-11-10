@@ -15,11 +15,9 @@ enum PostCellType: Int, CaseIterable {
 
 class FeedTableViewController: UITableViewController {
     
-    let newsAPI = NewsAPI()
-    
-    var news: [NewsFeedModel] = []
+    var newsItems: [Items] = []
+    var newsProfiles: [Profile] = []
     var newsGroup: [Group] = []
-    var feedProfiles: [Profile] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,46 +26,53 @@ class FeedTableViewController: UITableViewController {
         tableView.sectionFooterHeight = 50
         tableView.separatorStyle = .singleLine
         
-        //Получаем News, добавляем их в таблицу
-        newsAPI.getNews { [weak self] feed  in
+        NewsFeedAPI(Session.shared).getNews { [weak self] result  in
             
             guard let self = self else { return }
-            guard let feed = feed else { return }
             
-            self.news = feed.response.items
-            self.newsGroup = feed.response.groups
-            self.feedProfiles = feed.response.profiles
-            
-            // перезагружаем таблицу
-            self.tableView.reloadData()
+            switch result {
+            case .success (let feedNews):
+                self.newsItems = feedNews.response.items
+                self.newsProfiles = feedNews.response.profiles
+                self.newsGroup = feedNews.response.groups
+                
+                // перезагружаем таблицу
+                self.tableView.reloadData()
+                
+            case .failure (let error):
+                print(error.localizedDescription)
+            }
         }
     }
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return newsGroup.count
-    }
-
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as? FeedFooter else { return UITableViewCell() }
-        let currentFeedItem = news[section]
-
-        view.likes.text = "♥ \(currentFeedItem.date)   |   ⚑ \(currentFeedItem.date)"
-
-        return view
+        
+        return newsProfiles.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         return PostCellType.allCases.count
         
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as! FeedFooter
+        let currentFeed = newsItems[section]
+        let likeCount = currentFeed.likes.count
+        let repostsCount = currentFeed.reposts.count
+        
+        view.likes.text = "♥ \(likeCount)                           ⚑ \(repostsCount)"
+        
+        return view
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
- 
-        let newsFeed = news[indexPath.section]
+        
+        let newsFeedItems = newsItems[indexPath.section]
+        let newsFeedProfiles = newsProfiles[indexPath.section]
         let newsFeedGroup = newsGroup[indexPath.section]
         
         let postCellType = PostCellType(rawValue: indexPath.item)
@@ -77,18 +82,16 @@ class FeedTableViewController: UITableViewController {
         case .info:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedInfoCell", for: indexPath) as? FeedInfoTableViewCell else { return UITableViewCell() }
             
+            let newsDate = newsFeedItems.date
+            
             let photoGroup = newsFeedGroup.photo100
             
             let newsTextName = newsFeedGroup.name
-            let photo = newsFeed.photos.items
-            let photoNews = photo.last
-            let newsDate = photoNews?.date
-            guard let newsDate = newsDate else { return cell }
-
+            
             if let urlGroup = URL(string: photoGroup), let dataGroup = try? Data(contentsOf: urlGroup), let photoGroup = UIImage(data: dataGroup)
                 
             {
-                cell.configureFeedInfo(feedUserGroupImage: photoGroup, feedIUserGroupName: newsTextName, feedPostDate: newsDate)
+                cell.configureFeedInfo(feedUserGroupImage: photoGroup, feedIUserGroupName: newsTextName, feedPostDate: Double(newsDate))
                 
             }
             
@@ -96,23 +99,22 @@ class FeedTableViewController: UITableViewController {
             
         case .text:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedTextCell", for: indexPath) as? FeedTextTableViewCell else { return UITableViewCell() }
-            let photo = newsFeed.photos.items
-            let photoNews = photo.last
-            let newsText = photoNews?.text
             
-            cell.configureFeedText(feedText: newsText!)
+            let newsText = newsFeedItems.text
+            
+            guard let newsText = newsText else { return cell }
+            
+            cell.configureFeedText(feedText: newsText)
             
             return cell
             
         case .photo:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedPhotoCell", for: indexPath) as? FeedPhotoTableViewCell else { return UITableViewCell() }
             
-            let photo = newsFeed.photos.items
-            let photoNews = photo.last
-            let photoNewsLast = photoNews?.sizes.last
-            guard let newsLast = photoNewsLast?.url else { return UITableViewCell() }
-            if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews)
+            let newsLast = newsFeedProfiles.photo100
             
+            if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews)
+                
             {
                 cell.configureFeedPhoto(feedPhotoImage: imageNews)
             }
