@@ -10,7 +10,6 @@ import Alamofire
 
 final class SearchAPI {
     
-    // базовый URL сервиса
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
@@ -20,7 +19,6 @@ final class SearchAPI {
         
         let method = "/groups.search"
         
-        // параметры
         let parameters: Parameters = [
             "access_token": Session.shared.token,
             "v": version,
@@ -28,28 +26,16 @@ final class SearchAPI {
             "q": "searchText"
         ]
         
-        // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
         let url = baseUrl + method
         
-        // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //                        print (response.data) //бинарник
-            //                        print (response.result) //получаем данные в формате JSON
-            //                        print ("=============SearchGroup=======================")
-            //                        print (response.data?.prettyJSON)
-            
-            
-            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {
                 
-                // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
                 
-                // получили объект вложенный состоящий еще с двух подобъектов
                 let searchGroupResponse = try? JSONDecoder().decode(SearchGroupResponse.self, from: data)
                 
-                // вытащили searchGroups
                 let searchGroups = searchGroupResponse?.response.items
                 
                 completion (searchGroups)

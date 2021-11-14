@@ -171,7 +171,7 @@
 			path = "vk-api";
 			sourceTree = "<group>";
 		};
-		EC19201F26E39A5D002851DE /* Photos */ = {
+		EC19201F26E39A5D002851DE /* VCPhotos */ = {
 			isa = PBXGroup;
 			children = (
 				ECF3236926E6417E00040B9A /* PhotoCollectionViewController.swift */,
@@ -180,7 +180,7 @@
 				ECB56CF426E6AAD200904451 /* CustomCollectionViewCell.swift */,
 				ECB56CF526E6AAD200904451 /* CustomCollectionViewCell.xib */,
 			);
-			path = Photos;
+			path = VCPhotos;
 			sourceTree = "<group>";
 		};
 		EC3C089426CC559A006F20B2 /* VCFriendAndGroups */ = {
@@ -204,7 +204,7 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		EC9109DF26E4C28A002FA630 /* News */ = {
+		EC9109DF26E4C28A002FA630 /* VCNews */ = {
 			isa = PBXGroup;
 			children = (
 				ECC3A50A26E5C64F00B2F6EB /* FeedTableViewController.swift */,
@@ -213,15 +213,7 @@
 				EC97731C2733079700F53240 /* FeedTextTableViewCell.swift */,
 				EC9773212733113000F53240 /* FeedFooter.swift */,
 			);
-			path = News;
-			sourceTree = "<group>";
-		};
-		EC97731E27330D6E00F53240 /* CustomUIControllers */ = {
-			isa = PBXGroup;
-			children = (
-				EC97731F27330D8E00F53240 /* RoundedImageView.swift */,
-			);
-			path = CustomUIControllers;
+			path = VCNews;
 			sourceTree = "<group>";
 		};
 		EC9A86BB26CC81750029DA99 /* Extension */ = {
@@ -256,11 +248,10 @@
 		ECA0D3A326C97F2B009A0948 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				EC97731E27330D6E00F53240 /* CustomUIControllers */,
 				EC417F4426CC57100002303B /* Auth */,
 				EC3C089426CC559A006F20B2 /* VCFriendAndGroups */,
-				EC19201F26E39A5D002851DE /* Photos */,
-				EC9109DF26E4C28A002FA630 /* News */,
+				EC19201F26E39A5D002851DE /* VCPhotos */,
+				EC9109DF26E4C28A002FA630 /* VCNews */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -312,6 +303,7 @@
 			children = (
 				ECCE1B382708B46000A7F140 /* Transitions */,
 				EC52ECDE2709828D00E76507 /* ImageScrollView.swift */,
+				EC97731F27330D8E00F53240 /* RoundedImageView.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";

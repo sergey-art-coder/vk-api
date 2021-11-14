@@ -48,7 +48,8 @@ class FeedTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return  newsGroup.count
+        guard newsItems.count >= newsGroup.count else { return newsGroup.count }
+        return newsGroup.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,7 +60,8 @@ class FeedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as! FeedFooter
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as? FeedFooter else { return UIView() }
+        
         let currentFeed = newsItems[section]
         let likeCount = currentFeed.likes.count
         let repostsCount = currentFeed.reposts.count
@@ -72,7 +74,7 @@ class FeedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let newsFeedItems = newsItems[indexPath.section]
-        let newsFeedProfiles = newsProfiles[indexPath.section]
+        //     let newsFeedProfiles = newsProfiles[indexPath.section]
         let newsFeedGroup = newsGroup[indexPath.section]
         
         let postCellType = PostCellType(rawValue: indexPath.item)
@@ -100,10 +102,10 @@ class FeedTableViewController: UITableViewController {
         case .text:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedTextCell", for: indexPath) as? FeedTextTableViewCell else { return UITableViewCell() }
             
-
+            
             let newsText = newsFeedItems.text
             
-//            guard let newsText = newsText else { return cell }
+            //            guard let newsText = newsText else { return cell }
             
             cell.configureFeedText(feedText: newsText)
             
@@ -114,7 +116,7 @@ class FeedTableViewController: UITableViewController {
             
             
             let newsLast = newsFeedItems.attachments?.last?.photo?.sizes.last?.url
-
+            
             guard let newsLast = newsLast else { return UITableViewCell() }
             
             if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews)

@@ -8,8 +8,6 @@
 import Foundation
 import RealmSwift
 
-//   let searchGroupResponse = try? newJSONDecoder().decode(SearchGroupResponse.self, from: jsonData)
-
 // MARK: - SearchGroupResponse
 class SearchGroupResponse: Codable {
     let response: SearchGroupsModel

@@ -43,7 +43,7 @@ final class FriendsAPI {
             //            print (response.request) //запрос
             //            print (response.response) //ответ - статус код и хедеры
             //            print (response.data) //бинарник
-            //            print (response.result) //JSON
+            //            print (response.result) //получаем данные в формате JSON
             //            print ("====================")
             //            print (response.data?.prettyJSON)
             

@@ -9,13 +9,11 @@ import Foundation
 import RealmSwift
 
 // MARK: - FriendsResponse
-// получаем объект FriendsResponse и наследуемся от Codable
 class FriendsResponse: Codable {
     let response: FriendsModel
 }
 
 // MARK: - Response
-// в нутри FriendsResponse будет объект Friends
 class FriendsModel: Codable {
     let count: Int
     let items: [FriendModel]
