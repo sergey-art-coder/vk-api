@@ -13,7 +13,6 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
     
     let photoCell = "PhotoCell"
     let toPhoto = "toPhoto"
-    //  let photosDB = PhotosDB()
     let photosAPI = PhotosAPI()
     var photos: [PhotoModel] = []
     var selectedIndex: Int = 0

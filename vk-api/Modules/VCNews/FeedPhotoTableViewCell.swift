@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class FeedPhotoTableViewCell: UITableViewCell {
     
@@ -15,31 +14,25 @@ class FeedPhotoTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     func clearCell() {
         
         feedPhotoImageView.image = nil
-        
     }
     
     func configureFeedPhoto(feedPhotoImage: UIImage) {
-        
         
         feedPhotoImageView.image = feedPhotoImage
         
     }
     
-    
     override func prepareForReuse() {
         clearCell()
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         clearCell()
     }
-    
 }

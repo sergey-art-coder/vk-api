@@ -72,7 +72,7 @@ class GroupsTableViewController: UITableViewController {
         let operationQueue = OperationQueue()
         
         // операция запроса
-        let groupsAPIDataOperation = GroupsAPIDataOperation()
+        let groupsAPIDataOperation = GroupsAPIOperation()
         operationQueue.addOperation(groupsAPIDataOperation)
         
         // операция parsing

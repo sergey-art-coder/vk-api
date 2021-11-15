@@ -86,6 +86,10 @@ class AuthViewController: UIViewController {
         performSegue(withIdentifier: "showMainSegue", sender: nil)
     }
     
+    // Создаем метод который будет маркером для перехода назад (Unwind Segue)
+    @IBAction func backToLogin (unwindSegue: UIStoryboardSegue) {
+        authorizetionToVK()
+    }
 }
 
 extension AuthViewController: WKNavigationDelegate {

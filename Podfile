@@ -19,6 +19,8 @@ target '1|SergeyLyashenko' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'SDWebImage', '~> 5.0'
+  pod 'PromiseKit'
+  pod 'AlamofireImage'
   
 
 end

@@ -8,13 +8,8 @@
 import Foundation
 import Alamofire
 
-struct User {
-    
-}
-
 final class FriendsAPI {
-    
-    // базовый URL сервиса
+
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId

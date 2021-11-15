@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class FeedInfoTableViewCell: UITableViewCell {
     
@@ -23,7 +22,6 @@ class FeedInfoTableViewCell: UITableViewCell {
         feedUserGroupImageView.image = nil
         feedIUserGroupNameLabel.text = nil
         feedPostDateLabel.text = nil
-        
     }
     
     func configureFeedInfo(feedUserGroupImage: UIImage?, feedIUserGroupName: String, feedPostDate: Double) {
@@ -33,24 +31,9 @@ class FeedInfoTableViewCell: UITableViewCell {
         feedPostDateLabel.text = feedPostDate.getDateStringFromUTC()
     }
     
-    //    func configureGroup(newsName: String, photoGroup: UIImage?, newsNameProfiles: String, photoProfiles: UIImage?) {
-    //
-    //        if newsName != "" && photoGroup != nil {
-    //            newsNameLabel.text = newsName
-    //            photoGroupImage.image = photoGroup
-    //
-    //        } else {
-    //
-    //            newsNameLabel.text = newsNameProfiles
-    //            photoGroupImage.image = photoProfiles
-    //        }
-    //    }
-    
-    
     override func prepareForReuse() {
         clearCell()
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

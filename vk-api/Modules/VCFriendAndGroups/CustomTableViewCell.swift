@@ -12,7 +12,7 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
-
+    
     func clearCell() {
         nameLabel.text = nil
         avatarImage.image = nil
@@ -22,7 +22,6 @@ class CustomTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         clearCell()
     }
-
     
     // вызывается один раз, это инициализация ячейки
     override func awakeFromNib() {
