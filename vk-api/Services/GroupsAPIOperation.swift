@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GroupsAPIDataOperation: Operation {
+class GroupsAPIOperation: Operation {
     
     // храним data
     var data: Data?
@@ -31,40 +31,3 @@ class GroupsAPIDataOperation: Operation {
     }
 }
 
-class GroupsParsingDataOperation: Operation {
-    
-    var groups: [GroupModel] = []
-    
-    override func main() {
-        
-        // через dependencies получаем доступ к первому объекту и забираем у него data
-        guard let groupsAPIDataOperation = dependencies.first as? GroupsAPIDataOperation,
-              let data = groupsAPIDataOperation.data else { return }
-        do {
-            var responseGroupsData: GroupsResponse
-            responseGroupsData = try JSONDecoder().decode(GroupsResponse.self, from: data)
-            self.groups = responseGroupsData.response.items
-        } catch {
-            print(error)
-        }
-    }
-}
-
-class GroupsDisplayDataOperation: Operation {
-    
-    var groupsViewController: GroupsTableViewController
-    
-    override func main() {
-        guard let groupsParsingDataOperation = dependencies.first as? GroupsParsingDataOperation else { return }
-        let groupsItems = groupsParsingDataOperation.groups
-        groupsViewController.groups = groupsItems
-        
-        groupsViewController.tableView.reloadData()
-        
-    }
-    
-    init(_ controller: GroupsTableViewController) {
-        
-        self.groupsViewController = controller
-    }
-}

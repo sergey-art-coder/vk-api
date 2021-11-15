@@ -91,28 +91,7 @@ class FriendsTableViewController: UITableViewController {
         
         return cell
     }
-    
-    // сохраняем выбранный индекс в переменной selectedFriend и убираем выделения
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        selectedFriend = friends[indexPath.row]
-        performSegue(withIdentifier: toPhotosFriends, sender: self)
-    }
-    
-    // метод через который мы переходим на PhotosFriendCollectionViewController
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //вызываем подготовку к переходу
-        super.prepare(for: segue, sender: sender)
-        
-        // проверяем что индитификатор называется "toPhotosFriend"
-        if segue.identifier == toPhotosFriends {
-            
-            // проверяем что контроллер на который мы переходим является контроллером типа PhotosFriendCollectionViewController и передаем тот или иной friend по соответствующему индексу строки
-            guard let detailVC = segue.destination as? PhotosFriendsCollectionViewController  else { return }
-            detailVC.photosUsers = selectedFriend
-        }
-    }
-    
+
     // MARK:  - Firebase
     
     //    private func writingIdToFirebase() {

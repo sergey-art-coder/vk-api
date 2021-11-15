@@ -19,25 +19,19 @@ class FeedTextTableViewCell: UITableViewCell {
     func clearCell() {
         
         feedTextLabel.text = nil
-        
     }
     
     func configureFeedText(feedText: String) {
         
-        
         feedTextLabel.text = feedText
-        
     }
-    
     
     override func prepareForReuse() {
         clearCell()
     }
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         clearCell()
     }
-    
 }

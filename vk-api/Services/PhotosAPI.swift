@@ -49,7 +49,6 @@ final class PhotosAPI {
                         
                         completion(photos)
                     }
-                    
                 } catch let error as NSError {
                     
                     NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
