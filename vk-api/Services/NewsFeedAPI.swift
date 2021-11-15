@@ -17,7 +17,6 @@ enum NewsFeedServiceError: Error {
 
 class NewsFeedAPI {
     
-    // базовый URL сервиса
     let baseUrl = "https://api.vk.com/method"
     let method = "/newsfeed.get"
     
@@ -26,21 +25,18 @@ class NewsFeedAPI {
     init(_ session: Session) {
         
         self.parameters = [
-            "client_id": Session.shared.cliendId,
             "user_id": Session.shared.userId,
             "access_token": Session.shared.token,
             "v": Session.shared.version,
             "filters": "post",
-//          "count": "1",
+            //          "count": "10",
         ]
     }
     
     func getNews (_ completion: @escaping(Result<NewsResponse, NewsFeedServiceError>) -> Void) {
         
-        // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
         let url = baseUrl + method
         
-        // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseData { response in
             
             if let error = response.error {
@@ -48,12 +44,11 @@ class NewsFeedAPI {
                 print(error)
             }
             
-            // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
             guard let data = response.data else {
                 completion(.failure(.notData))
                 return
             }
-//            print(data.prettyJSON as Any)
+            //            print(data.prettyJSON as Any)
             
             let decoder = JSONDecoder()
             let json = JSON(data)
@@ -76,6 +71,9 @@ class NewsFeedAPI {
                         let decodedItem = try decoder.decode(Items.self, from: items.rawData())
                         vkItemsArray.append(decodedItem)
                         
+                        //                        print("==========global itemsAPI==========")
+                        //                        debugPrint(Thread.current)
+                        
                     } catch(let errorDecode) {
                         print("Item decoding error at index \(index), err: \(errorDecode)")
                     }
@@ -89,6 +87,9 @@ class NewsFeedAPI {
                         let decodedItem = try decoder.decode(Group.self, from: groups.rawData())
                         vkGroupsArray.append(decodedItem)
                         
+                        //                        print("==========global groupsAPI==========")
+                        //                        debugPrint(Thread.current)
+                        
                     } catch(let errorDecode) {
                         print("Group decoding error at index \(index), err: \(errorDecode)")
                     }
@@ -101,6 +102,9 @@ class NewsFeedAPI {
                     do {
                         let decodedItem = try decoder.decode(Profile.self, from: profiles.rawData())
                         vkProfilesArray.append(decodedItem)
+                        
+                        //                        print("==========global profilesAPI==========")
+                        //                        debugPrint(Thread.current)
                         
                     } catch(let errorDecode) {
                         print("Profile decoding error at index \(index), err: \(errorDecode)")
@@ -118,6 +122,9 @@ class NewsFeedAPI {
                     let feedNews = NewsResponse(response: response)
                     
                     completion (.success(feedNews))
+                    
+                    //                    print("==========main NewsFeedAPI==========")
+                    //                    debugPrint(Thread.current)
                 }
             }
             

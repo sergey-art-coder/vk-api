@@ -11,30 +11,18 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImage: UIImageView!
     
-    func setup() {
-        
-    }
-    
-    
     func clearCell() {
         
+        photoImage.image = nil
     }
-    
     
     override func prepareForReuse() {
         clearCell()
     }
     
-    
-    func configure() {
-        
-    }
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        setup()
+        
         clearCell()
     }
-    
 }

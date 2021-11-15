@@ -16,16 +16,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="531" height="92"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friend2" translatesAutoresizingMaskIntoConstraints="NO" id="Jxm-XY-AQw">
-                        <rect key="frame" x="0.0" y="0.0" width="112" height="92"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friend2" translatesAutoresizingMaskIntoConstraints="NO" id="Jxm-XY-AQw" customClass="RoundedImageView" customModule="__SergeyLyashenko" customModuleProvider="target">
+                        <rect key="frame" x="10" y="0.0" width="92" height="92"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Jxm-XY-AQw" secondAttribute="height" multiplier="1:1" id="oXy-uq-XAe"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="corneradius" value=""/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3m8-Cw-082">
-                        <rect key="frame" x="106" y="0.0" width="425" height="92"/>
+                        <rect key="frame" x="124" y="0.0" width="397" height="92"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="425" id="hSR-nG-9X7"/>
+                            <constraint firstAttribute="width" constant="397" id="hSR-nG-9X7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -34,9 +37,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Jxm-XY-AQw" secondAttribute="bottom" id="4ff-mP-Yh1"/>
-                    <constraint firstItem="Jxm-XY-AQw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8wD-De-kgn"/>
+                    <constraint firstItem="Jxm-XY-AQw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-10" id="59B-s0-9SZ"/>
                     <constraint firstItem="3m8-Cw-082" firstAttribute="top" secondItem="Jxm-XY-AQw" secondAttribute="top" id="HZV-qk-Q9V"/>
-                    <constraint firstItem="3m8-Cw-082" firstAttribute="leading" secondItem="Jxm-XY-AQw" secondAttribute="trailing" constant="-6" id="Kv5-Je-i48"/>
+                    <constraint firstItem="3m8-Cw-082" firstAttribute="leading" secondItem="Jxm-XY-AQw" secondAttribute="trailing" constant="22" id="Kv5-Je-i48"/>
                     <constraint firstItem="3m8-Cw-082" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bYO-Ny-4uw"/>
                     <constraint firstItem="3m8-Cw-082" firstAttribute="bottom" secondItem="Jxm-XY-AQw" secondAttribute="bottom" id="bqR-5l-4Bx"/>
                 </constraints>

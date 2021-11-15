@@ -8,13 +8,8 @@
 import Foundation
 import Alamofire
 
-struct Groups {
-    
-}
-
 final class GroupsAPI {
     
-    // базовый URL сервиса
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
@@ -24,7 +19,6 @@ final class GroupsAPI {
         
         let method = "/groups.get"
         
-        // параметры
         let parameters: Parameters = [
             "user_id": clientId,
             "access_token": Session.shared.token,
@@ -32,27 +26,16 @@ final class GroupsAPI {
             "extended": 1
         ]
         
-        // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
         let url = baseUrl + method
         
-        // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
             
-            //                        print (response.data) //бинарник
-            //                        print (response.result) //получаем данные в формате JSON
-            //                        print ("=============Group=======================")
-            //                        print (response.data?.prettyJSON)
-            
-            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {
                 
-                // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
                 
-                // получили объект вложенный состоящий еще с двух подобъектов
                 let groupsResponse = try? JSONDecoder().decode(GroupsResponse.self, from: data)
                 
-                // вытащили groups
                 let groups = groupsResponse?.response.items
                 
                 completion (groups)

@@ -11,12 +11,11 @@ final class Session {
     
     static let shared = Session()
     
-    private init() {}
+    private init() { }
     
     var token = "" // хранение токена в VK
     var userId = "" // хранение идентификатора пользователя VK
-    
-    let cliendId = "7902471"
+
     let version = "5.131"
 
 }

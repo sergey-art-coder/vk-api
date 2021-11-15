@@ -5,17 +5,11 @@
 //  Created by Сергей Ляшенко on 04.09.2021.
 //
 
-//   let newsResponse = try? newJSONDecoder().decode(NewsResponse.self, from: jsonData)
-
 import Foundation
 
 // MARK: - NewsResponse
 struct NewsResponse: Codable {
     let response: NewsModel
-    
-    init (response: NewsModel) {
-        self.response = response
-    }
 }
 
 // MARK: - Response
@@ -23,161 +17,295 @@ struct NewsModel: Codable {
     let items: [Items]
     let profiles: [Profile]
     let groups: [Group]
-    let nextFrom: String
-    
+
+//    let nextFrom: String
+
     enum CodingKeys: String, CodingKey {
-        case items, profiles, groups
-        case nextFrom = "next_from"
-    }
-    
-    init(items: [Items], profiles: [Profile], groups: [Group]) {
-        self.items = items
-        self.profiles = profiles
-        self.groups = groups
-        self.nextFrom = ""
+        case items, groups, profiles
+//        case nextFrom = "next_from"
     }
 }
 
 // MARK: - Group
 struct Group: Codable {
-    let id: Int
-    let name, screenName: String
+    let isMember, id: Int
+    let photo100: String
+    let isAdvertiser, isAdmin: Int
+    let photo50, photo200: String
+    let type: GroupType
+    let screenName, name: String
     let isClosed: Int
-    let type: String
-    let isAdmin, isMember, isAdvertiser: Int?
-    let photo50, photo100, photo200: String
-    
+
     enum CodingKeys: String, CodingKey {
-        case id, name
-        case screenName = "screen_name"
-        case isClosed = "is_closed"
-        case type
-        case isAdmin = "is_admin"
         case isMember = "is_member"
-        case isAdvertiser = "is_advertiser"
-        case photo50 = "photo_50"
+        case id
         case photo100 = "photo_100"
+        case isAdvertiser = "is_advertiser"
+        case isAdmin = "is_admin"
+        case photo50 = "photo_50"
         case photo200 = "photo_200"
+        case type
+        case screenName = "screen_name"
+        case name
+        case isClosed = "is_closed"
     }
 }
 
-// MARK: - Item
+enum GroupType: String, Codable {
+    case group = "group"
+    case page = "page"
+}
+
+// MARK: - Items
 struct Items: Codable {
-    let sourceID: Int
-    let date: TimeInterval
-    let canDoubtCategory, canSetCategory: Bool?
-    let postType, text: String?
-    let markedAsAds: Int?
-    let attachments: [Attachment]?
-    let postSource: PostSource
+    let donut: Donut
     let comments: Comments
+    let canSetCategory, isFavorite: Bool
+    let shortTextRate: Double
     let likes: Likes
     let reposts: Reposts
-    let views: Views?
-    let postID: Int?
-    let type: String
-    
-    // MARK: - Computed properties.
-    //
-    //    var hasText: Bool {
-    //        return self.text != nil && self.text != ""
-    //    }
-    //
-    //    var hasPhoto604: Bool {
-    //        return self.attachments?[0].photo?.photo604 != nil
-    //    }
-    
+    let type, postType: PostTypeEnum
+    let date, sourceID: Int
+    let text: String
+    let canDoubtCategory: Bool
+    let postID: Int
+    let markedAsAds: Int?
+    let postSource: ItemPostSource
+    let views: Views
+    let copyHistory: [CopyHistory]?
+    let carouselOffset: Int?
+    let attachments: [ItemAttachment]?
+    let signerID: Int?
+
     enum CodingKeys: String, CodingKey {
-        case sourceID = "source_id"
-        case date
-        case canDoubtCategory = "can_doubt_category"
+        case donut, comments
         case canSetCategory = "can_set_category"
+        case isFavorite = "is_favorite"
+        case shortTextRate = "short_text_rate"
+        case likes, reposts, type
         case postType = "post_type"
+        case date
+        case sourceID = "source_id"
         case text
-        case markedAsAds = "marked_as_ads"
-        case attachments
-        case postSource = "post_source"
-        case comments, likes, reposts, views
+        case canDoubtCategory = "can_doubt_category"
         case postID = "post_id"
-        case type
+        case markedAsAds = "marked_as_ads"
+        case postSource = "post_source"
+        case views
+        case copyHistory = "copy_history"
+        case carouselOffset = "carousel_offset"
+        case attachments
+        case signerID = "signer_id"
     }
 }
 
-// MARK: - Attachment
-struct Attachment: Codable {
-    let type: String
-    let photo: Photo?
-    let link: Link?
+// MARK: - ItemAttachment
+struct ItemAttachment: Codable {
+    let type: AttachmentType
+    let album: Album?
+    let photo: Photos?
+    let link: Links?
 }
 
-// MARK: - Link
-struct Link: Codable {
-    let url: String
-    let photo: Photo?
+// MARK: - Album
+struct Album: Codable {
+    let updated, id: Int
+    let title: String
+    let size, created: Int
+    let thumb: Photos
+    let albumDescription: String
+    let ownerID: Int
+
+    enum CodingKeys: String, CodingKey {
+        case updated, id, title, size, created, thumb
+        case albumDescription = "description"
+        case ownerID = "owner_id"
+    }
 }
 
 // MARK: - Photo
-struct Photo: Codable {
-    let albumID, date, id, ownerID: Int
-    let hasTags: Bool
-    let accessKey: String?
-    let height: Int?
-    let photo1280, photo130, photo604, photo75: String?
-    let photo807: String?
-    let postID: Int?
+struct Photos: Codable {
+    let albumID, id, date: Int
     let text: String
-    let userID, width: Int?
-    
+    let userID: Int?
+    let sizes: [Sizes]
+    let hasTags: Bool
+    let ownerID: Int
+    let accessKey: String?
+    let postID: Int?
+
     enum CodingKeys: String, CodingKey {
         case albumID = "album_id"
-        case date, id
-        case ownerID = "owner_id"
-        case hasTags = "has_tags"
-        case accessKey = "access_key"
-        case height
-        case photo1280 = "photo_1280"
-        case photo130 = "photo_130"
-        case photo604 = "photo_604"
-        case photo75 = "photo_75"
-        case photo807 = "photo_807"
-        case postID = "post_id"
-        case text
+        case id, date, text
         case userID = "user_id"
-        case width
+        case sizes
+        case hasTags = "has_tags"
+        case ownerID = "owner_id"
+        case accessKey = "access_key"
+        case postID = "post_id"
     }
+}
+
+// MARK: - Sizes
+struct Sizes: Codable {
+    let width, height: Int
+    let url: String
+    let type: SizeType
+}
+
+enum SizeType: String, Codable {
+    case k = "k"
+    case l = "l"
+    case m = "m"
+    case o = "o"
+    case p = "p"
+    case q = "q"
+    case r = "r"
+    case s = "s"
+    case w = "w"
+    case x = "x"
+    case y = "y"
+    case z = "z"
+}
+
+// MARK: - Link
+struct Links: Codable {
+    let button: Button?
+    let product: Product?
+    let isFavorite: Bool
+    let title, linkDescription: String
+    let photo: Photos
+    let caption: String?
+    let url: String
+    let target: String?
+
+    enum CodingKeys: String, CodingKey {
+        case button, product
+        case isFavorite = "is_favorite"
+        case title
+        case linkDescription = "description"
+        case photo, caption, url, target
+    }
+}
+
+// MARK: - Button
+struct Button: Codable {
+    let title: String
+    let action: Action
+}
+
+// MARK: - Action
+struct Action: Codable {
+    let type: String
+    let url: String
+}
+
+// MARK: - Product
+struct Product: Codable {
+    let price: Price
+}
+
+// MARK: - Price
+struct Price: Codable {
+    let amount: String
+    let currency: Currency
+    let text: String
+}
+
+// MARK: - Currency
+struct Currency: Codable {
+    let id: Int
+    let name, title: String
+}
+
+enum AttachmentType: String, Codable {
+    case album = "album"
+    case link = "link"
+    case photo = "photo"
 }
 
 // MARK: - Comments
 struct Comments: Codable {
     let count, canPost: Int
-    
+    let groupsCanPost: Bool?
+
     enum CodingKeys: String, CodingKey {
         case count
         case canPost = "can_post"
+        case groupsCanPost = "groups_can_post"
+    }
+}
+
+// MARK: - CopyHistory
+struct CopyHistory: Codable {
+    let postSource: CopyHistoryPostSource
+    let postType: PostTypeEnum
+    let id, fromID, date: Int
+    let text: String
+    let attachments: [CopyHistoryAttachment]
+    let ownerID: Int
+
+    enum CodingKeys: String, CodingKey {
+        case postSource = "post_source"
+        case postType = "post_type"
+        case id
+        case fromID = "from_id"
+        case date, text, attachments
+        case ownerID = "owner_id"
+    }
+}
+
+// MARK: - CopyHistoryAttachment
+struct CopyHistoryAttachment: Codable {
+    let type: AttachmentType
+    let photo: Photos
+}
+
+// MARK: - CopyHistoryPostSource
+struct CopyHistoryPostSource: Codable {
+    let type: PostSourceType
+}
+
+enum PostSourceType: String, Codable {
+    case api = "api"
+    case vk = "vk"
+}
+
+enum PostTypeEnum: String, Codable {
+    case post = "post"
+}
+
+// MARK: - Donut
+struct Donut: Codable {
+    let isDonut: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case isDonut = "is_donut"
     }
 }
 
 // MARK: - Likes
 struct Likes: Codable {
-    let count, userLikes, canLike, canPublish: Int
-    
+    let canLike, canPublish, count, userLikes: Int
+
     enum CodingKeys: String, CodingKey {
-        case count
-        case userLikes = "user_likes"
         case canLike = "can_like"
         case canPublish = "can_publish"
+        case count
+        case userLikes = "user_likes"
     }
 }
 
-// MARK: - PostSource
-struct PostSource: Codable {
-    let type: String
+// MARK: - ItemPostSource
+struct ItemPostSource: Codable {
+    let type: PostSourceType
+    let platform: String?
 }
 
 // MARK: - Reposts
 struct Reposts: Codable {
     let count, userReposted: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case count
         case userReposted = "user_reposted"
@@ -191,35 +319,43 @@ struct Views: Codable {
 
 // MARK: - Profile
 struct Profile: Codable {
-    let firstName: String
-    let id: Int
-    let lastName: String
-    let sex: Int
+    let canAccessClosed: Bool?
     let screenName: String?
-    let photo50, photo100: String
+    let online, id: Int
+    let photo100: String
+    let lastName: String
+    let photo50: String
     let onlineInfo: OnlineInfo
-    let online: Int
-    
+    let sex: Int
+    let isClosed: Bool?
+    let firstName: String
+    let deactivated: String?
+
     enum CodingKeys: String, CodingKey {
-        case firstName = "first_name"
-        case id
-        case lastName = "last_name"
-        case sex
+        case canAccessClosed = "can_access_closed"
         case screenName = "screen_name"
-        case photo50 = "photo_50"
+        case online, id
         case photo100 = "photo_100"
+        case lastName = "last_name"
+        case photo50 = "photo_50"
         case onlineInfo = "online_info"
-        case online
+        case sex
+        case isClosed = "is_closed"
+        case firstName = "first_name"
+        case deactivated
     }
 }
 
 // MARK: - OnlineInfo
 struct OnlineInfo: Codable {
-    let visible, isOnline, isMobile: Bool?
-    
+    let visible, isMobile, isOnline: Bool
+    let appID, lastSeen: Int?
+
     enum CodingKeys: String, CodingKey {
         case visible
-        case isOnline = "is_online"
         case isMobile = "is_mobile"
+        case isOnline = "is_online"
+        case appID = "app_id"
+        case lastSeen = "last_seen"
     }
 }

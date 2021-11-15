@@ -413,7 +413,7 @@
                                     <outlet property="feedTextLabel" destination="FQm-3o-iCR" id="8Iz-QI-W7P"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedPhotoCell" id="NBe-0d-h7g" customClass="FeedPhotoTableViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedPhotoCell" id="NBe-0d-h7g" customClass="FeedPhotoTableViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="214.5" width="414" height="350.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NBe-0d-h7g" id="0f2-VZ-ZJf">

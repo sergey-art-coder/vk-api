@@ -10,7 +10,7 @@ import RealmSwift
 class GroupsTableViewController: UITableViewController {
     
     let groupsDB = GroupsDB()
-    let groupsAPI = GroupsAPI()
+  //  let groupsAPI = GroupsAPI()
     var groups: [GroupModel] = []
     private let customTableViewCellIdentifier = "CustomTableViewCellIdentifier"
     
@@ -69,15 +69,24 @@ class GroupsTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        //Получаем список групп, добавляем их в таблицу
-        groupsAPI.getGroups { [weak self] users in
-            guard let self = self else { return }
-            
-            // сохраняем в groups
-            guard let users = users else { return }
-            self.groups = users
-            self.tableView.reloadData()
-        }
+        let operationQueue = OperationQueue()
+        
+        // операция запроса
+        let groupsAPIDataOperation = GroupsAPIDataOperation()
+        operationQueue.addOperation(groupsAPIDataOperation)
+        
+        // операция parsing
+        let parseGroupData = GroupsParsingDataOperation()
+        // parseGroupData ждет groupsAPIDataOperation, когда groupsAPIDataOperation будет выполнена запускается parseGroupData
+        parseGroupData.addDependency(groupsAPIDataOperation)
+        operationQueue.addOperation(parseGroupData)
+        
+        // операция displayGroupData
+        let displayGroupData = GroupsDisplayDataOperation(self)
+        // displayGroupData ждет parseGroupData, когда parseGroupData будет выполнена запускается displayGroupData
+        displayGroupData.addDependency(parseGroupData)
+        OperationQueue.main.addOperation(displayGroupData)
+        
     }
     
     // MARK: - Table view data source
