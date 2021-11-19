@@ -62,10 +62,11 @@ struct Items: Codable {
     let comments: Comments
     let canSetCategory, isFavorite: Bool
     let shortTextRate: Double
-    let likes: Likes
+    var likes: Likes
     let reposts: Reposts
     let type, postType: PostTypeEnum
-    let date, sourceID: Int
+    let sourceID: Int
+    let date: TimeInterval
     let text: String
     let canDoubtCategory: Bool
     let postID: Int
@@ -76,6 +77,16 @@ struct Items: Codable {
     let carouselOffset: Int?
     let attachments: [ItemAttachment]?
     let signerID: Int?
+    
+    // MARK: - Computed properties.
+
+    var hasText: Bool {
+        return self.text != nil && self.text != ""
+    }
+    
+    var hasLink: Bool {
+        return self.attachments?[0].link?.url != nil
+    }
 
     enum CodingKeys: String, CodingKey {
         case donut, comments
@@ -286,7 +297,7 @@ struct Donut: Codable {
 
 // MARK: - Likes
 struct Likes: Codable {
-    let canLike, canPublish, count, userLikes: Int
+    var canLike, canPublish, count, userLikes: Int
 
     enum CodingKeys: String, CodingKey {
         case canLike = "can_like"

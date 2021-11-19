@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class FeedTextTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var feedTextLabel: UILabel!
+    @IBOutlet weak var feedTextLabel: ActiveLabel!
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -21,9 +22,29 @@ class FeedTextTableViewCell: UITableViewCell {
         feedTextLabel.text = nil
     }
     
-    func configureFeedText(feedText: String) {
+    func configureFeedText(text: String?) {
         
-        feedTextLabel.text = feedText
+        guard let text = text else { return }
+        
+        feedTextLabel.customize { label in
+            
+            label.text = text
+            
+            let vkHashTag = ActiveType.custom(pattern: #"#\S+"#)
+            
+            label.urlMaximumLength = 22
+            label.enabledTypes = [.url, vkHashTag]
+            
+            label.customColor[vkHashTag] = activeVkHashTagColor
+            label.customSelectedColor[vkHashTag] = activeVkHashTagColorSelected
+            
+            label.URLColor = activeURLColor
+            label.URLSelectedColor = activeURLColorSelected
+            
+            label.handleURLTap { url in
+                UIApplication.shared.open(url)
+            }
+        }
     }
     
     override func prepareForReuse() {

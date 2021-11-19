@@ -21,10 +21,10 @@ class FeedPhotoTableViewCell: UITableViewCell {
         feedPhotoImageView.image = nil
     }
     
-    func configureFeedPhoto(feedPhotoImage: UIImage) {
+    func configureFeedPhoto(url: String?) {
         
-        feedPhotoImageView.image = feedPhotoImage
-        
+        guard let url = url else { return }
+        feedPhotoImageView.asyncLoadImageUsingCache(withUrl: url, withImageViewer: true)
     }
     
     override func prepareForReuse() {
