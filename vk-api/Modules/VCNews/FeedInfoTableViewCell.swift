@@ -24,11 +24,20 @@ class FeedInfoTableViewCell: UITableViewCell {
         feedPostDateLabel.text = nil
     }
     
-    func configureFeedInfo(feedUserGroupImage: UIImage?, feedIUserGroupName: String, feedPostDate: Double) {
+    func configureFeedInfo(profiles: Profile? = nil, groups: Group? = nil, feedPostDate: Double) {
         
-        feedUserGroupImageView.image = feedUserGroupImage
-        feedIUserGroupNameLabel.text = feedIUserGroupName
-        feedPostDateLabel.text = feedPostDate.getDateStringFromUTC()
+        if let group = groups {
+            
+            feedIUserGroupNameLabel.text = group.name
+            feedUserGroupImageView.asyncLoadImageUsingCache(withUrl: group.photo100)
+            
+        } else if let profile = profiles {
+            
+            feedIUserGroupNameLabel.text = "\(profile.firstName) \(profile.lastName)"
+            feedUserGroupImageView.asyncLoadImageUsingCache(withUrl: profile.photo100)
+        }
+        
+        feedPostDateLabel.text = feedPostDate.getRelativeDateStringFromUTC()
     }
     
     override func prepareForReuse() {

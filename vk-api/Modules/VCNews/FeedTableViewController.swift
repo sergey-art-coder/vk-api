@@ -8,9 +8,11 @@
 import UIKit
 
 enum PostCellType: Int, CaseIterable {
+    
     case info
     case text
     case photo
+
 }
 
 class FeedTableViewController: UITableViewController {
@@ -36,13 +38,45 @@ class FeedTableViewController: UITableViewController {
                 self.newsProfiles = feedNews.response.profiles
                 self.newsGroup = feedNews.response.groups
                 
-                // перезагружаем таблицу
                 self.tableView.reloadData()
                 
             case .failure (let error):
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // MARK: - Configure footer.
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as? FeedFooter else { return UIView() }
+        let currentFeedLike = newsItems[section]
+        
+        view.likeButton.configureLikeButton(likesCount: currentFeedLike.likes.count,
+                                  isLikedByMe: currentFeedLike.likes.userLikes == 1 ? true : false,
+                                  itemID: currentFeedLike.postID,
+                                  ownerID: currentFeedLike.sourceID,
+                                  completionHandlerLiked: {
+            self.newsItems[section].likes.count += 1
+            self.newsItems[section].likes.userLikes = 1
+        },
+                                  completionHandlerUnLiked: {
+            self.newsItems[section].likes.count -= 1
+            self.newsItems[section].likes.userLikes = 0
+        })
+        
+        //         --[ ⚑ ]--
+        
+        var footerText = ""
+        
+        footerText += (currentFeedLike.views.count != 0) ? "        ⊹ \(Int(currentFeedLike.views.count).formatted)" : ""
+        footerText += (currentFeedLike.reposts.count != 0) ? "       ⌁ \(Int(currentFeedLike.reposts.count).formatted)" : ""
+        footerText += (currentFeedLike.comments.count != 0) ? "      ℘ \(Int(currentFeedLike.comments.count).formatted)" : ""
+        
+        view.postInfo.text = footerText
+        
+        return view
     }
     
     // MARK: - Table view data source
@@ -52,26 +86,12 @@ class FeedTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return PostCellType.allCases.count
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionFooter") as? FeedFooter else { return UIView() }
-        
-        let currentFeed = newsItems[section]
-        let likeCount = currentFeed.likes.count
-        let repostsCount = currentFeed.reposts.count
-        
-        view.likes.text = "♥ \(likeCount)                           ⚑ \(repostsCount)"
-        return view
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let newsFeedItems = newsItems[indexPath.section]
-        //     let newsFeedProfiles = newsProfiles[indexPath.section]
-        let newsFeedGroup = newsGroup[indexPath.section]
         let postCellType = PostCellType(rawValue: indexPath.item)
         
         switch postCellType {
@@ -79,36 +99,48 @@ class FeedTableViewController: UITableViewController {
         case .info:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedInfoCell", for: indexPath) as? FeedInfoTableViewCell else { return UITableViewCell() }
             
-            let newsDate = newsFeedItems.date
-            let photoGroup = newsFeedGroup.photo100
-            let newsTextName = newsFeedGroup.name
+            let currentFeedItemInfo = newsItems[indexPath.section]
             
-            if let urlGroup = URL(string: photoGroup), let dataGroup = try? Data(contentsOf: urlGroup), let photoGroup = UIImage(data: dataGroup)
-            {
-                cell.configureFeedInfo(feedUserGroupImage: photoGroup, feedIUserGroupName: newsTextName, feedPostDate: Double(newsDate))
+            switch newsItems[indexPath.section].sourceID.signum() {
+                
+            case 1: // Пост пользователя
+                let currentFeedItemProfile = newsProfiles.filter{ $0.id == currentFeedItemInfo.sourceID }[0]
+                cell.configureFeedInfo(profiles: currentFeedItemProfile, feedPostDate: currentFeedItemInfo.date)
+                
+            case -1: // Пост группы
+                let currentFeedItemGroup = newsGroup.filter{ $0.id == abs(currentFeedItemInfo.sourceID) }[0]
+                cell.configureFeedInfo(groups: currentFeedItemGroup, feedPostDate: currentFeedItemInfo.date)
+                
+            default: break
+                
             }
+            
             return cell
             
         case .text:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedTextCell", for: indexPath) as? FeedTextTableViewCell else { return UITableViewCell() }
             
-            let newsText = newsFeedItems.text
-            cell.configureFeedText(feedText: newsText)
-            return cell
+            let currentFeedItemText = newsItems[indexPath.section]
+            
+            if currentFeedItemText.hasText {
+                
+                cell.configureFeedText(text: currentFeedItemText.text)
+                return cell
+                
+            } else { return UITableViewCell() }
             
         case .photo:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "feedPhotoCell", for: indexPath) as? FeedPhotoTableViewCell else { return UITableViewCell() }
             
-            let newsLast = newsFeedItems.attachments?.last?.photo?.sizes.last?.url
-            guard let newsLast = newsLast else { return UITableViewCell() }
-            if let urlNews = URL(string: newsLast), let dataNews = try? Data(contentsOf: urlNews), let imageNews = UIImage(data: dataNews)
+            let currentFeedItemPhoto = newsItems[indexPath.section]
+            if ((currentFeedItemPhoto.attachments?.last?.photo?.sizes.last?.url) != nil) {
+                cell.configureFeedPhoto(url: currentFeedItemPhoto.attachments?.last?.photo!.sizes.last?.url)
+                return cell
                 
-            {
-                cell.configureFeedPhoto(feedPhotoImage: imageNews)
-                print(imageNews)
+            } else {
+                
+                return UITableViewCell()
             }
-            
-            return cell
             
         default:
             return UITableViewCell()
@@ -116,15 +148,5 @@ class FeedTableViewController: UITableViewController {
     }
 }
 
-extension Double {
-    func getDateStringFromUTC() -> String {
-        let date = Date(timeIntervalSince1970: self)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        
-        return dateFormatter.string(from: date)
-    }
-}
+
+

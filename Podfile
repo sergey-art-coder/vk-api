@@ -21,6 +21,7 @@ target '1|SergeyLyashenko' do
   pod 'SDWebImage', '~> 5.0'
   pod 'PromiseKit'
   pod 'AlamofireImage'
-  
+  pod 'ImageViewer.swift', '~> 3.0'
+  pod 'ActiveLabel'
 
 end
