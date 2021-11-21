@@ -447,17 +447,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feedPhotoCell" id="nlD-ZZ-UGs" customClass="FeedPhotoTableViewCell" customModule="__SergeyLyashenko" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="221" width="414" height="414.5"/>
+                                <rect key="frame" x="0.0" y="221" width="414" height="106.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nlD-ZZ-UGs" id="T7m-yr-aAk">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="414.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="106.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="group4" translatesAutoresizingMaskIntoConstraints="NO" id="W8A-lQ-KEf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="W8A-lQ-KEf" secondAttribute="height" id="sJs-OG-ekF"/>
-                                            </constraints>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="106.5"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>

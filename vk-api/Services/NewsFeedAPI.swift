@@ -20,22 +20,22 @@ class NewsFeedAPI {
     let baseUrl = "https://api.vk.com/method"
     let method = "/newsfeed.get"
     
-    var parameters: Parameters
-    
-    init(_ session: Session) {
+    func getNews (startFrom: String = "", startTime: Double? = nil, completion: @escaping (Swift.Result<NewsResponse, NewsFeedServiceError>) -> Void) {
         
-        self.parameters = [
+        var parameters: Parameters = [
             "user_id": Session.shared.userId,
             "access_token": Session.shared.token,
-            "v": Session.shared.version,
             "filters": "post",
-            //          "count": "10",
+            "v": Session.shared.version,
+            "count": "3",
+            "start_from": startFrom
         ]
-    }
-    
-    func getNews (_ completion: @escaping(Result<NewsResponse, NewsFeedServiceError>) -> Void) {
         
         let url = baseUrl + method
+        
+        if let startTime = startTime {
+            parameters["start_time"] = startTime
+        }
         
         AF.request(url, method: .get, parameters: parameters).responseData { response in
             
@@ -59,6 +59,7 @@ class NewsFeedAPI {
             let vkItemsJSONArr = json["response"]["items"].arrayValue
             let vkGroupsJSONArr = json["response"]["groups"].arrayValue
             let vkProfilesJSONArr = json["response"]["profiles"].arrayValue
+            let nextFrom = json["response"]["next_from"].stringValue
             
             var vkItemsArray: [Items] = []
             var vkGroupsArray: [Group] = []
@@ -117,7 +118,8 @@ class NewsFeedAPI {
                 dispatchGroup.notify(queue: DispatchQueue.main) {
                     let response = NewsModel(items: vkItemsArray,
                                              profiles: vkProfilesArray,
-                                             groups: vkGroupsArray)
+                                             groups: vkGroupsArray,
+                                             nextFrom: nextFrom)
                     
                     let feedNews = NewsResponse(response: response)
                     

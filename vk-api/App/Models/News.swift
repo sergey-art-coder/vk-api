@@ -17,12 +17,11 @@ struct NewsModel: Codable {
     let items: [Items]
     let profiles: [Profile]
     let groups: [Group]
-
-//    let nextFrom: String
-
+    let nextFrom: String
+    
     enum CodingKeys: String, CodingKey {
         case items, groups, profiles
-//        case nextFrom = "next_from"
+        case nextFrom = "next_from"
     }
 }
 
@@ -35,7 +34,7 @@ struct Group: Codable {
     let type: GroupType
     let screenName, name: String
     let isClosed: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case isMember = "is_member"
         case id
@@ -79,7 +78,7 @@ struct Items: Codable {
     let signerID: Int?
     
     // MARK: - Computed properties.
-
+    
     var hasText: Bool {
         return self.text != nil && self.text != ""
     }
@@ -87,7 +86,7 @@ struct Items: Codable {
     var hasLink: Bool {
         return self.attachments?[0].link?.url != nil
     }
-
+    
     enum CodingKeys: String, CodingKey {
         case donut, comments
         case canSetCategory = "can_set_category"
@@ -126,7 +125,7 @@ struct Album: Codable {
     let thumb: Photos
     let albumDescription: String
     let ownerID: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case updated, id, title, size, created, thumb
         case albumDescription = "description"
@@ -144,7 +143,7 @@ struct Photos: Codable {
     let ownerID: Int
     let accessKey: String?
     let postID: Int?
-
+    
     enum CodingKeys: String, CodingKey {
         case albumID = "album_id"
         case id, date, text
@@ -189,7 +188,7 @@ struct Links: Codable {
     let caption: String?
     let url: String
     let target: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case button, product
         case isFavorite = "is_favorite"
@@ -239,7 +238,7 @@ enum AttachmentType: String, Codable {
 struct Comments: Codable {
     let count, canPost: Int
     let groupsCanPost: Bool?
-
+    
     enum CodingKeys: String, CodingKey {
         case count
         case canPost = "can_post"
@@ -255,7 +254,7 @@ struct CopyHistory: Codable {
     let text: String
     let attachments: [CopyHistoryAttachment]
     let ownerID: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case postSource = "post_source"
         case postType = "post_type"
@@ -289,7 +288,7 @@ enum PostTypeEnum: String, Codable {
 // MARK: - Donut
 struct Donut: Codable {
     let isDonut: Bool
-
+    
     enum CodingKeys: String, CodingKey {
         case isDonut = "is_donut"
     }
@@ -298,7 +297,7 @@ struct Donut: Codable {
 // MARK: - Likes
 struct Likes: Codable {
     var canLike, canPublish, count, userLikes: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case canLike = "can_like"
         case canPublish = "can_publish"
@@ -316,7 +315,7 @@ struct ItemPostSource: Codable {
 // MARK: - Reposts
 struct Reposts: Codable {
     let count, userReposted: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case count
         case userReposted = "user_reposted"
@@ -341,7 +340,7 @@ struct Profile: Codable {
     let isClosed: Bool?
     let firstName: String
     let deactivated: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case canAccessClosed = "can_access_closed"
         case screenName = "screen_name"
@@ -361,7 +360,7 @@ struct Profile: Codable {
 struct OnlineInfo: Codable {
     let visible, isMobile, isOnline: Bool
     let appID, lastSeen: Int?
-
+    
     enum CodingKeys: String, CodingKey {
         case visible
         case isMobile = "is_mobile"
