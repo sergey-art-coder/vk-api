@@ -1,29 +1,29 @@
 //
-//  GroupsAPI.swift
+//  SearchAPI.swift
 //  1|SergeyLyashenko
 //
-//  Created by Сергей Ляшенко on 18.08.2021.
+//  Created by Сергей Ляшенко on 04.09.2021.
 //
 
 import Foundation
 import Alamofire
 
-final class GroupsAPI {
+final class SearchAPI {
     
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
     let version = "5.131"
     
-    func getGroups (completion: @escaping([GroupModel]?)->()) {
+    func getSearchGroups (completion: @escaping([SearchGroupModel]?)->()) {
         
-        let method = "/groups.get"
+        let method = "/groups.search"
         
         let parameters: Parameters = [
-            "user_id": clientId,
             "access_token": Session.shared.token,
             "v": version,
-            "extended": 1
+            "count": 1000,
+            "q": "searchText"
         ]
         
         let url = baseUrl + method
@@ -34,12 +34,13 @@ final class GroupsAPI {
                 
                 guard let data = response.data else { return }
                 
-                let groupsResponse = try? JSONDecoder().decode(GroupsResponse.self, from: data)
+                let searchGroupResponse = try? JSONDecoder().decode(SearchGroupResponse.self, from: data)
                 
-                let groups = groupsResponse?.response.items
+                let searchGroups = searchGroupResponse?.response.items
                 
-                completion (groups)
+                completion (searchGroups)
             }
+            
             catch DecodingError.keyNotFound(let key, let context) {
                 Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
             }

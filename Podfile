@@ -13,7 +13,15 @@ target '1|SergeyLyashenko' do
   pod 'RealmSwift'
   pod 'SwiftKeychainWrapper'
   pod 'DynamicJSON'
-  #pod 'Firebase'
+  pod 'SwiftyJSON'
   
+  #pod 'Firebase'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'SDWebImage', '~> 5.0'
+  pod 'PromiseKit'
+  pod 'AlamofireImage'
+  pod 'ImageViewer.swift', '~> 3.0'
+  pod 'ActiveLabel'
 
 end

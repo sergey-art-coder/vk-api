@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import DynamicJSON
 
 final class PhotosAPI {
     
@@ -15,13 +14,12 @@ final class PhotosAPI {
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
-    let version = "5.21"
+    let version = "5.131"
     
     func getPhotos (completion: @escaping([PhotoModel]?)->()) {
         
         let method = "/photos.getAll"
-        
-        // параметры
+
         let parameters: Parameters = [
             "owner_id": clientId,
             "access_token": Session.shared.token,
@@ -30,48 +28,31 @@ final class PhotosAPI {
             "count": 100,
             "extended": 0
         ]
-        
-        // составляем URL из базового адреса сервиса и конкретного пути к ресурсу
+ 
         let url = baseUrl + method
-        
-        // делаем запрос
+
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
+
+            guard let data = response.data else { return }
+
+            let dispatchGroup = DispatchGroup()
             
-            // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
-            do {
-                
-                //response.request позволяет посмотреть как выглядит полный запрос
-                //    print (response.request as Any)
-                
-                // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
-                guard let data = response.data else { return }
-                //          print(data.prettyJSON as Any)
-                
-                guard let items = JSON(data).response.items.array else { return }
-                
-                //                    let photos: [PhotoModel] = items.map { json in
-                //                        PhotoModel(data: json)
-                //                    }
-                let photos: [PhotoModel] = items.map { PhotoModel(data: $0) }
-                
-                DispatchQueue.main.async {
-                    completion (photos)
+            DispatchQueue.global().async(group: dispatchGroup) {
+
+                do {
+                    
+                    let photosResponse = try? JSONDecoder().decode(PhotosResponse.self, from: data)
+                    
+                    let photos = photosResponse?.response.items
+
+                    dispatchGroup.notify(queue: DispatchQueue.main) {
+                        
+                        completion(photos)
+                    }
+                } catch let error as NSError {
+                    
+                    NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
                 }
-            }
-            catch DecodingError.keyNotFound(let key, let context) {
-                Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
-            }
-            catch DecodingError.valueNotFound(let type, let context) {
-                Swift.print("could not find type \(type) in JSON: \(context.debugDescription)")
-            }
-            catch DecodingError.typeMismatch(let type, let context) {
-                Swift.print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
-            }
-            catch DecodingError.dataCorrupted(let context) {
-                Swift.print("data found to be corrupted in JSON: \(context.debugDescription)")
-            }
-            catch let error as NSError {
-                NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
             }
         }
     }

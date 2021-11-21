@@ -8,17 +8,12 @@
 import Foundation
 import Alamofire
 
-struct User {
-    
-}
-
 final class FriendsAPI {
-    
-    // базовый URL сервиса
+
     let baseUrl = "https://api.vk.com/method"
     let token = Session.shared.token
     let clientId = Session.shared.userId
-    let version = "5.21"
+    let version = "5.131"
     
     func getFriends (completion: @escaping([FriendModel]?)->()) {
         
@@ -43,15 +38,16 @@ final class FriendsAPI {
             //            print (response.request) //запрос
             //            print (response.response) //ответ - статус код и хедеры
             //            print (response.data) //бинарник
-            //            print (response.result) //JSON
+            //            print (response.result) //получаем данные в формате JSON
             //            print ("====================")
             //            print (response.data?.prettyJSON)
             
-            // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
-            guard let data = response.data else { return }
-            
             // проверка на ошибки, если будет ошибка она выведется в консоль (всегда когда  используем try нужно оформлять в do catch)
             do {
+                
+                // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
+                guard let data = response.data else { return }
+                
                 // получили объект вложенный состоящий еще с двух подобъектов
                 let friendsResponse = try? JSONDecoder().decode(FriendsResponse.self, from: data)
                 
@@ -60,9 +56,20 @@ final class FriendsAPI {
                 
                 completion (friends)
             }
-            catch {
-                
-                print(error)
+            catch DecodingError.keyNotFound(let key, let context) {
+                Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
+            }
+            catch DecodingError.valueNotFound(let type, let context) {
+                Swift.print("could not find type \(type) in JSON: \(context.debugDescription)")
+            }
+            catch DecodingError.typeMismatch(let type, let context) {
+                Swift.print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
+            }
+            catch DecodingError.dataCorrupted(let context) {
+                Swift.print("data found to be corrupted in JSON: \(context.debugDescription)")
+            }
+            catch let error as NSError {
+                NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
             }
         }
     }
