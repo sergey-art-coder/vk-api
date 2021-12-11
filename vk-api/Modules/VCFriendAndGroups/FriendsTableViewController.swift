@@ -25,7 +25,7 @@ class FriendsTableViewController: UITableViewController {
     let configFriends = Realm.Configuration(schemaVersion: 13)
     // подтягиваем Realm на главном потоке
     lazy var mainRealm = try! Realm(configuration: configFriends)
-    
+       
     override func viewDidLoad() {
         
         super.viewDidLoad()

@@ -28,6 +28,7 @@ class FeedPhotoTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         clearCell()
     }
     

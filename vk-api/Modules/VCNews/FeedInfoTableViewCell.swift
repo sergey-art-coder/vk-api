@@ -41,6 +41,7 @@ class FeedInfoTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         clearCell()
     }
     

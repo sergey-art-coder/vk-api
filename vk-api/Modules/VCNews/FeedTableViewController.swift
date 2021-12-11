@@ -202,9 +202,7 @@ class FeedTableViewController: UITableViewController {
 
 // MARK: - Pull-to-refresh (подгрузка новых новостей)
 extension FeedTableViewController {
-    
     @objc func refreshNews() {
-        
         // Начинаем обновление новостей
         self.refreshControl?.beginRefreshing()
         // Определяем время самой свежей новости или берем текущее время

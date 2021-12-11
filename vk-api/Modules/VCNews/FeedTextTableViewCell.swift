@@ -62,6 +62,7 @@ class FeedTextTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         clearCell()
     }
     
