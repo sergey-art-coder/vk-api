@@ -7,36 +7,46 @@
 
 import Foundation
 import RealmSwift
-import DynamicJSON
+//import DynamicJSON
 
-class PhotoModel: Object {
-    @objc dynamic var albumid: String?
-    @objc dynamic var fotosId: String?
-    @objc dynamic var fotosDate: String?
-    @objc dynamic var fotosText: String?
-    @objc dynamic var fotosSizes: String?
-    @objc dynamic var fotosWidth: String?
-    @objc dynamic var fotosHeight: String?
-    @objc dynamic var fotosUrl: String?
-    @objc dynamic var fotosType: String?
-    
-    convenience required init(data: JSON) {
-        self.init()
-        
-        self.albumid = data.album_id.string
-        self.fotosId = data.id.string
-        self.fotosDate = data.date.string
-        self.fotosText = data.text.string
-        let photoUrl = data["sizes"].last.last
-        self.fotosSizes = photoUrl.string
-        self.fotosWidth = data.width.string
-        self.fotosHeight = data.height.string
-        self.fotosUrl = data.url.string
-        self.fotosType = data.type.string
-        
-//        print("==============")
-//        print(photoUrl as Any)
-//        print("==============")
-//        print(fotosSizes as Any)
+
+//   let photosResponse = try? newJSONDecoder().decode(PhotosResponse.self, from: jsonData)
+
+import Foundation
+
+// MARK: - PhotosResponse
+struct PhotosResponse: Codable {
+    let response: PhotosModel
+}
+
+// MARK: - Response
+struct PhotosModel: Codable {
+    let count: Int
+    let items: [PhotoModel]
+}
+
+// MARK: - Item
+struct PhotoModel: Codable {
+    let albumID, id, date: Int
+    let text: String
+    let sizes: [Size]
+    let hasTags: Bool
+    let ownerID: Int
+    let postID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case albumID = "album_id"
+        case id, date, text, sizes
+        case hasTags = "has_tags"
+        case ownerID = "owner_id"
+        case postID = "post_id"
     }
 }
+
+// MARK: - Size
+struct Size: Codable {
+    let width, height: Int
+    let url: String
+    let type: String
+}
+

@@ -7,20 +7,19 @@
 
 import UIKit
 import RealmSwift
+import SDWebImage
 
-class PhotoCollectionViewController: UICollectionViewController {
+class PhotoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let photoCell = "PhotoCell"
     let toPhoto = "toPhoto"
-    let photosDB = PhotosDB()
+    //  let photosDB = PhotosDB()
     let photosAPI = PhotosAPI()
-    var photo = PhotoModel()
     var photos: [PhotoModel] = []
-    var selectedPhotos: [PhotoModel] = []
-    var selectedFriend: FriendModel?
+    var selectedIndex: Int = 0
     
     //пустой массив куда будем помещать отфильтрованные записи
-   var filterFoto: [PhotoModel] = []
+    var filterFoto: [PhotoModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +34,6 @@ class PhotoCollectionViewController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
-
     
     // MARK: UICollectionViewDataSource
     
@@ -47,68 +45,59 @@ class PhotoCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCell, for: indexPath) as? PhotoCollectionViewCell else { return UICollectionViewCell() }
-     
-        DispatchQueue.global().async {
+        do {
+            let photo = self.photos [indexPath.item]
             
-            do {
-                
-//                let filterFoto = self.photos.compactMap { ($0) }
-//
-//                print(filterFoto)
-                
-                //берем фото из массива по indexPath
-                let photo = self.photos [indexPath.item]
-
-                guard let photoPath = photo.fotosSizes != nil ? photo.fotosSizes : photo.fotosSizes else { return }
-                let urlPhoto = URL(string:photoPath)
-                guard let urlPhoto = urlPhoto else { return }
-                let data = try? Data(contentsOf: urlPhoto)
-
-                DispatchQueue.main.async {
-
-                    //                    self.photosDB.add(photo)
-                    //                    print(self.photosDB.read())
-                    //                    self.photosDB.delete(photo)
-                    //                    print(self.photosDB.read())
-                    guard let data = data else { return }
-                    cell.photoImage.image = UIImage(data: data)
-
-                }
-            }
-            catch {
-                
-                print(error)
-            }
+            let sizeMomel = photo.sizes.last
+            
+            guard let url = sizeMomel?.url else { return cell}
+            
+            cell.photoImage.layer.borderWidth = 3
+            cell.photoImage.layer.borderColor = UIColor.lightGray.cgColor
+            
+            cell.photoImage?.sd_setImage(with: URL(string: url), placeholderImage: UIImage())
+        }
+        catch {
+            
+            print(error)
         }
         
         return cell
     }
     
-    // сохраняем выбранный индекс в переменной selectedPhotos и убираем выделения
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedPhotos = [photos [indexPath.item]]
-        performSegue(withIdentifier: toPhoto, sender: self)
+    // MARK: - прописывам нужный размер ячейки
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var width = collectionView.bounds.width
+        let insets = collectionView.contentInset.left + collectionView.contentInset.right
+        width -= insets
+        width -= 40
+        width /= 3
+        return CGSize(width: width, height: width)
     }
     
-    // метод через который мы переходим на PhotoViewController
+    // сохраняем выбранный индекс в переменной selectedIndex и убираем выделения
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.item
+        performSegue(withIdentifier: toPhoto, sender: selectedIndex)
+    }
+    
+    // метод через который мы переходим на PhotosCollectionViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //вызываем подготовку к переходу
         super.prepare(for: segue, sender: sender)
         
         // проверяем что индитификатор называется "toPhoto"
         if segue.identifier == toPhoto {
-
+            
             guard let detailVC = segue.destination as? PhotosCollectionViewController,
                   let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
-
-            let photo: PhotoModel? = photos [indexPath.item]
-
-            guard (photo?.fotosSizes != nil ? photo?.fotosSizes : photo?.fotosSizes) != nil else { return }
-
-            guard let photo = photo else { return }
-            detailVC.photo = photo
+            
+            detailVC.selectedIndex = indexPath.item
+            detailVC.photos = photos
         }
     }
 }
+
+//                   guard (photo?.sizes.first != nil ? photo?.sizes.first : photo?.sizes.first) != nil else { return }
 
 

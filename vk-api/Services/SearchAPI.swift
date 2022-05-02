@@ -7,11 +7,6 @@
 
 import Foundation
 import Alamofire
-import DynamicJSON
-
-struct SearchGroup {
-    
-}
 
 final class SearchAPI {
     
@@ -38,7 +33,7 @@ final class SearchAPI {
         
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-
+            
             //                        print (response.data) //бинарник
             //                        print (response.result) //получаем данные в формате JSON
             //                        print ("=============SearchGroup=======================")

@@ -7,11 +7,6 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
-
-//class NewsModel {
-//
-//}
 
 final class NewsAPI {
     
@@ -20,19 +15,16 @@ final class NewsAPI {
     let token = Session.shared.token
     let clientId = Session.shared.userId
     let version = "5.131"
-    
-    func getNews (completion: @escaping([NewModel]?)->()) {
+
+    func getNews (completion: @escaping([NewsFeedModel]?, [Group]?)->()) {
         
         let method = "/newsfeed.get"
         
         // параметры
         let parameters: Parameters = [
-            // "filters": "post",
-            "filters": "post, photo",
-            "return_banned": 1,
-            "max_photos": 10,
-            "source_ids": "friends",
-            "count": 70,
+            "filters": "photo, wall_photo, friend, note",
+            "max_photos": 50,
+            "count": 5,
             "access_token": Session.shared.token,
             "v": version
         ]
@@ -42,20 +34,24 @@ final class NewsAPI {
         
         // делаем запрос
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-
+            
+            
             do {
                 
                 // распаковываем response.data в data и если все нормально то идем дальше (оператор раннего выхода)
                 guard let data = response.data else { return }
                 
-            //    print(data.prettyJSON as Any)
+                print(data.prettyJSON as Any)
                 
                 let newsResponse = try? JSONDecoder().decode(NewsResponse.self, from: data)
-
-                // вытащили news
-                let newsItems = newsResponse?.response.items
-
-                completion(newsItems)
+                print(newsResponse as Any)
+                let news = newsResponse?.response.items
+                
+                let newsGroup = newsResponse?.response.groups
+                print(news as Any)
+                print(newsGroup as Any)
+                completion (news, newsGroup)
+                
             }
             catch DecodingError.keyNotFound(let key, let context) {
                 Swift.print("could not find key \(key) in JSON: \(context.debugDescription)")
@@ -75,3 +71,4 @@ final class NewsAPI {
         }
     }
 }
+

@@ -10,11 +10,6 @@ import UIKit
 class CustomCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var photoImageView: UIImageView!
-
-    // первоначальные настройки ячейки
-    func setup() {
-        
-    }
     
     // очищаем
     func clearCell() {
@@ -33,9 +28,15 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     // вызывается один раз, это инициализация ячейки
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        setup()
+
         clearCell()
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        return photoImageView
     }
 }
     

@@ -23,7 +23,7 @@ class CustomTableViewCell: UITableViewCell {
         nameLabel.text = nil
         avatarImage.image = nil
     }
-   
+    
     // функция prepareForReuse вызывается автоматически при переиспользовании ячейки
     override func prepareForReuse() {
         clearCell()

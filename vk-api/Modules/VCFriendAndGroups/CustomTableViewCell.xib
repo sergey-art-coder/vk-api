@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,15 +17,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friend2" translatesAutoresizingMaskIntoConstraints="NO" id="Jxm-XY-AQw">
-                        <rect key="frame" x="0.0" y="0.0" width="216" height="92"/>
+                        <rect key="frame" x="0.0" y="0.0" width="112" height="92"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="corneradius" value=""/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3m8-Cw-082">
-                        <rect key="frame" x="224" y="0.0" width="307" height="92"/>
+                        <rect key="frame" x="106" y="0.0" width="425" height="92"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="307" id="eHs-Qt-KpR"/>
+                            <constraint firstAttribute="width" constant="425" id="hSR-nG-9X7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -33,13 +33,12 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Jxm-XY-AQw" firstAttribute="bottom" secondItem="3m8-Cw-082" secondAttribute="bottom" id="E4C-bV-KJ4"/>
-                    <constraint firstItem="Jxm-XY-AQw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FcI-kC-GNL"/>
-                    <constraint firstItem="Jxm-XY-AQw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QQ3-AF-eXz"/>
-                    <constraint firstItem="Jxm-XY-AQw" firstAttribute="top" secondItem="3m8-Cw-082" secondAttribute="top" id="Qcx-Vc-q8L"/>
-                    <constraint firstItem="3m8-Cw-082" firstAttribute="leading" secondItem="Jxm-XY-AQw" secondAttribute="trailing" constant="8" symbolic="YES" id="WkN-BM-Nu6"/>
-                    <constraint firstAttribute="bottom" secondItem="Jxm-XY-AQw" secondAttribute="bottom" id="YDQ-mE-cBj"/>
-                    <constraint firstAttribute="trailing" secondItem="3m8-Cw-082" secondAttribute="trailing" id="xvV-Sb-v1P"/>
+                    <constraint firstAttribute="bottom" secondItem="Jxm-XY-AQw" secondAttribute="bottom" id="4ff-mP-Yh1"/>
+                    <constraint firstItem="Jxm-XY-AQw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8wD-De-kgn"/>
+                    <constraint firstItem="3m8-Cw-082" firstAttribute="top" secondItem="Jxm-XY-AQw" secondAttribute="top" id="HZV-qk-Q9V"/>
+                    <constraint firstItem="3m8-Cw-082" firstAttribute="leading" secondItem="Jxm-XY-AQw" secondAttribute="trailing" constant="-6" id="Kv5-Je-i48"/>
+                    <constraint firstItem="3m8-Cw-082" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bYO-Ny-4uw"/>
+                    <constraint firstItem="3m8-Cw-082" firstAttribute="bottom" secondItem="Jxm-XY-AQw" secondAttribute="bottom" id="bqR-5l-4Bx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
